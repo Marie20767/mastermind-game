@@ -1,4 +1,4 @@
-# React Template by Marie Impens
+# React Mastermind Game by Marie Impens
 
 ## Available Scripts
 
