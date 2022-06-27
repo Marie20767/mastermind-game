@@ -1,9 +1,15 @@
 import React from 'react';
-import './App.css';
+import GameBoard from './GameBoard.js/GameBoard';
+import GlobalStyle from './GlobalStyle';
+import Pegpicker from './Pegpicker';
 
 const App = () => {
   return (
-    <div>Hello</div>
+    <div className="App">
+      <GlobalStyle />
+      <Pegpicker />
+      <GameBoard />
+    </div>
   );
 };
 
