@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Circle from './Circle';
 import { PegHexCodes } from './utils/constants';
 
-const Pegpicker = () => {
+const Pegpicker = ({ onClickPickUserAnswer }) => {
   return (
     <StyledPegpickerContainer>
       {PegHexCodes.map((color) => {
@@ -10,7 +10,8 @@ const Pegpicker = () => {
           <Circle
             key={color}
             color={color}
-            clickable />
+            clickable
+            onClick={() => onClickPickUserAnswer(color)} />
         );
       })}
     </StyledPegpickerContainer>

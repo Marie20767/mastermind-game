@@ -11,7 +11,7 @@ const Round = () => {
         color={EmptyPegColors.OuterCircle}>
         <Circle
           color={EmptyPegColors.InnerCircle}
-          size={3} />
+          size={2} />
       </Circle>
 
       <Circle

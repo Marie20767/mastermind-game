@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 import Round from './Round';
+import Solution from './Solution';
 
-const GameBoard = () => {
+const GameBoard = ({ solution, showSolution }) => {
   return (
     <StyledGameBoardContainer>
-      <StyledGameBoard />
-      <Round />
+      <StyledGameBoard>
+        <Solution
+          solution={solution}
+          showSolution={showSolution} />
+        <Round />
+      </StyledGameBoard>
     </StyledGameBoardContainer>
   );
 };
