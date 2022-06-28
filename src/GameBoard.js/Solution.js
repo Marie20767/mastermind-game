@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
 import Circle from '../Circle';
-import { PegColors } from '../utils/constants';
 
 const Solution = ({ solution, showSolution }) => {
   return (
@@ -13,14 +12,16 @@ const Solution = ({ solution, showSolution }) => {
           return (
             <Circle
               key={`${color}-${index}`}
-              color={PegColors[color]} />
+              color={color}
+              margin="0 20px 0 0" />
           );
         }
 
         return (
           <Circle
             key={`${color}-${index}`}
-            color="transparent">
+            color="transparent"
+            margin="0 20px 0 0">
             <FontAwesomeIcon
               icon={faQuestion}
               fontSize="25px" />
@@ -33,6 +34,7 @@ const Solution = ({ solution, showSolution }) => {
 
 const StyledSolutionContainer = styled.div`
   display: flex;
+  justify-content: flex-end;
 `;
 
 export default Solution;

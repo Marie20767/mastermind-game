@@ -1,17 +1,15 @@
-import { PegColorNames } from './constants';
-// TODO: create a function called generatedRandomSolution
-// that returns an array of 4 random PegColors (can be the name of the colour, or the hex code)
+import { PegHexCodes } from './constants';
 
 const generateRandomSolution = () => {
-  const randomPegColors = [];
+  const randomSolution = [];
 
   for (let i = 0; i < 4; i++) {
     const randomIndex = Math.floor(Math.random() * 6);
 
-    randomPegColors.push(PegColorNames[randomIndex]);
+    randomSolution.push(PegHexCodes[randomIndex]);
   }
 
-  return randomPegColors;
+  return randomSolution;
 };
 
 export { generateRandomSolution };

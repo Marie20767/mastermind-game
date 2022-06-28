@@ -8,11 +8,16 @@ const PegColors = {
 };
 
 const PegHexCodes = Object.values(PegColors);
-const PegColorNames = Object.keys(PegColors);
 
 const EmptyPegColors = {
   InnerCircle: '#4e4e4c',
   OuterCircle: 'transparent',
 };
 
-export { PegColors, PegHexCodes, PegColorNames, EmptyPegColors };
+const FeedbackNumbers = {
+  correct: 1,
+  incorrect: 2,
+  empty: 3,
+};
+
+export { PegColors, PegHexCodes, EmptyPegColors, FeedbackNumbers };

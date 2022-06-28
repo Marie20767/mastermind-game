@@ -1,34 +1,42 @@
+/* eslint-disable react/no-array-index-key */
 import styled from 'styled-components';
 import Circle from '../Circle';
 import { EmptyPegColors } from '../utils/constants';
+import FeedbackPegs from './FeedbackPegs';
 
-const Round = () => {
-  const roundColors = [];
-
+const Round = ({ userAnswers, pegFeedback }) => {
   return (
     <StyledRoundContainer>
-      <Circle
-        color={EmptyPegColors.OuterCircle}>
-        <Circle
-          color={EmptyPegColors.InnerCircle}
-          size={2} />
-      </Circle>
+      <FeedbackPegs pegFeedback={pegFeedback} />
+      {userAnswers.map((color, index) => {
+        if (color !== null) {
+          return (
+            <Circle
+              key={`${color}-${index}`}
+              color={color}
+              margin="0 20px 0 0" />
+          );
+        }
 
-      <Circle
-        color="#4e4e4c"
-        emptyPegHole />
-      <Circle
-        color="#4e4e4c"
-        emptyPegHole />
-      <Circle
-        color="#4e4e4c"
-        emptyPegHole />
+        return (
+          <Circle
+            key={`${color}-${index}`}
+            color={EmptyPegColors.OuterCircle}
+            margin="0 20px 0 0">
+            <Circle
+              color={EmptyPegColors.InnerCircle}
+              size={1.5} />
+          </Circle>
+        );
+      })}
     </StyledRoundContainer>
   );
 };
 
 const StyledRoundContainer = styled.div`
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `;
 
 export default Round;
