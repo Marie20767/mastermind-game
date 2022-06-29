@@ -21,11 +21,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    margin-left: 60px;
-    height: 50px;
-    padding: 0 1.7vh;
-    font-size: 2.5vh;
-    margin-bottom: 3vh;
     background-color: transparent;
     border: 3px solid #c4cacc;
     cursor: pointer;

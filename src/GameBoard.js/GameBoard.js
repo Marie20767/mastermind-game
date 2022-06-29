@@ -6,7 +6,7 @@ const GameBoard = ({ allUserAnswers, solution, showSolution, allPegFeedback }) =
   return (
     <StyledGameBoardContainer>
       <StyledGameBoard>
-        <StyledGameName />
+        <StyledGameTitle />
         <Solution
           solution={solution}
           showSolution={showSolution} />
@@ -19,6 +19,7 @@ const GameBoard = ({ allUserAnswers, solution, showSolution, allPegFeedback }) =
 };
 
 const StyledGameBoardContainer = styled.div`
+  position: relative;
   margin-right: 320px;
   margin-left: 60px;
   height: 100%;
@@ -36,18 +37,19 @@ const StyledGameBoard = styled.div`
    padding-top: 30px;
    background-color: #c4cacc;
    height: 95vh;
-   width: 90vh;
+   width: 80vh;
    border-radius: 5%;
    border: 1.5px solid black;
 `;
 
-const StyledGameName = styled.div`
+const StyledGameTitle = styled.div`
   position: absolute;
-  left: 5vh;
-  border-radius: 10%;
+  left: 0.20vh;
+  bottom: 9.5vh;
+  border-radius: 0 15px 15px 0;
   background-color: #64a4b8;
-  height: 95vh;
-  width: 10vh;
+  height: 80vh;
+  width: 18vh;
 `;
 
 export default GameBoard;

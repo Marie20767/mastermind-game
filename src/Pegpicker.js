@@ -2,9 +2,17 @@ import styled from 'styled-components';
 import Circle from './Circle';
 import { PegHexCodes } from './utils/constants';
 
-const Pegpicker = ({ onClickPickUserAnswer, setAllUserAnswers, onClickGiveFeedback, isArrayFullofColors }) => {
+const Pegpicker = ({ onClickPickUserAnswer, currentRound, allUserAnswers, setAllUserAnswers, onClickGiveFeedback, isArrayFullofColors }) => {
   const onClickDeletePegs = () => {
-    setAllUserAnswers([null, null, null, null]);
+    const updatedRoundAnswers = allUserAnswers.map((roundAnswers, index) => {
+      if (index === currentRound) {
+        return [null, null, null, null];
+      }
+
+      return roundAnswers;
+    });
+
+    setAllUserAnswers(updatedRoundAnswers);
   };
 
   return (
@@ -24,6 +32,7 @@ const Pegpicker = ({ onClickPickUserAnswer, setAllUserAnswers, onClickGiveFeedba
       </StyledPegsContainer>
       <StyledButtonContainer>
         <button type="button" onClick={onClickDeletePegs}>Delete</button>
+        {/* TODO: When you filled up one round, the check button should be highlighted to show that you need to check your result */}
         <button type="button" onClick={isArrayFullofColors ? onClickGiveFeedback : null}>Check</button>
       </StyledButtonContainer>
     </StyledPegpickerContainer>
@@ -44,6 +53,14 @@ const StyledPegsContainer = styled.div`
 const StyledButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
+  
+  button {
+    margin-left: 60px;
+    height: 50px;
+    padding: 0 1.7vh;
+    font-size: 2.5vh;
+    margin-bottom: 3vh;
+  }
 `;
 
 export default Pegpicker;

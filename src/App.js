@@ -4,9 +4,12 @@ import GlobalStyle from './GlobalStyle';
 import Pegpicker from './Pegpicker';
 import { generateInitialPegFeedbackState, generateInitialUserAnswersState, generateRandomSolution } from './utils/game-utils';
 import { FeedbackNumbers } from './utils/constants';
+import GameInfo from './GameInfo.js/GameInfo';
 
 // TODO: at some point:
-// - Make it so you can't delete a row that already has feedback
+// Save to local storage so it remembers your game
+// For every new round, make it clear with an arrow that you are at the next round because if all pegs are incorrect it looks like the game
+// is not working
 
 const App = () => {
   const [solution, setSolution] = useState(generateRandomSolution());
@@ -14,10 +17,10 @@ const App = () => {
   const [currentRound, setCurrentRound] = useState(0);
   const [showSolution, setShowSolution] = useState(false);
   const [allPegFeedback, setAllPegFeedback] = useState(generateInitialPegFeedbackState());
+  const [gamesWon, setGamesWon] = useState(0);
+  const [gamesLost, setGamesLost] = useState(0);
 
   const isArrayFullofColors = allUserAnswers[currentRound].every((element) => element !== null);
-
-  console.log(allUserAnswers);
 
   const findFirstNullElement = (state) => {
     return state.findIndex((element) => {
@@ -56,7 +59,6 @@ const App = () => {
   const onClickGiveFeedback = () => {
     // TODO:
     // The small peg should become white if I have one correct colour but in the wrong position
-    debugger;
     const updatedRoundPegFeedback = [];
 
     // Compare the userAnswer array to the solution array
@@ -82,20 +84,39 @@ const App = () => {
     setAllPegFeedback(updatedAllPegFeedback);
 
     // If the allUserAnswers array is full of colours, go to the next round
-    if (isArrayFullofColors) {
+    if (isArrayFullofColors && currentRound !== 8) {
       const newCurrentRound = currentRound + 1;
 
       setCurrentRound(newCurrentRound);
     }
+
+    if (isArrayFullofColors && currentRound === 8) {
+      setShowSolution(true);
+    }
+
+    const areRoundAnswersAllCorrect = updatedAllPegFeedback[currentRound].every((number) => number === 1);
+
+    if (areRoundAnswersAllCorrect) {
+      setShowSolution(true);
+    }
   };
 
-  console.log(allUserAnswers);
+  const onClickStartNewGame = () => {
+    setSolution(generateRandomSolution());
+    setCurrentRound(0);
+    setShowSolution(false);
+    setSolution(generateRandomSolution());
+    setAllPegFeedback(generateInitialPegFeedbackState());
+    setAllUserAnswers(generateInitialUserAnswersState);
+  };
 
   return (
     <div className="App">
       <GlobalStyle />
       <Pegpicker
         onClickPickUserAnswer={onClickPickUserAnswer}
+        currentRound={currentRound}
+        allUserAnswers={allUserAnswers}
         setAllUserAnswers={setAllUserAnswers}
         onClickGiveFeedback={onClickGiveFeedback}
         isArrayFullofColors={isArrayFullofColors} />
@@ -104,6 +125,10 @@ const App = () => {
         solution={solution}
         showSolution={showSolution}
         allPegFeedback={allPegFeedback} />
+      <GameInfo
+        onClickStartNewGame={onClickStartNewGame}
+        gamesWon={gamesWon}
+        gamesLost={gamesLost} />
     </div>
   );
 };

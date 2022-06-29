@@ -13,7 +13,7 @@ const Solution = ({ solution, showSolution }) => {
             <Circle
               key={`${color}-${index}`}
               color={color}
-              margin="0 20px 0 0" />
+              margin="0 28px 0 0" />
           );
         }
 
@@ -21,7 +21,7 @@ const Solution = ({ solution, showSolution }) => {
           <Circle
             key={`${color}-${index}`}
             color="transparent"
-            margin="0 20px 0 0">
+            margin="0 28px 0 0">
             <FontAwesomeIcon
               icon={faQuestion}
               fontSize="25px" />
@@ -35,7 +35,7 @@ const Solution = ({ solution, showSolution }) => {
 const StyledSolutionContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-left: 64px;
+  margin-left: 204px;
 `;
 
 export default Solution;

@@ -20,7 +20,8 @@ const Rounds = ({ allUserAnswers, allPegFeedback }) => {
 const StyledRoundsContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
-  margin-top: 5vh;
+  margin-top: 35px;
+  margin-left: 140px;
 `;
 
 export default Rounds;

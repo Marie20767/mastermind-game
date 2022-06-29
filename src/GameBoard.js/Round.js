@@ -14,7 +14,7 @@ const Round = ({ roundAnswers, roundPegFeedback }) => {
             <Circle
               key={`${color}-${index}`}
               color={color}
-              margin="0 20px 0 0" />
+              margin="0 28px 0 0" />
           );
         }
 
@@ -22,7 +22,7 @@ const Round = ({ roundAnswers, roundPegFeedback }) => {
           <Circle
             key={`${color}-${index}`}
             color={EmptyPegColors.OuterCircle}
-            margin="0 20px 0 0">
+            margin="0 28px 0 0">
             <Circle
               color={EmptyPegColors.InnerCircle}
               size={1.5} />
