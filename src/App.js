@@ -15,10 +15,12 @@ const App = () => {
   const [solution, setSolution] = useState(generateRandomSolution());
   const [allUserAnswers, setAllUserAnswers] = useState(generateInitialUserAnswersState());
   const [currentRound, setCurrentRound] = useState(0);
-  const [showSolution, setShowSolution] = useState(false);
+  const [showSolution, setShowSolution] = useState(true);
   const [allPegFeedback, setAllPegFeedback] = useState(generateInitialPegFeedbackState());
   const [gamesWon, setGamesWon] = useState(0);
   const [gamesLost, setGamesLost] = useState(0);
+  const [showLosingMessage, setShowLosingMessage] = useState(false);
+  const [showWinningMessage, setShowWinningMessage] = useState(false);
 
   const isArrayFullofColors = allUserAnswers[currentRound].every((element) => element !== null);
 
@@ -92,12 +94,20 @@ const App = () => {
 
     if (isArrayFullofColors && currentRound === 8) {
       setShowSolution(true);
+      const newGamesLostScore = gamesLost + 1;
+
+      setGamesLost(newGamesLostScore);
+      setShowLosingMessage(true);
     }
 
     const areRoundAnswersAllCorrect = updatedAllPegFeedback[currentRound].every((number) => number === 1);
 
     if (areRoundAnswersAllCorrect) {
       setShowSolution(true);
+      const newGamesWonScore = gamesWon + 1;
+
+      setGamesWon(newGamesWonScore);
+      setShowWinningMessage(true);
     }
   };
 
@@ -108,6 +118,8 @@ const App = () => {
     setSolution(generateRandomSolution());
     setAllPegFeedback(generateInitialPegFeedbackState());
     setAllUserAnswers(generateInitialUserAnswersState);
+    setShowLosingMessage(false);
+    setShowWinningMessage(false);
   };
 
   return (
@@ -128,7 +140,9 @@ const App = () => {
       <GameInfo
         onClickStartNewGame={onClickStartNewGame}
         gamesWon={gamesWon}
-        gamesLost={gamesLost} />
+        gamesLost={gamesLost}
+        showLosingMessage={showLosingMessage}
+        showWinningMessage={showWinningMessage} />
     </div>
   );
 };

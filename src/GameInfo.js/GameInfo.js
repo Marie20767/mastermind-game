@@ -4,12 +4,14 @@ import GameRules from './GameRules';
 import Score from './Score';
 import PostGameFeedback from './PostGameFeedback';
 
-const GameInfo = ({ onClickStartNewGame, gamesWon, gamesLost }) => {
+const GameInfo = ({ onClickStartNewGame, gamesWon, gamesLost, showWinningMessage, showLosingMessage }) => {
   return (
     <StyledGameInfoContainer>
       <PlayNewGame onClickStartNewGame={onClickStartNewGame} />
       <GameRules />
-      <PostGameFeedback />
+      <PostGameFeedback
+        showWinningMessage={showWinningMessage}
+        showLosingMessage={showLosingMessage} />
       <Score
         gamesWon={gamesWon}
         gamesLost={gamesLost} />
