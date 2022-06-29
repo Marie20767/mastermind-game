@@ -1,4 +1,4 @@
-import { PegHexCodes } from './constants';
+import { FeedbackNumbers, PegHexCodes } from './constants';
 
 const generateRandomSolution = () => {
   const randomSolution = [];
@@ -12,4 +12,24 @@ const generateRandomSolution = () => {
   return randomSolution;
 };
 
-export { generateRandomSolution };
+const generateInitialUserAnswersState = () => {
+  const initialUserAnswersState = [];
+
+  for (let i = 0; i < 9; i++) {
+    initialUserAnswersState.push([null, null, null, null]);
+  }
+
+  return initialUserAnswersState;
+};
+
+const generateInitialPegFeedbackState = () => {
+  const initialPegFeedbackState = [];
+
+  for (let i = 0; i < 9; i++) {
+    initialPegFeedbackState.push([FeedbackNumbers.empty, FeedbackNumbers.empty, FeedbackNumbers.empty, FeedbackNumbers.empty]);
+  }
+
+  return initialPegFeedbackState;
+};
+
+export { generateRandomSolution, generateInitialUserAnswersState, generateInitialPegFeedbackState };

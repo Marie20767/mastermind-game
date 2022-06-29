@@ -35,6 +35,7 @@ const Solution = ({ solution, showSolution }) => {
 const StyledSolutionContainer = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-left: 64px;
 `;
 
 export default Solution;

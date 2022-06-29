@@ -1,17 +1,18 @@
 import styled from 'styled-components';
-import Round from './Round';
+import Rounds from './Rounds';
 import Solution from './Solution';
 
-const GameBoard = ({ userAnswers, solution, showSolution, pegFeedback }) => {
+const GameBoard = ({ allUserAnswers, solution, showSolution, allPegFeedback }) => {
   return (
     <StyledGameBoardContainer>
       <StyledGameBoard>
+        <StyledGameName />
         <Solution
           solution={solution}
           showSolution={showSolution} />
-        <Round
-          userAnswers={userAnswers}
-          pegFeedback={pegFeedback} />
+        <Rounds
+          allUserAnswers={allUserAnswers}
+          allPegFeedback={allPegFeedback} />
       </StyledGameBoard>
     </StyledGameBoardContainer>
   );
@@ -35,9 +36,18 @@ const StyledGameBoard = styled.div`
    padding-top: 30px;
    background-color: #c4cacc;
    height: 95vh;
-   width: 75vh;
+   width: 90vh;
    border-radius: 5%;
    border: 1.5px solid black;
+`;
+
+const StyledGameName = styled.div`
+  position: absolute;
+  left: 5vh;
+  border-radius: 10%;
+  background-color: #64a4b8;
+  height: 95vh;
+  width: 10vh;
 `;
 
 export default GameBoard;

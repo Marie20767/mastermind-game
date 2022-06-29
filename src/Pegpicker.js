@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import Circle from './Circle';
 import { PegHexCodes } from './utils/constants';
 
-const Pegpicker = ({ onClickPickUserAnswer, setUserAnswers, onClickGiveFeedback, isArrayFullofColors }) => {
+const Pegpicker = ({ onClickPickUserAnswer, setAllUserAnswers, onClickGiveFeedback, isArrayFullofColors }) => {
   const onClickDeletePegs = () => {
-    setUserAnswers([null, null, null, null]);
+    setAllUserAnswers([null, null, null, null]);
   };
 
   return (

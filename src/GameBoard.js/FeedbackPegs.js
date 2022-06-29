@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import Circle from '../Circle';
 import { EmptyPegColors, FeedbackNumbers, PegColors } from '../utils/constants';
 
-const FeedbackPegs = ({ pegFeedback }) => {
+const FeedbackPegs = ({ roundPegFeedback }) => {
   return (
     <StyledFeedbackPegsContainer>
-      {pegFeedback.map((number, index) => {
+      {roundPegFeedback.map((number, index) => {
         if (number === FeedbackNumbers.empty) {
           return (
             <Circle
@@ -42,6 +42,7 @@ const FeedbackPegs = ({ pegFeedback }) => {
 };
 
 const StyledFeedbackPegsContainer = styled.div`
+  /* align feedback pegs vertically with pegs */
   display: flex;
   width: 34px;
   flex-wrap: wrap;

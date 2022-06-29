@@ -4,11 +4,11 @@ import Circle from '../Circle';
 import { EmptyPegColors } from '../utils/constants';
 import FeedbackPegs from './FeedbackPegs';
 
-const Round = ({ userAnswers, pegFeedback }) => {
+const Round = ({ roundAnswers, roundPegFeedback }) => {
   return (
     <StyledRoundContainer>
-      <FeedbackPegs pegFeedback={pegFeedback} />
-      {userAnswers.map((color, index) => {
+      <FeedbackPegs roundPegFeedback={roundPegFeedback} />
+      {roundAnswers.map((color, index) => {
         if (color !== null) {
           return (
             <Circle
@@ -35,8 +35,8 @@ const Round = ({ userAnswers, pegFeedback }) => {
 
 const StyledRoundContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
   align-items: center;
+  margin-bottom: 2.5vh;
 `;
 
 export default Round;
