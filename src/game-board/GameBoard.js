@@ -22,7 +22,6 @@ const GameBoard = ({ allUserAnswers, currentRound, solution, showSolution, allPe
 
 const StyledGameBoardContainer = styled.div`
   position: relative;
-  margin-left: 60px;
   height: 100%;
   display: flex;
   justify-content: center;

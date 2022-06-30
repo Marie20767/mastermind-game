@@ -41,7 +41,7 @@ const Pegpicker = ({
             <Circle
               key={color}
               size={7}
-              margin="0 0 30px 90px"
+              margin="0 0 30px 0px"
               color={color}
               clickable
               onClick={() => onClickPickUserAnswer(color)} />
@@ -67,9 +67,10 @@ const Pegpicker = ({
 };
 
 const StyledPegpickerContainer = styled.div`
+  flex: 1;
+  justify-content: space-evenly;
   display: flex;
   align-items: center;
-  justify-content: space-around;
 `;
 
 const StyledPegsContainer = styled.div`
@@ -82,10 +83,8 @@ const StyledButtonContainer = styled.div`
   flex-direction: column;
   
   button {
-    /* margin-left: 60px; */
     height: 50px;
     padding: 0 1.7vh;
-    font-size: 2.5vh;
     margin-bottom: 3vh;
 
     &.disabled {

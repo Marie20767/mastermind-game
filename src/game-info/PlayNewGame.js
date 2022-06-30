@@ -7,7 +7,6 @@ const PlayNewGame = ({ onClickStartNewGame }) => {
     <StyledPlayNewGameContainer>
       <button type="button" onClick={onClickStartNewGame}>
         <FontAwesomeIcon icon={faArrowRotateLeft} />
-        New game
       </button>
     </StyledPlayNewGameContainer>
   );
@@ -16,11 +15,12 @@ const PlayNewGame = ({ onClickStartNewGame }) => {
 const StyledPlayNewGameContainer = styled.div`
   button {
     display: flex;
+    margin-right: 1vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1vh 2vh;
-    font-size: 2.5vh;
+    width: 63px;
+    height: 63px;
   }
 `;
 

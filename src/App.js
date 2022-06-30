@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import GameBoard from './GameBoard.js/GameBoard';
+import GameBoard from './game-board/GameBoard';
 import GlobalStyle from './GlobalStyle';
 import Pegpicker from './Pegpicker';
 import { generateInitialPegFeedbackState, generateInitialUserAnswersState, generateRandomSolution } from './utils/game-utils';
 import { FeedbackNumbers } from './utils/constants';
-import GameInfo from './GameInfo.js/GameInfo';
+import GameInfo from './game-info/GameInfo';
 
 // TODO: at some point:
 // Save to local storage so it remembers your game
-// For every new round, make it clear with an arrow that you are at the next round because if all pegs are incorrect it looks like the game
-// is not working
+// Add tooltip to new game and game rules buttons
 
 const App = () => {
   const [solution, setSolution] = useState(generateRandomSolution());
@@ -23,8 +22,6 @@ const App = () => {
   const [showWinningMessage, setShowWinningMessage] = useState(false);
 
   const isArrayFullofColors = allUserAnswers[currentRound].every((element) => element !== null);
-
-  console.log(solution);
 
   const findFirstNullElement = (state) => {
     return state.findIndex((element) => {

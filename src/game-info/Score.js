@@ -11,7 +11,7 @@ const Score = ({ gamesWon, gamesLost }) => {
 };
 
 const StyledScoreContainer = styled.div`
-
+  margin-top: 2.5vh;
 `;
 
 export default Score;

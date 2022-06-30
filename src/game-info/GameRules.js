@@ -7,7 +7,6 @@ const GameRules = () => {
     <StyledGameRulesContainer>
       <button type="button">
         <FontAwesomeIcon icon={faQuestion} />
-        Rules
       </button>
     </StyledGameRulesContainer>
   );
@@ -16,11 +15,12 @@ const GameRules = () => {
 const StyledGameRulesContainer = styled.div`
   button {
     display: flex;
+    margin-left: 2vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1vh 2vh;
-    font-size: 2.5vh;
+    width: 63px;
+    height: 63px;
   }
 `;
 
