@@ -17,16 +17,17 @@ const GlobalStyle = createGlobalStyle`
   .App {
     background-color: #eceadb;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
   }
 
   button {
-    background-color: transparent;
-    border: 3px solid #c4cacc;
+    background-color: #64a4b8;
+    color: white;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
     &:hover {
-      background-color: #c4cacc;
-      color: white;
+      background-color: #185f75;
     }
   }
 

@@ -2,9 +2,17 @@ import styled from 'styled-components';
 import Circle from './Circle';
 import { PegHexCodes } from './utils/constants';
 
-const Pegpicker = ({ onClickPickUserAnswer, currentRound, allUserAnswers, setAllUserAnswers, onClickGiveFeedback, isArrayFullofColors }) => {
+const Pegpicker = ({
+  onClickPickUserAnswer,
+  currentRound, allUserAnswers,
+  setAllUserAnswers,
+  onClickGiveFeedback,
+  isArrayFullofColors,
+  showSolution,
+}) => {
   const onClickDeletePegs = () => {
     const updatedRoundAnswers = allUserAnswers.map((roundAnswers, index) => {
+      //  currentRound !== 8 to make sure you can't delete pegs after last round
       if (index === currentRound) {
         return [null, null, null, null];
       }
@@ -13,6 +21,16 @@ const Pegpicker = ({ onClickPickUserAnswer, currentRound, allUserAnswers, setAll
     });
 
     setAllUserAnswers(updatedRoundAnswers);
+  };
+
+  const getClassNameForDeleteButton = () => {
+    const areAllPegsEmpty = allUserAnswers[currentRound].every((roundAnswer) => roundAnswer === null);
+
+    if (areAllPegsEmpty || showSolution) {
+      return 'disabled';
+    }
+
+    return '';
   };
 
   return (
@@ -31,9 +49,18 @@ const Pegpicker = ({ onClickPickUserAnswer, currentRound, allUserAnswers, setAll
         })}
       </StyledPegsContainer>
       <StyledButtonContainer>
-        <button type="button" onClick={onClickDeletePegs}>Delete</button>
-        {/* TODO: When you filled up one round, the check button should be highlighted to show that you need to check your result */}
-        <button type="button" onClick={isArrayFullofColors ? onClickGiveFeedback : null}>Check</button>
+        <button
+          type="button"
+          className={getClassNameForDeleteButton()}
+          onClick={onClickDeletePegs}>
+          Delete
+        </button>
+        <button
+          type="button"
+          className={!isArrayFullofColors ? 'disabled' : ''}
+          onClick={isArrayFullofColors ? onClickGiveFeedback : null}>
+          Check
+        </button>
       </StyledButtonContainer>
     </StyledPegpickerContainer>
   );
@@ -42,12 +69,12 @@ const Pegpicker = ({ onClickPickUserAnswer, currentRound, allUserAnswers, setAll
 const StyledPegpickerContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-around;
 `;
 
 const StyledPegsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
 `;
 
 const StyledButtonContainer = styled.div`
@@ -55,11 +82,17 @@ const StyledButtonContainer = styled.div`
   flex-direction: column;
   
   button {
-    margin-left: 60px;
+    /* margin-left: 60px; */
     height: 50px;
     padding: 0 1.7vh;
     font-size: 2.5vh;
     margin-bottom: 3vh;
+
+    &.disabled {
+      background-color: #d3d3d3d6;
+      color: #bebdbd;
+      cursor: initial;
+    }
   }
 `;
 

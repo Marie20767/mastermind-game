@@ -4,7 +4,7 @@ import Circle from '../Circle';
 import { EmptyPegColors } from '../utils/constants';
 import FeedbackPegs from './FeedbackPegs';
 
-const Round = ({ roundAnswers, roundPegFeedback }) => {
+const Round = ({ Icon, roundAnswers, roundPegFeedback }) => {
   return (
     <StyledRoundContainer>
       <FeedbackPegs roundPegFeedback={roundPegFeedback} />
@@ -29,6 +29,7 @@ const Round = ({ roundAnswers, roundPegFeedback }) => {
           </Circle>
         );
       })}
+      {Icon}
     </StyledRoundContainer>
   );
 };

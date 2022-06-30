@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Rounds from './Rounds';
 import Solution from './Solution';
 
-const GameBoard = ({ allUserAnswers, solution, showSolution, allPegFeedback }) => {
+const GameBoard = ({ allUserAnswers, currentRound, solution, showSolution, allPegFeedback }) => {
   return (
     <StyledGameBoardContainer>
       <StyledGameBoard>
@@ -12,7 +12,9 @@ const GameBoard = ({ allUserAnswers, solution, showSolution, allPegFeedback }) =
           showSolution={showSolution} />
         <Rounds
           allUserAnswers={allUserAnswers}
-          allPegFeedback={allPegFeedback} />
+          currentRound={currentRound}
+          allPegFeedback={allPegFeedback}
+          showSolution={showSolution} />
       </StyledGameBoard>
     </StyledGameBoardContainer>
   );
@@ -20,7 +22,6 @@ const GameBoard = ({ allUserAnswers, solution, showSolution, allPegFeedback }) =
 
 const StyledGameBoardContainer = styled.div`
   position: relative;
-  margin-right: 320px;
   margin-left: 60px;
   height: 100%;
   display: flex;

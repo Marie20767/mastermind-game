@@ -15,7 +15,7 @@ const App = () => {
   const [solution, setSolution] = useState(generateRandomSolution());
   const [allUserAnswers, setAllUserAnswers] = useState(generateInitialUserAnswersState());
   const [currentRound, setCurrentRound] = useState(0);
-  const [showSolution, setShowSolution] = useState(true);
+  const [showSolution, setShowSolution] = useState(false);
   const [allPegFeedback, setAllPegFeedback] = useState(generateInitialPegFeedbackState());
   const [gamesWon, setGamesWon] = useState(0);
   const [gamesLost, setGamesLost] = useState(0);
@@ -23,6 +23,8 @@ const App = () => {
   const [showWinningMessage, setShowWinningMessage] = useState(false);
 
   const isArrayFullofColors = allUserAnswers[currentRound].every((element) => element !== null);
+
+  console.log(solution);
 
   const findFirstNullElement = (state) => {
     return state.findIndex((element) => {
@@ -92,15 +94,15 @@ const App = () => {
       setCurrentRound(newCurrentRound);
     }
 
-    if (isArrayFullofColors && currentRound === 8) {
+    const areRoundAnswersAllCorrect = updatedAllPegFeedback[currentRound].every((number) => number === 1);
+
+    if (isArrayFullofColors && currentRound === 8 && !areRoundAnswersAllCorrect) {
       setShowSolution(true);
       const newGamesLostScore = gamesLost + 1;
 
       setGamesLost(newGamesLostScore);
       setShowLosingMessage(true);
     }
-
-    const areRoundAnswersAllCorrect = updatedAllPegFeedback[currentRound].every((number) => number === 1);
 
     if (areRoundAnswersAllCorrect) {
       setShowSolution(true);
@@ -131,9 +133,11 @@ const App = () => {
         allUserAnswers={allUserAnswers}
         setAllUserAnswers={setAllUserAnswers}
         onClickGiveFeedback={onClickGiveFeedback}
-        isArrayFullofColors={isArrayFullofColors} />
+        isArrayFullofColors={isArrayFullofColors}
+        showSolution={showSolution} />
       <GameBoard
         allUserAnswers={allUserAnswers}
+        currentRound={currentRound}
         solution={solution}
         showSolution={showSolution}
         allPegFeedback={allPegFeedback} />
