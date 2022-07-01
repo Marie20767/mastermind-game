@@ -20,4 +20,8 @@ const FeedbackNumbers = {
   empty: 3,
 };
 
-export { PegColors, PegHexCodes, EmptyPegColors, FeedbackNumbers };
+const NumberOfRounds = 9;
+
+const NumberOfPegColors = 6;
+
+export { PegColors, PegHexCodes, EmptyPegColors, FeedbackNumbers, NumberOfRounds, NumberOfPegColors };

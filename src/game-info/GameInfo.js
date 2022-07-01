@@ -1,19 +1,15 @@
 import styled from 'styled-components';
-import PlayNewGame from './PlayNewGame';
-import GameRules from './GameRules';
+import { faArrowRotateLeft, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import Score from './Score';
-import PostGameFeedback from './PostGameFeedback';
+import GameInfoButton from './GameInfoButton';
 
-const GameInfo = ({ onClickStartNewGame, gamesWon, gamesLost, showWinningMessage, showLosingMessage }) => {
+const GameInfo = ({ gamesWon, gamesLost, onClickStartNewGame }) => {
   return (
     <StyledGameInfoContainer>
       <StyledNewGameAndRulesContainer>
-        <PlayNewGame onClickStartNewGame={onClickStartNewGame} />
-        <GameRules />
+        <GameInfoButton onClick={onClickStartNewGame} icon={faArrowRotateLeft} toolTipText="Start new game" />
+        <GameInfoButton icon={faQuestion} toolTipText="Check game rules" />
       </StyledNewGameAndRulesContainer>
-      <PostGameFeedback
-        showWinningMessage={showWinningMessage}
-        showLosingMessage={showLosingMessage} />
       <Score
         gamesWon={gamesWon}
         gamesLost={gamesLost} />

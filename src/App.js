@@ -3,12 +3,17 @@ import GameBoard from './game-board/GameBoard';
 import GlobalStyle from './GlobalStyle';
 import Pegpicker from './Pegpicker';
 import { generateInitialPegFeedbackState, generateInitialUserAnswersState, generateRandomSolution } from './utils/game-utils';
-import { FeedbackNumbers } from './utils/constants';
+import { FeedbackNumbers, NumberOfRounds } from './utils/constants';
 import GameInfo from './game-info/GameInfo';
+import Overlay from './Overlay';
+import chickImage from './images/chick.png';
+import sadDogImage from './images/sad-dog.png';
 
 // TODO: at some point:
 // Save to local storage so it remembers your game
-// Add tooltip to new game and game rules buttons
+
+// Finish game over overlay: when you click on the x button the overlay should close
+// Add rules overlay
 
 const App = () => {
   const [solution, setSolution] = useState(generateRandomSolution());
@@ -21,9 +26,9 @@ const App = () => {
   const [showLosingMessage, setShowLosingMessage] = useState(false);
   const [showWinningMessage, setShowWinningMessage] = useState(false);
 
-  const isArrayFullofColors = allUserAnswers[currentRound].every((element) => element !== null);
+  const isRoundFull = allUserAnswers[currentRound].every((element) => element !== null);
 
-  const findFirstNullElement = (state) => {
+  const findFirstNullIndex = (state) => {
     return state.findIndex((element) => {
       if (element === null) {
         return true;
@@ -33,10 +38,11 @@ const App = () => {
     });
   };
 
+
   const onClickPickUserAnswer = (color) => {
     const updatedRoundAnswers = allUserAnswers[currentRound].map((element, index) => {
       // Find the first null element in allUserAnswers
-      if (index === findFirstNullElement(allUserAnswers[currentRound])) {
+      if (index === findFirstNullIndex(allUserAnswers[currentRound])) {
         // Replace that null element with the colour of the peg you clicked on
         return color;
       }
@@ -85,15 +91,15 @@ const App = () => {
     setAllPegFeedback(updatedAllPegFeedback);
 
     // If the allUserAnswers array is full of colours, go to the next round
-    if (isArrayFullofColors && currentRound !== 8) {
+    if (isRoundFull && currentRound !== NumberOfRounds - 1) {
       const newCurrentRound = currentRound + 1;
 
       setCurrentRound(newCurrentRound);
     }
 
-    const areRoundAnswersAllCorrect = updatedAllPegFeedback[currentRound].every((number) => number === 1);
+    const areRoundAnswersAllCorrect = updatedAllPegFeedback[currentRound].every((number) => number === FeedbackNumbers.correct);
 
-    if (isArrayFullofColors && currentRound === 8 && !areRoundAnswersAllCorrect) {
+    if (isRoundFull && currentRound === NumberOfRounds - 1 && !areRoundAnswersAllCorrect) {
       setShowSolution(true);
       const newGamesLostScore = gamesLost + 1;
 
@@ -111,12 +117,11 @@ const App = () => {
   };
 
   const onClickStartNewGame = () => {
-    setSolution(generateRandomSolution());
     setCurrentRound(0);
     setShowSolution(false);
     setSolution(generateRandomSolution());
     setAllPegFeedback(generateInitialPegFeedbackState());
-    setAllUserAnswers(generateInitialUserAnswersState);
+    setAllUserAnswers(generateInitialUserAnswersState());
     setShowLosingMessage(false);
     setShowWinningMessage(false);
   };
@@ -125,13 +130,13 @@ const App = () => {
     <div className="App">
       <GlobalStyle />
       <Pegpicker
-        onClickPickUserAnswer={onClickPickUserAnswer}
+        showSolution={showSolution}
         currentRound={currentRound}
         allUserAnswers={allUserAnswers}
         setAllUserAnswers={setAllUserAnswers}
-        onClickGiveFeedback={onClickGiveFeedback}
-        isArrayFullofColors={isArrayFullofColors}
-        showSolution={showSolution} />
+        isRoundFull={isRoundFull}
+        onClickPickUserAnswer={onClickPickUserAnswer}
+        onClickGiveFeedback={onClickGiveFeedback} />
       <GameBoard
         allUserAnswers={allUserAnswers}
         currentRound={currentRound}
@@ -139,11 +144,35 @@ const App = () => {
         showSolution={showSolution}
         allPegFeedback={allPegFeedback} />
       <GameInfo
-        onClickStartNewGame={onClickStartNewGame}
         gamesWon={gamesWon}
         gamesLost={gamesLost}
         showLosingMessage={showLosingMessage}
-        showWinningMessage={showWinningMessage} />
+        showWinningMessage={showWinningMessage}
+        onClickStartNewGame={onClickStartNewGame} />
+
+      {showWinningMessage
+        ? (
+          <Overlay
+            imageSource={chickImage}
+            imageAlt="Celebrating chick"
+            title1="Congratulations!"
+            title2="You won Mastermind."
+            onClickStartNewGame={onClickStartNewGame} />
+        )
+        : null
+      }
+
+      {showLosingMessage
+        ? (
+          <Overlay
+            imageSource={sadDogImage}
+            imageAlt="Sad dog"
+            title1="You lost..."
+            title2="Better luck next time!"
+            onClickStartNewGame={onClickStartNewGame} />
+        )
+        : null
+      }
     </div>
   );
 };

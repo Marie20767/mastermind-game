@@ -3,16 +3,17 @@ import Circle from './Circle';
 import { PegHexCodes } from './utils/constants';
 
 const Pegpicker = ({
-  onClickPickUserAnswer,
-  currentRound, allUserAnswers,
+  currentRound,
+  allUserAnswers,
   setAllUserAnswers,
-  onClickGiveFeedback,
-  isArrayFullofColors,
   showSolution,
+  isRoundFull,
+  onClickPickUserAnswer,
+  onClickGiveFeedback,
+
 }) => {
   const onClickDeletePegs = () => {
     const updatedRoundAnswers = allUserAnswers.map((roundAnswers, index) => {
-      //  currentRound !== 8 to make sure you can't delete pegs after last round
       if (index === currentRound) {
         return [null, null, null, null];
       }
@@ -57,8 +58,8 @@ const Pegpicker = ({
         </button>
         <button
           type="button"
-          className={!isArrayFullofColors ? 'disabled' : ''}
-          onClick={isArrayFullofColors ? onClickGiveFeedback : null}>
+          className={!isRoundFull ? 'disabled' : ''}
+          onClick={isRoundFull ? onClickGiveFeedback : null}>
           Check
         </button>
       </StyledButtonContainer>
