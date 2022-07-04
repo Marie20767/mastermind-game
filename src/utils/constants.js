@@ -4,6 +4,7 @@ const PegColors = {
   Blue: '#2b9de5',
   Orange: '#f49633',
   Green: '#06ba7e',
+  White: '#fff',
   Purple: '#a99cc7',
 };
 
@@ -22,6 +23,6 @@ const FeedbackNumbers = {
 
 const NumberOfRounds = 9;
 
-const NumberOfPegColors = 6;
+const NumberOfPegColors = 7;
 
 export { PegColors, PegHexCodes, EmptyPegColors, FeedbackNumbers, NumberOfRounds, NumberOfPegColors };

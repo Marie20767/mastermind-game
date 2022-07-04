@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAnglesRight, faAnglesLeft } from '@fortawesome/free-solid-svg-icons';
 import GameBoard from './game-board/GameBoard';
 import GlobalStyle from './GlobalStyle';
 import Pegpicker from './Pegpicker';
@@ -6,14 +9,12 @@ import { generateInitialPegFeedbackState, generateInitialUserAnswersState, gener
 import { FeedbackNumbers, NumberOfRounds } from './utils/constants';
 import GameInfo from './game-info/GameInfo';
 import Overlay from './Overlay';
-import chickImage from './images/chick.png';
+import welcomingChickImage from './images/chick.png';
 import sadDogImage from './images/sad-dog.png';
+import happyBeeImage from './images/bee.png';
 
 // TODO: at some point:
 // Save to local storage so it remembers your game
-
-// Finish game over overlay: when you click on the x button the overlay should close
-// Add rules overlay
 
 const App = () => {
   const [solution, setSolution] = useState(generateRandomSolution());
@@ -25,6 +26,8 @@ const App = () => {
   const [gamesLost, setGamesLost] = useState(0);
   const [showLosingMessage, setShowLosingMessage] = useState(false);
   const [showWinningMessage, setShowWinningMessage] = useState(false);
+  const [showRules, setShowRules] = useState(false);
+  const [rulesPageIndex, setRulesPageIndex] = useState(0);
 
   const isRoundFull = allUserAnswers[currentRound].every((element) => element !== null);
 
@@ -37,7 +40,6 @@ const App = () => {
       return false;
     });
   };
-
 
   const onClickPickUserAnswer = (color) => {
     const updatedRoundAnswers = allUserAnswers[currentRound].map((element, index) => {
@@ -126,6 +128,66 @@ const App = () => {
     setShowWinningMessage(false);
   };
 
+  const onClickShowRules = () => {
+    setShowRules(true);
+  };
+
+  const getRulesOverlayContent = () => {
+    if (rulesPageIndex === 0) {
+      return (
+        <>
+          <h2>Hi, welcome to Mastermind!</h2>
+          <img src={welcomingChickImage} alt="Waving chick" />
+          <p>The aim of the game is to find the exact positions of the colours in the secret sequence.</p>
+          <FontAwesomeIcon icon={faAnglesRight} className="icon next" onClick={() => setRulesPageIndex(rulesPageIndex + 1)} color="white" fontSize="30px" />
+        </>
+      );
+    }
+
+    if (rulesPageIndex === 1) {
+      return (
+        <>
+          <p>To start the game, click on the <span>coloured balls </span> on the left.</p>
+          <p>Click on the <span>Delete</span> button if you wish to delete your sequence and choose different colours.</p>
+          <p>Once 4 balls are selected, click on the <span>Check</span> button to get the computer&apos;s response.</p>
+          <StyledIconContainer>
+            <FontAwesomeIcon icon={faAnglesLeft} className="icon next" onClick={() => setRulesPageIndex(rulesPageIndex - 1)} color="white" fontSize="30px" />
+            <FontAwesomeIcon icon={faAnglesRight} className="icon previous" onClick={() => setRulesPageIndex(rulesPageIndex + 1)} color="white" fontSize="30px" />
+          </StyledIconContainer>
+        </>
+      );
+    }
+
+    if (rulesPageIndex === 2) {
+      return (
+        <>
+          <p>The small <span>red</span>, <span>white</span> and <span>dark grey</span> balls indicate the computer&apos;s response.</p>
+          <p>Red indicates a <span>correct colour</span> in the <span>correct position</span>.</p>
+          <p>White indicates a <span>correct colour</span> in the <span>wrong position</span>.</p>
+          <p>Dark grey indicates an <span>incorrect colour</span> in the <span>incorrect position</span>.</p>
+          <StyledIconContainer>
+            <FontAwesomeIcon icon={faAnglesLeft} className="icon next" onClick={() => setRulesPageIndex(rulesPageIndex - 1)} color="white" fontSize="30px" />
+            <FontAwesomeIcon icon={faAnglesRight} className="icon previous" onClick={() => setRulesPageIndex(rulesPageIndex + 1)} color="white" fontSize="30px" />
+          </StyledIconContainer>
+        </>
+      );
+    }
+
+    if (rulesPageIndex === 3) {
+      return (
+        <>
+          <h3>Special notes:</h3>
+          <p>The same colour can be selected up to <span>4 times.</span></p>
+          <p>You have <span>9 attempts</span> to find the secret sequence.</p>
+          <p>Good luck Mastermind!</p>
+          <FontAwesomeIcon icon={faAnglesLeft} className="icon next" onClick={() => setRulesPageIndex(rulesPageIndex - 1)} color="white" fontSize="30px" />
+        </>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <div className="App">
       <GlobalStyle />
@@ -148,33 +210,129 @@ const App = () => {
         gamesLost={gamesLost}
         showLosingMessage={showLosingMessage}
         showWinningMessage={showWinningMessage}
-        onClickStartNewGame={onClickStartNewGame} />
+        onClickStartNewGame={onClickStartNewGame}
+        onClickShowRules={onClickShowRules} />
 
       {showWinningMessage
         ? (
-          <Overlay
-            imageSource={chickImage}
-            imageAlt="Celebrating chick"
-            title1="Congratulations!"
-            title2="You won Mastermind."
-            onClickStartNewGame={onClickStartNewGame} />
+          <Overlay onClickCloseOverlay={() => setShowWinningMessage(false)}>
+            <StyledFeedbackContentContainer>
+              <img src={happyBeeImage} alt="Happy bee" />
+              <h2>Congratulations!</h2>
+              <h2>You won Mastermind.</h2>
+              <button type="button" onClick={onClickStartNewGame}>New Game</button>
+            </StyledFeedbackContentContainer>
+          </Overlay>
         )
         : null
       }
 
       {showLosingMessage
         ? (
-          <Overlay
-            imageSource={sadDogImage}
-            imageAlt="Sad dog"
-            title1="You lost..."
-            title2="Better luck next time!"
-            onClickStartNewGame={onClickStartNewGame} />
+          <Overlay onClickCloseOverlay={() => setShowLosingMessage(false)}>
+            <StyledFeedbackContentContainer>
+              <img src={sadDogImage} alt="Sad dog" />
+              <h2>You lost...</h2>
+              <h2>Better luck next time!</h2>
+              <button type="button" onClick={onClickStartNewGame}>New Game</button>
+            </StyledFeedbackContentContainer>
+          </Overlay>
+        )
+        : null
+      }
+
+      {showRules
+        ? (
+          <Overlay onClickCloseOverlay={() => setShowRules(false)}>
+            <StyledRulesContainer>
+              {getRulesOverlayContent()}
+            </StyledRulesContainer>
+          </Overlay>
         )
         : null
       }
     </div>
   );
 };
+
+const StyledFeedbackContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  margin-bottom: 3vh;
+
+   img {
+    margin-bottom: 1vh;
+  }
+
+  button {
+    margin-top: 4vh;
+    padding: 1vh 2vh;
+  }
+
+  h2 {
+    color: white;
+    font-size: 4.5vh;
+    letter-spacing: 1.5px;
+    margin-bottom: 2vh;
+  }
+`;
+
+const StyledRulesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  img {
+    margin-bottom: 3vh;
+  }
+
+  h2 {
+    margin-top: 4vh;
+    margin-bottom: 3vh;
+    color: white;
+    font-size: 4vh;
+    letter-spacing: 1.5px;
+  }
+
+  h3 {
+    color: white;
+    font-size: 3.8vh;
+    text-decoration: underline;
+    margin-bottom: 2vh;
+  }
+
+  .icon {
+    margin-top: 2vh;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  p {
+    color: white;
+    font-size: 3.3vh;
+    margin: 1.8vh 4vh;
+  }
+
+  span {
+    color: #64a4b8;
+    font-weight: bold;
+  }
+
+`;
+
+const StyledIconContainer = styled.div`
+  display: flex;
+
+  .previous {
+    margin-left: 3vh;
+  }
+`;
 
 export default App;

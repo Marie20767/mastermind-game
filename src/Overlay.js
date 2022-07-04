@@ -2,19 +2,22 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const Overlay = ({ imageSource, imageAlt, title1, title2, onClickStartNewGame }) => {
+const Overlay = ({
+  children,
+  onClickCloseOverlay,
+}) => {
   // Add a transition for the overlay to come in smoother and give user a second to see solution first
   return (
     <StyledOverlayContainer>
       <StyledOverlay />
       <StyledOverlayContent>
-        <FontAwesomeIcon icon={faXmark} color="white" className="close-icon" fontSize="33px" />
-        <StyledContentContainer>
-          <img src={imageSource} alt={imageAlt} />
-          <h2>{title1}</h2>
-          <h2>{title2}</h2>
-          <button type="button" onClick={onClickStartNewGame}>New Game</button>
-        </StyledContentContainer>
+        <FontAwesomeIcon
+          icon={faXmark}
+          onClick={onClickCloseOverlay}
+          color="white"
+          className="close-icon"
+          fontSize="33px" />
+        {children}
       </StyledOverlayContent>
     </StyledOverlayContainer>
   );
@@ -54,30 +57,6 @@ const StyledOverlayContent = styled.div`
     &:hover {
       transform: scale(1.2);
     }
-  }
-`;
-
-const StyledContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  margin-bottom: 3vh;
-
-  img {
-    margin-bottom: 1vh;
-  }
-
-  button {
-    margin-top: 4vh;
-    padding: 1vh 2vh;
-  }
-
-  h2 {
-    color: white;
-    font-size: 4.5vh;
-    letter-spacing: 1.5px;
   }
 `;
 

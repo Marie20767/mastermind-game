@@ -3,12 +3,12 @@ import { faArrowRotateLeft, faQuestion } from '@fortawesome/free-solid-svg-icons
 import Score from './Score';
 import GameInfoButton from './GameInfoButton';
 
-const GameInfo = ({ gamesWon, gamesLost, onClickStartNewGame }) => {
+const GameInfo = ({ gamesWon, gamesLost, onClickStartNewGame, onClickShowRules }) => {
   return (
     <StyledGameInfoContainer>
       <StyledNewGameAndRulesContainer>
         <GameInfoButton onClick={onClickStartNewGame} icon={faArrowRotateLeft} toolTipText="Start new game" />
-        <GameInfoButton icon={faQuestion} toolTipText="Check game rules" />
+        <GameInfoButton onClick={onClickShowRules} icon={faQuestion} toolTipText="Check game rules" />
       </StyledNewGameAndRulesContainer>
       <Score
         gamesWon={gamesWon}

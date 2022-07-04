@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     justify-content: space-around;
   }
 
-  button, h2, p {
+  button, h2, h3, p {
     font-family: 'GeoLight', Helvetica, sans-serif;
   }
 

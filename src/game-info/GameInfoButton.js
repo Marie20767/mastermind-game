@@ -4,13 +4,11 @@ import ReactTooltip from 'react-tooltip';
 
 const GameInfoButton = ({ icon, toolTipText, onClick }) => {
   return (
-    <Button data-tip data-for={toolTipText} type="button">
+    <Button data-tip data-for={toolTipText} onClick={onClick} type="button">
       <ReactTooltip id={toolTipText} place="top" effect="solid">
         <span>{toolTipText}</span>
       </ReactTooltip>
-      <FontAwesomeIcon
-        icon={icon}
-        onClick={onClick} />
+      <FontAwesomeIcon icon={icon} />
     </Button>
   );
 };
