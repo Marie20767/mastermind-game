@@ -6,7 +6,11 @@ const GameBoard = ({ allUserAnswers, currentRound, solution, showSolution, allPe
   return (
     <StyledGameBoardContainer>
       <StyledGameBoard>
-        <StyledGameTitle />
+        <StyledGameTitleContainer>
+          <StyledGameTitle>
+            Mastermind
+          </StyledGameTitle>
+        </StyledGameTitleContainer>
         <Solution
           solution={solution}
           showSolution={showSolution} />
@@ -42,7 +46,7 @@ const StyledGameBoard = styled.div`
    border: 1.5px solid black;
 `;
 
-const StyledGameTitle = styled.div`
+const StyledGameTitleContainer = styled.div`
   position: absolute;
   left: 0.20vh;
   bottom: 9.5vh;
@@ -50,6 +54,15 @@ const StyledGameTitle = styled.div`
   background-color: #64a4b8;
   height: 80vh;
   width: 18vh;
+`;
+
+const StyledGameTitle = styled.div`
+font-family: 'Ubuntu', sans-serif;
+  transform: rotate(-90deg) translateX(-440px);
+  font-size: 12vh;
+  -webkit-text-fill-color:  #eceadb;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
 `;
 
 export default GameBoard;

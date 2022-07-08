@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import GameBoard from './game-board/GameBoard';
 import GlobalStyle from './GlobalStyle';
 import Pegpicker from './Pegpicker';
-import { generateInitialPegFeedbackState, generateInitialUserAnswersState, generateRandomSolution } from './utils/game-utils';
+import {
+  generateInitialPegFeedbackState,
+  generateInitialUserAnswersState,
+  generateRandomSolution,
+  getNumberOfCorrectPositionPegs,
+  getNumberOfIncorrectPositionPegs,
+  getUpdatedRoundFeedback,
+} from './utils/game-utils';
 import { FeedbackNumbers, NumberOfRounds } from './utils/constants';
 import GameInfo from './game-info/GameInfo';
 import Overlay from './Overlay';
@@ -13,6 +20,7 @@ import RulesOverlay from './RulesOverlay';
 
 // TODO: at some point:
 // Save to local storage so it remembers your game
+// App icon
 // Mastermind title
 
 const App = () => {
@@ -64,25 +72,16 @@ const App = () => {
   };
 
   const onClickGiveFeedback = () => {
-    // TODO:
-    // The small peg should become white if I have one correct colour but in the wrong position
-    const updatedRoundPegFeedback = [];
+    // Get the number of correct color in correct position pegs, correct color in incorrect position pegs and completely incorrect pegs for the currentRound
+    const numberOfCorrectPositionPegs = getNumberOfCorrectPositionPegs(allUserAnswers[currentRound], solution);
+    const numberOfIncorrectPositionPegs = getNumberOfIncorrectPositionPegs(allUserAnswers[currentRound], solution);
 
-    // Compare the userAnswer array to the solution array
-    for (let i = 0; i < 4; i++) {
-      if (allUserAnswers[currentRound][i] === solution[i]) {
-        updatedRoundPegFeedback.push(FeedbackNumbers.correct);
-      } else {
-        updatedRoundPegFeedback.push(FeedbackNumbers.empty);
-      }
-    }
+    const updatedRoundFeedback = getUpdatedRoundFeedback(numberOfIncorrectPositionPegs, numberOfCorrectPositionPegs);
 
-    // Sort the array so the red colour is first
-    const sortedRoundPegFeedback = updatedRoundPegFeedback.sort((a, b) => a - b);
-
+    // Update all the pegFeedback
     const updatedAllPegFeedback = allPegFeedback.map((roundPegFeedback, index) => {
       if (index === currentRound) {
-        return sortedRoundPegFeedback;
+        return updatedRoundFeedback;
       }
 
       return roundPegFeedback;

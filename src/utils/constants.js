@@ -25,4 +25,6 @@ const NumberOfRounds = 9;
 
 const NumberOfPegColors = 7;
 
-export { PegColors, PegHexCodes, EmptyPegColors, FeedbackNumbers, NumberOfRounds, NumberOfPegColors };
+const SolutionLength = 4;
+
+export { PegColors, PegHexCodes, EmptyPegColors, FeedbackNumbers, NumberOfRounds, NumberOfPegColors, SolutionLength };
