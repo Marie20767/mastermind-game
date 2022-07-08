@@ -17,11 +17,11 @@ import Overlay from './Overlay';
 import sadDogImage from './images/sad-dog.png';
 import happyBeeImage from './images/bee.png';
 import RulesOverlay from './RulesOverlay';
+import Circle from './Circle';
 
 // TODO: at some point:
 // Save to local storage so it remembers your game
 // App icon
-// Mastermind title
 
 const App = () => {
   const [solution, setSolution] = useState(generateRandomSolution());
@@ -186,7 +186,9 @@ const App = () => {
         ? <RulesOverlay setShowRules={setShowRules} />
         : null
       }
+
     </div>
+
   );
 };
 

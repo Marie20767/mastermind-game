@@ -42,7 +42,7 @@ const FeedbackPegs = ({ roundPegFeedback }) => {
 };
 
 const StyledFeedbackPegsContainer = styled.div`
-  /* align feedback pegs vertically with pegs */
+  /* TODO: align feedback pegs vertically with pegs */
   display: flex;
   width: 34px;
   flex-wrap: wrap;
