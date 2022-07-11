@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { OverlayAnimation } from './animation';
 
 const Overlay = ({
   children,
@@ -10,7 +12,7 @@ const Overlay = ({
   return (
     <StyledOverlayContainer>
       <StyledOverlay />
-      <StyledOverlayContent>
+      <StyledOverlayContent variants={OverlayAnimation} initial="hidden" animate="show" exit="exit">
         <FontAwesomeIcon
           icon={faXmark}
           onClick={onClickCloseOverlay}
@@ -41,7 +43,7 @@ const StyledOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.75);
 `;
 
-const StyledOverlayContent = styled.div`
+const StyledOverlayContent = styled(motion.div)`
   display: flex;
   flex-direction: column;
   width: 50%;

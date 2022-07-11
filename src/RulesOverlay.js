@@ -88,12 +88,12 @@ const RulesOverlay = ({ setShowRules }) => {
     if (rulesPageIndex === 3) {
       return (
         <>
-          <StyledRulesContainer>
-            <h3>Special notes:</h3>‰
+          <StyledRulesTextContainer>
+            <h3>Special notes:</h3>
             <p>The same colour can be selected up to <span>4 times.</span></p>
             <p>You have <span>9 attempts</span> to find the secret sequence.</p>
             <p>Good luck Mastermind!</p>
-          </StyledRulesContainer>
+          </StyledRulesTextContainer>
           <FontAwesomeIcon
             icon={faAnglesLeft}
             className="icon next"
@@ -163,7 +163,6 @@ const StyledRulesContainer = styled.div`
     color: #64a4b8;
     font-weight: bold;
   }
-
 `;
 
 const StyledRulesTextContainer = styled.div`

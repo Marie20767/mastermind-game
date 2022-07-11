@@ -18,7 +18,7 @@ import sadDogImage from './images/sad-dog.png';
 import happyBeeImage from './images/bee.png';
 import RulesOverlay from './RulesOverlay';
 
-// TODO: incoming and exit animation for overlays
+// TODO: fix exit animation for overlays
 // For the post feedback game overlay we need a delay for the user to see the solution
 // Exit animations for both overlays
 
@@ -26,6 +26,8 @@ import RulesOverlay from './RulesOverlay';
 // Fix the screenshot error
 // Look into app dying when refreshing too much?
 // Custom hooks for useStates
+
+// TODO: Refactor StyledRulesTextContainer content into separate container, call it RulesContent
 
 const App = () => {
   const [solution, setSolution] = useState(generateRandomSolution());
