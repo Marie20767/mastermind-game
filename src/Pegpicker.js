@@ -58,7 +58,7 @@ const Pegpicker = ({
         </button>
         <button
           type="button"
-          className={!isRoundFull ? 'disabled' : ''}
+          className={!isRoundFull || showSolution ? 'disabled' : ''}
           onClick={isRoundFull ? onClickGiveFeedback : null}>
           Check
         </button>

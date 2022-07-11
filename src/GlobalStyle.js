@@ -25,6 +25,13 @@ const GlobalStyle = createGlobalStyle`
     justify-content: space-around;
   }
 
+  h1 {
+    color: white;
+    font-size: 4.2vh;
+    letter-spacing: 1.5px;
+    font-family: 'GeoLight', Helvetica, sans-serif;
+  }
+
   button, h2, h3, p {
     font-family: 'GeoLight', Helvetica, sans-serif;
   }

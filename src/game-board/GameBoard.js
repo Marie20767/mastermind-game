@@ -8,7 +8,7 @@ const GameBoard = ({ allUserAnswers, currentRound, solution, showSolution, allPe
       <StyledGameBoard>
         <StyledGameTitleContainer>
           <StyledGameTitle>
-            Mastermind
+            MASTERMIND
           </StyledGameTitle>
         </StyledGameTitleContainer>
         <Solution
@@ -59,7 +59,7 @@ const StyledGameTitleContainer = styled.div`
 const StyledGameTitle = styled.div`
 font-family: 'Ubuntu', sans-serif;
   transform: rotate(-90deg) translateX(-440px);
-  font-size: 12vh;
+  font-size: 10vh;
   -webkit-text-fill-color:  #eceadb;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
