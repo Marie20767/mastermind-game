@@ -17,6 +17,13 @@ const GlobalStyle = createGlobalStyle`
   height: 100%;
   width: 100%;
   overflow-y: hidden;
+  /* Make sure no text can be selected */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; 
   }
 
   .App {

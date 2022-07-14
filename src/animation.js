@@ -11,7 +11,7 @@ const OverlayAnimation = {
   exit: {
     opacity: 0,
     transition: {
-      duration: 0.4,
+      duration: 1,
     },
   },
 };

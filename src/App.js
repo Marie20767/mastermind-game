@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import GameBoard from './game-board/GameBoard';
 import GlobalStyle from './GlobalStyle';
@@ -13,55 +13,24 @@ import {
 } from './utils/game-utils';
 import { FeedbackNumbers, NumberOfRounds } from './utils/constants';
 import GameInfo from './game-info/GameInfo';
-import Overlay from './Overlay';
+import Overlay from './overlays/Overlay';
 import sadDogImage from './images/sad-dog.png';
 import happyBeeImage from './images/bee.png';
-import RulesOverlay from './RulesOverlay';
+import RulesOverlay from './overlays/RulesOverlay';
+import useLocalStorageState from './hooks/useLocalStorageState';
 
-// TODO: fix exit animation for overlays
-// For the post feedback game overlay we need a delay for the user to see the solution
-// Exit animations for both overlays
-
-// TODO: Make sure the app still works for a first time user
-// Fix the screenshot error
-// Look into app dying when refreshing too much?
-// Custom hooks for useStates
-
-// TODO: Refactor StyledRulesTextContainer content into separate container, call it RulesContent
+// TODO: Refactor RulesOverlay content
+// TODO: MOBILE STYLING
+// TODO: align feedback pegs vertically with pegs ?
 
 const App = () => {
-  const [solution, setSolution] = useState(generateRandomSolution());
-  const [allUserAnswers, setAllUserAnswers] = useState(() => {
-    const storedUserAnswers = localStorage.getItem('user-answers');
-
-    return storedUserAnswers !== null ? JSON.parse(storedUserAnswers) : generateInitialUserAnswersState();
-  });
-
-  const [currentRound, setCurrentRound] = useState(() => {
-    const storedCurrentRound = localStorage.getItem('current-round');
-
-    return storedCurrentRound !== null ? JSON.parse(storedCurrentRound) : 0;
-  });
-  const [showSolution, setShowSolution] = useState(() => {
-    const storedShowSolution = localStorage.getItem('show-solution');
-
-    return storedShowSolution !== null ? JSON.parse(storedShowSolution) : false;
-  });
-  const [allPegFeedback, setAllPegFeedback] = useState(() => {
-    const storedPegFeedback = localStorage.getItem('peg-feedback');
-
-    return storedPegFeedback !== null ? JSON.parse(storedPegFeedback) : generateInitialPegFeedbackState();
-  });
-  const [gamesWon, setGamesWon] = useState(() => {
-    const storedWonGames = localStorage.getItem('won-games');
-
-    return storedWonGames !== null ? JSON.parse(storedWonGames) : 0;
-  });
-  const [gamesLost, setGamesLost] = useState(() => {
-    const storedLostGames = localStorage.getItem('lost-games');
-
-    return storedLostGames !== null ? JSON.parse(storedLostGames) : 0;
-  });
+  const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
+  const [allUserAnswers, setAllUserAnswers] = useLocalStorageState('user-answers', generateInitialUserAnswersState());
+  const [currentRound, setCurrentRound] = useLocalStorageState('current-round', 0);
+  const [showSolution, setShowSolution] = useLocalStorageState('show-solution', false);
+  const [allPegFeedback, setAllPegFeedback] = useLocalStorageState('peg-feedback', generateInitialPegFeedbackState());
+  const [gamesWon, setGamesWon] = useLocalStorageState('won-games', 0);
+  const [gamesLost, setGamesLost] = useLocalStorageState('lost-games', 0);
   const [showLosingMessage, setShowLosingMessage] = useState(false);
   const [showWinningMessage, setShowWinningMessage] = useState(false);
   const [showRules, setShowRules] = useState(false);
@@ -160,27 +129,6 @@ const App = () => {
     setShowRules(true);
   };
 
-  // Handles saving to local storage
-  useEffect(() => {
-    // Save allUserAnswers to local storage
-    localStorage.setItem('user-answers', JSON.stringify(allUserAnswers));
-
-    // Save currentRound to local storage
-    localStorage.setItem('current-round', JSON.stringify(currentRound));
-
-    // Save allPegFeedback to local storage
-    localStorage.setItem('peg-feedback', JSON.stringify(allPegFeedback));
-
-    // Save gamesWon to local storage
-    localStorage.setItem('won-games', JSON.stringify(gamesWon));
-
-    // Save gamesLost to lcoal storage
-    localStorage.setItem('lost-games', JSON.stringify(gamesLost));
-
-    // Save showSolution to local storage
-    localStorage.setItem('show-solution', JSON.stringify(showSolution));
-  }, [allUserAnswers, currentRound, allPegFeedback, gamesWon, gamesLost, showSolution]);
-
   return (
     <div className="App">
       <GlobalStyle />
@@ -206,41 +154,34 @@ const App = () => {
         onClickStartNewGame={onClickStartNewGame}
         onClickShowRules={onClickShowRules} />
 
-      {showWinningMessage
-        ? (
-          <Overlay onClickCloseOverlay={() => setShowWinningMessage(false)}>
-            <StyledFeedbackContentContainer>
-              <img src={happyBeeImage} alt="Happy bee" />
-              <h1>Congratulations!</h1>
-              <h1>You won, Mastermind.</h1>
-              <button type="button" onClick={onClickStartNewGame}>New Game</button>
-            </StyledFeedbackContentContainer>
-          </Overlay>
-        )
-        : null
-      }
+      <Overlay
+        isVisible={showWinningMessage}
+        delay={1}
+        onClickCloseOverlay={() => setShowWinningMessage(false)}>
+        <StyledFeedbackContentContainer>
+          <img src={happyBeeImage} alt="Happy bee" />
+          <h1>Congratulations!</h1>
+          <h1>You won, Mastermind.</h1>
+          <button type="button" onClick={onClickStartNewGame}>New Game</button>
+        </StyledFeedbackContentContainer>
+      </Overlay>
 
-      {showLosingMessage
-        ? (
-          <Overlay onClickCloseOverlay={() => setShowLosingMessage(false)}>
-            <StyledFeedbackContentContainer>
-              <img src={sadDogImage} alt="Sad dog" />
-              <h1>You lost...</h1>
-              <h1>Better luck next time!</h1>
-              <button type="button" onClick={onClickStartNewGame}>New Game</button>
-            </StyledFeedbackContentContainer>
-          </Overlay>
-        )
-        : null
-      }
+      <Overlay
+        isVisible={showLosingMessage}
+        delay={1}
+        onClickCloseOverlay={() => setShowLosingMessage(false)}>
+        <StyledFeedbackContentContainer>
+          <img src={sadDogImage} alt="Sad dog" />
+          <h1>You lost...</h1>
+          <h1>Better luck next time!</h1>
+          <button type="button" onClick={onClickStartNewGame}>New Game</button>
+        </StyledFeedbackContentContainer>
+      </Overlay>
 
-      {showRules
-        ? <RulesOverlay setShowRules={setShowRules} />
-        : null
-      }
-
+      <RulesOverlay
+        setShowRules={setShowRules}
+        isVisible={showRules} />
     </div>
-
   );
 };
 

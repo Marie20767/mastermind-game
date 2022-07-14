@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesRight, faAnglesLeft } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
-import welcomingChickImage from './images/chick.png';
+import { motion } from 'framer-motion';
+import welcomingChickImage from '../images/chick.png';
 import Overlay from './Overlay';
+import { OverlayAnimation } from '../animation';
 
-const RulesOverlay = ({ setShowRules }) => {
+const RulesOverlay = ({ isVisible, setShowRules }) => {
   const [rulesPageIndex, setRulesPageIndex] = useState(0);
 
   const onClickCloseRulesOverlay = () => {
@@ -22,12 +24,14 @@ const RulesOverlay = ({ setShowRules }) => {
             <img src={welcomingChickImage} alt="Waving chick" />
             <p>The aim of the game is to find the exact positions of the colours in the secret sequence.</p>
           </StyledRulesTextContainer>
-          <FontAwesomeIcon
-            icon={faAnglesRight}
-            className="icon next"
-            onClick={() => setRulesPageIndex(rulesPageIndex + 1)}
-            color="white"
-            fontSize="30px" />
+          <StyledIconContainer>
+            <FontAwesomeIcon
+              icon={faAnglesRight}
+              className="icon next"
+              onClick={() => setRulesPageIndex(rulesPageIndex + 1)}
+              color="white"
+              fontSize="30px" />
+          </StyledIconContainer>
         </>
       );
     }
@@ -108,15 +112,19 @@ const RulesOverlay = ({ setShowRules }) => {
   };
 
   return (
-    <Overlay onClickCloseOverlay={onClickCloseRulesOverlay}>
-      <StyledRulesContainer>
+    <Overlay isVisible={isVisible} onClickCloseOverlay={onClickCloseRulesOverlay}>
+      <StyledRulesContainer
+        key={`rules-page-${rulesPageIndex}`}
+        variants={OverlayAnimation}
+        initial="hidden"
+        animate="show">
         {getRulesOverlayContent()}
       </StyledRulesContainer>
     </Overlay>
   );
 };
 
-const StyledRulesContainer = styled.div`
+const StyledRulesContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -175,6 +183,7 @@ const StyledRulesTextContainer = styled.div`
 
 const StyledIconContainer = styled.div`
   display: flex;
+  justify-content: center;
 
   .previous {
     margin-left: 3vh;
