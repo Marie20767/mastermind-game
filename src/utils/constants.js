@@ -27,4 +27,15 @@ const NumberOfPegColors = 7;
 
 const SolutionLength = 4;
 
-export { PegColors, PegHexCodes, EmptyPegColors, FeedbackNumbers, NumberOfRounds, NumberOfPegColors, SolutionLength };
+const NumberOfRulesPages = 4;
+
+export {
+  PegColors,
+  PegHexCodes,
+  EmptyPegColors,
+  FeedbackNumbers,
+  NumberOfRounds,
+  NumberOfPegColors,
+  SolutionLength,
+  NumberOfRulesPages,
+};

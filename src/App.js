@@ -19,7 +19,6 @@ import happyBeeImage from './images/bee.png';
 import RulesOverlay from './overlays/RulesOverlay';
 import useLocalStorageState from './hooks/useLocalStorageState';
 
-// TODO: Refactor RulesOverlay content
 // TODO: MOBILE STYLING
 // TODO: align feedback pegs vertically with pegs ?
 
