@@ -29,7 +29,11 @@ const GlobalStyle = createGlobalStyle`
   .App {
     background-color: #eceadb;
     display: flex;
-    justify-content: space-around;
+
+    @media screen and (min-width: 1024px) {
+      justify-content: space-around;
+    }
+    
   }
 
   h1 {
@@ -52,11 +56,16 @@ const GlobalStyle = createGlobalStyle`
     background-color: #64a4b8;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 3vh;
+    border-radius: 4px;
+    font-size: 2vh;
     cursor: pointer;
     &:hover {
       background-color: #185f75;
+    }
+
+    @media screen and (min-width: 1024px) {
+      font-size: 3vh;
+      border-radius: 8px;
     }
   }
 

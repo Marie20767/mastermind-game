@@ -12,19 +12,19 @@ const Solution = ({ solution, showSolution }) => {
           return (
             <Circle
               key={`${color}-${index}`}
-              color={color}
-              margin="0 28px 0 0" />
+              className="styled-solution-pegs"
+              color={color} />
           );
         }
 
         return (
           <Circle
             key={`${color}-${index}`}
-            color="transparent"
-            margin="0 28px 0 0">
+            className="styled-solution-pegs"
+            color="transparent">
             <FontAwesomeIcon
-              icon={faQuestion}
-              fontSize="25px" />
+              className="question-mark-icon"
+              icon={faQuestion} />
           </Circle>
         );
       })}
@@ -35,7 +35,32 @@ const Solution = ({ solution, showSolution }) => {
 const StyledSolutionContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-left: 171px;
+  margin-right: 41px;
+
+  @media screen and (min-width: 1024px) {
+    margin-left: 171px;
+    margin-right: 0;
+  }
+
+  .styled-solution-pegs {
+    margin: 0 8px 20px 0;
+    height: 4.5vh;
+    width: 4.5vh;
+
+    @media screen and (min-width: 1024px) {
+      margin: 0 28px 0 0;
+      height: 6vh;
+      width: 6vh;
+    }
+  }
+
+  .question-mark-icon {
+    font-size: 18px;
+
+    @media screen and (min-width: 1024px) {
+      font-size: 25px
+    }
+  }
 `;
 
 export default Solution;

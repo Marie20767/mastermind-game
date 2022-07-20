@@ -13,19 +13,19 @@ const Round = ({ Icon, roundAnswers, roundPegFeedback }) => {
           return (
             <Circle
               key={`${color}-${index}`}
-              color={color}
-              margin="0 28px 0 0" />
+              className="styled-round-outer-circle"
+              color={color} />
           );
         }
 
         return (
           <Circle
             key={`${color}-${index}`}
-            color={EmptyPegColors.OuterCircle}
-            margin="0 28px 0 0">
+            className="styled-round-outer-circle"
+            color={EmptyPegColors.OuterCircle}>
             <Circle
               color={EmptyPegColors.InnerCircle}
-              size={1.5} />
+              className="styled-round-inner-circle" />
           </Circle>
         );
       })}
@@ -37,7 +37,34 @@ const Round = ({ Icon, roundAnswers, roundPegFeedback }) => {
 const StyledRoundContainer = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 2.5vh;
+  justify-content: center;
+  margin-bottom: 2vh;
+
+  @media screen and (min-width: 1024px) {
+    margin-bottom: 2.5vh;
+  }
+
+  .styled-round-outer-circle {
+    margin: 0 8px 0 0;
+    height: 4.5vh;
+    width: 4.5vh;
+
+    @media screen and (min-width: 1024px) {
+      margin: 0 28px 0 0;
+      height: 6vh;
+      width: 6vh;
+    }
+  }
+
+  .styled-round-inner-circle {
+    height: 1vh;
+    width: 1vh;
+
+    @media screen and (min-width: 1024px) {
+      height: 1.5vh;
+      width: 1.5vh;
+    }
+  }
 `;
 
 export default Round;

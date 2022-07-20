@@ -5,7 +5,12 @@ import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import Round from './Round';
 import { EmptyPegColors } from '../utils/constants';
 
-const Rounds = ({ allUserAnswers, allPegFeedback, currentRound, showSolution }) => {
+const Rounds = ({
+  allUserAnswers,
+  allPegFeedback,
+  currentRound,
+  showSolution,
+}) => {
   return (
     <StyledRoundsContainer>
       {allUserAnswers.map((roundAnswers, index) => {
@@ -17,7 +22,7 @@ const Rounds = ({ allUserAnswers, allPegFeedback, currentRound, showSolution }) 
             Icon={(
               <FontAwesomeIcon
                 icon={faArrowLeftLong}
-                fontSize="33px"
+                className="left-arrow-round"
                 color={shouldShowArrow ? EmptyPegColors.InnerCircle : 'transparent'} />
             )}
             roundAnswers={roundAnswers}
@@ -31,8 +36,23 @@ const Rounds = ({ allUserAnswers, allPegFeedback, currentRound, showSolution }) 
 const StyledRoundsContainer = styled.div`
   display: flex;
   flex-direction: column-reverse;
-  margin-top: 35px;
-  margin-left: 140px;
+  justify-content: center;
+
+  .left-arrow-round {
+    font-size: 20px;
+    margin-left: 4px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    margin-left: 140px;
+    margin-top: 35px;
+
+    .left-arrow-round {
+      font-size: 33px;
+      margin-left: 0;
+    }
+  }
+
 `;
 
 export default Rounds;

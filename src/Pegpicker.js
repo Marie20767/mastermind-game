@@ -41,10 +41,8 @@ const Pegpicker = ({
           return (
             <Circle
               key={color}
-              size={7}
-              margin="0 0 30px 0px"
               color={color}
-              clickable
+              className="styled-pegpicker"
               onClick={() => onClickPickUserAnswer(color)} />
           );
         })}
@@ -68,15 +66,34 @@ const Pegpicker = ({
 };
 
 const StyledPegpickerContainer = styled.div`
-  flex: 1;
-  justify-content: space-evenly;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  @media screen and (min-width: 1024px) {
+    flex: 1;
+    justify-content: space-evenly;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const StyledPegsContainer = styled.div`
   display: flex;
   flex-direction: column;
+
+  .styled-pegpicker {
+    cursor: pointer;   
+    margin: 0 0 20px 0; 
+    width: 5vh;
+    height: 5vh;
+
+    @media screen and (min-width: 1024px) {
+      width: 7vh;
+      height: 7vh;
+      margin: 0 0 30px 0; 
+    }
+  }
 `;
 
 const StyledButtonContainer = styled.div`
@@ -84,14 +101,20 @@ const StyledButtonContainer = styled.div`
   flex-direction: column;
   
   button {
-    height: 50px;
-    padding: 0 1.7vh;
-    margin-bottom: 3vh;
+    height: 30px;
+    padding: 0 1vh;
+    margin-bottom: 1.5vh;
 
     &.disabled {
       background-color: #d3d3d3d6;
       color: #bebdbd;
       cursor: initial;
+    }
+
+    @media screen and (min-width: 1024px) {
+      height: 50px;
+      padding: 0 1.7vh;
+      margin-bottom: 3vh;
     }
   }
 `;

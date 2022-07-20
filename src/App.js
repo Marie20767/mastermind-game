@@ -19,9 +19,6 @@ import happyBeeImage from './images/bee.png';
 import RulesOverlay from './overlays/RulesOverlay';
 import useLocalStorageState from './hooks/useLocalStorageState';
 
-// TODO: MOBILE STYLING
-// TODO: align feedback pegs vertically with pegs ?
-
 const App = () => {
   const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
   const [allUserAnswers, setAllUserAnswers] = useLocalStorageState('user-answers', generateInitialUserAnswersState());

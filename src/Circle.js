@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 
-const Circle = ({ color, clickable, size = 6, onClick, children, margin }) => {
+const Circle = ({
+  color,
+  clickable,
+  className,
+  onClick,
+  children,
+}) => {
   return (
     <StyledCircle
       color={color}
+      className={className}
       clickable={clickable}
-      size={size}
-      onClick={onClick}
-      margin={margin}>
+      onClick={onClick}>
       {children}
     </StyledCircle>
   );
@@ -19,10 +24,7 @@ const StyledCircle = styled.div`
   justify-content: center;
   border-radius: 50%;
   border: 1.5px solid black;
-  ${(props) => props.clickable ? 'cursor: pointer;' : ''}
   ${(props) => `background-color: ${props.color};`}
-  ${(props) => `width: ${props.size}vh; height: ${props.size}vh;`}
-  ${(props) => props.margin ? `margin: ${props.margin}` : ''}
 `;
 
 export default Circle;
