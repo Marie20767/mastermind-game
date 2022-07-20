@@ -28,12 +28,6 @@ const GlobalStyle = createGlobalStyle`
 
   .App {
     background-color: #eceadb;
-    display: flex;
-
-    @media screen and (min-width: 1024px) {
-      justify-content: space-around;
-    }
-    
   }
 
   h1 {
@@ -48,8 +42,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h2 {
-    font-size: 3.8vh;
+    font-size: 3vh;
     margin-top: 1vh;
+
+    @media screen and (min-width: 1024px) {
+      font-size: 3.8vh;
+    }
   }
 
   button {

@@ -18,6 +18,7 @@ import sadDogImage from './images/sad-dog.png';
 import happyBeeImage from './images/bee.png';
 import RulesOverlay from './overlays/RulesOverlay';
 import useLocalStorageState from './hooks/useLocalStorageState';
+import Score from './game-info/Score';
 
 const App = () => {
   const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
@@ -128,28 +129,33 @@ const App = () => {
   return (
     <div className="App">
       <GlobalStyle />
-      <Pegpicker
-        showSolution={showSolution}
-        currentRound={currentRound}
-        allUserAnswers={allUserAnswers}
-        setAllUserAnswers={setAllUserAnswers}
-        isRoundFull={isRoundFull}
-        onClickPickUserAnswer={onClickPickUserAnswer}
-        onClickGiveFeedback={onClickGiveFeedback} />
-      <GameBoard
-        allUserAnswers={allUserAnswers}
-        currentRound={currentRound}
-        solution={solution}
-        showSolution={showSolution}
-        allPegFeedback={allPegFeedback} />
-      <GameInfo
+      <Score
+        className="mobile-score"
         gamesWon={gamesWon}
-        gamesLost={gamesLost}
-        showLosingMessage={showLosingMessage}
-        showWinningMessage={showWinningMessage}
-        onClickStartNewGame={onClickStartNewGame}
-        onClickShowRules={onClickShowRules} />
-
+        gamesLost={gamesLost} />
+      <StyledGameContainer>
+        <Pegpicker
+          showSolution={showSolution}
+          currentRound={currentRound}
+          allUserAnswers={allUserAnswers}
+          setAllUserAnswers={setAllUserAnswers}
+          isRoundFull={isRoundFull}
+          onClickPickUserAnswer={onClickPickUserAnswer}
+          onClickGiveFeedback={onClickGiveFeedback} />
+        <GameBoard
+          allUserAnswers={allUserAnswers}
+          currentRound={currentRound}
+          solution={solution}
+          showSolution={showSolution}
+          allPegFeedback={allPegFeedback} />
+        <GameInfo
+          gamesWon={gamesWon}
+          gamesLost={gamesLost}
+          showLosingMessage={showLosingMessage}
+          showWinningMessage={showWinningMessage}
+          onClickStartNewGame={onClickStartNewGame}
+          onClickShowRules={onClickShowRules} />
+      </StyledGameContainer>
       <Overlay
         isVisible={showWinningMessage}
         delay={1}
@@ -180,6 +186,11 @@ const App = () => {
     </div>
   );
 };
+
+const StyledGameContainer = styled.div`
+  display: flex;
+  margin-top: 2vh;
+`;
 
 const StyledFeedbackContentContainer = styled.div`
   display: flex;

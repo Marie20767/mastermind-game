@@ -72,6 +72,7 @@ const StyledPegpickerContainer = styled.div`
 
   @media screen and (min-width: 1024px) {
     flex: 1;
+    flex-direction: row;
     justify-content: space-evenly;
     display: flex;
     align-items: center;
