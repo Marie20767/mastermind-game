@@ -17,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
   height: 100%;
   width: 100%;
   overflow-y: hidden;
+  /* overflow-x: hidden; */
   /* Make sure no text can be selected */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -42,11 +43,14 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h2 {
-    font-size: 3vh;
+    font-size: 2.7vh;
     margin-top: 1vh;
+    margin-right: 2.5vh;
 
     @media screen and (min-width: 1024px) {
       font-size: 3.8vh;
+      margin: 0;
+      padding-bottom: 1vh;
     }
   }
 

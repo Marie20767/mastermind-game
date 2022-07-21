@@ -6,6 +6,7 @@ const GameInfo = ({ gamesWon, gamesLost, onClickStartNewGame, onClickShowRules }
   return (
     <StyledGameInfoContainer>
       <GameButtons
+        className="desktop-game-buttons"
         onClickStartNewGame={onClickStartNewGame}
         onClickShowRules={onClickShowRules} />
       <Score
@@ -17,11 +18,14 @@ const GameInfo = ({ gamesWon, gamesLost, onClickStartNewGame, onClickShowRules }
 };
 
 const StyledGameInfoContainer = styled.div`
-flex: 1;
 display: flex;
 align-items: center;
 flex-direction: column;
 justify-content: center;
+
+@media screen and (min-width: 1024px) {
+  flex: 1;
+}
 `;
 
 export default GameInfo;

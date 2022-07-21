@@ -35,7 +35,7 @@ const Solution = ({ solution, showSolution }) => {
 const StyledSolutionContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-right: 41px;
+  margin-right: 24px;
 
   @media screen and (min-width: 1024px) {
     margin-left: 171px;
@@ -44,8 +44,8 @@ const StyledSolutionContainer = styled.div`
 
   .styled-solution-pegs {
     margin: 0 8px 20px 0;
-    height: 4.5vh;
-    width: 4.5vh;
+    height: 34px;
+    width: 34px;
 
     @media screen and (min-width: 1024px) {
       margin: 0 28px 0 0;

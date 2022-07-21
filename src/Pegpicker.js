@@ -69,6 +69,7 @@ const StyledPegpickerContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   @media screen and (min-width: 1024px) {
     flex: 1;
@@ -102,7 +103,7 @@ const StyledButtonContainer = styled.div`
   flex-direction: column;
   
   button {
-    height: 30px;
+    height: 5vh;
     padding: 0 1vh;
     margin-bottom: 1.5vh;
 

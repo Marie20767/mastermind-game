@@ -19,8 +19,13 @@ const Button = styled.button`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 63px;
-  height: 63px;
+  width: 6.5vh;
+  height: 6.5vh;
+
+  @media screen and (min-width: 1024px) {
+    width: 63px;
+    height: 63px;
+  }
 
   .__react_component_tooltip {
     font-size: 2vh;

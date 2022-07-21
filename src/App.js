@@ -19,6 +19,10 @@ import happyBeeImage from './images/bee.png';
 import RulesOverlay from './overlays/RulesOverlay';
 import useLocalStorageState from './hooks/useLocalStorageState';
 import Score from './game-info/Score';
+import GameButtons from './game-info/GameButtons';
+
+// TODO: fix overlay (when display flex is removed from app overlay doesn't work anymore, when put back it messes up the layout of mobile & desktop)
+// TODO: possibly change some vh to px for desktop styling as well as mobile
 
 const App = () => {
   const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
@@ -156,6 +160,10 @@ const App = () => {
           onClickStartNewGame={onClickStartNewGame}
           onClickShowRules={onClickShowRules} />
       </StyledGameContainer>
+      <GameButtons
+        className="mobile-game-buttons"
+        onClickStartNewGame={onClickStartNewGame}
+        onClickShowRules={onClickShowRules} />
       <Overlay
         isVisible={showWinningMessage}
         delay={1}
@@ -179,7 +187,6 @@ const App = () => {
           <button type="button" onClick={onClickStartNewGame}>New Game</button>
         </StyledFeedbackContentContainer>
       </Overlay>
-
       <RulesOverlay
         setShowRules={setShowRules}
         isVisible={showRules} />
@@ -189,6 +196,7 @@ const App = () => {
 
 const StyledGameContainer = styled.div`
   display: flex;
+  justify-content: center;
   margin-top: 2vh;
 `;
 

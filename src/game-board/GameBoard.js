@@ -26,7 +26,6 @@ const GameBoard = ({ allUserAnswers, currentRound, solution, showSolution, allPe
 
 const StyledGameBoardContainer = styled.div`
   position: relative;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,17 +34,16 @@ const StyledGameBoardContainer = styled.div`
 const StyledGameBoard = styled.div`
    display: flex;
    flex-direction: column;
-   padding-bottom: 60px;
-   padding-top: 30px;
+   padding: 30px 8px 15px 8px;
    background-color: #c4cacc;
-   height: 75vh;
-   width: 40vh;
    border-radius: 5%;
    border: 1.5px solid black;
+   margin-left: 2vh;
 
    @media screen and (min-width: 1024px) {
     align-items: center;
     height: 95vh;
+    margin: 0;
     width: 80vh;
    }
 `;
