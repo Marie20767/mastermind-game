@@ -10,22 +10,22 @@ const Score = ({ gamesWon, gamesLost, className }) => {
 };
 
 const StyledScoreContainer = styled.div`
-  margin-top: 1.5vh;
+  margin-top: 25px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 
   &.desktop-score {
     display: none;
 
     @media screen and (min-width: 1024px) {
       display: block;
+      margin-top: 15px;
     }
   }
 
   &.mobile-score {
     display: flex;
-    margin-bottom: 2.5vh;
-    margin-left: 10vh;
+    margin-left: 75px;
 
     @media screen and (min-width: 1024px) {
       display: none;

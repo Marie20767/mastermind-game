@@ -38,7 +38,7 @@ const StyledSolutionContainer = styled.div`
   margin-right: 24px;
 
   @media screen and (min-width: 1024px) {
-    margin-left: 171px;
+    margin-left: 176px;
     margin-right: 0;
   }
 
@@ -49,8 +49,8 @@ const StyledSolutionContainer = styled.div`
 
     @media screen and (min-width: 1024px) {
       margin: 0 28px 0 0;
-      height: 6vh;
-      width: 6vh;
+      height: 48px;
+      width: 48px;
     }
   }
 

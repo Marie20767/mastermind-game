@@ -55,7 +55,7 @@ const StyledIconContainer = styled.div`
   justify-content: center;
 
   .previous {
-    margin-left: 3vh;
+    margin-left: 15px;
   }
 `;
 

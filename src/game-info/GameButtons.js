@@ -26,11 +26,10 @@ const StyledNewGameAndRulesContainer = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    margin: 3vh 0 3vh 10vh;
+    margin: 15px 0 15px 80px;
 
     @media screen and (min-width: 1024px) {
       display: none;
-      margin: 3vh 0;
     }
   }
 `;

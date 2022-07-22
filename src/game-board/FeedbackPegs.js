@@ -56,8 +56,8 @@ const StyledFeedbackContainer = styled.div`
 const StyledFeedbackPegsSubContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin-right: 3vh;
-  margin-left: 1vh;
+  margin-right: 25px;
+  margin-left: 8px;
 
   @media screen and (min-width: 1024px) {
     display: flex;
@@ -66,12 +66,14 @@ const StyledFeedbackPegsSubContainer = styled.div`
   }
 
   .styled-feedback-pegs {
-    height: 1.5vh;
-    width: 1.5vh;
+    height: 9px;
+    width: 9px;
     margin: 0 3px 3px 0;
 
     @media screen and (min-width: 1024px) {
-      margin: 0 5px 5px 0
+      margin: 0 5px 5px 0;
+      height: 12px;
+      width: 12px;
     }
   }
 

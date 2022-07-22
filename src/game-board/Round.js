@@ -38,10 +38,10 @@ const StyledRoundContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2vh;
+  margin-bottom: 13px;
 
   @media screen and (min-width: 1024px) {
-    margin-bottom: 2.5vh;
+    margin-bottom: 18px;
   }
 
   .styled-round-outer-circle {
@@ -51,18 +51,18 @@ const StyledRoundContainer = styled.div`
 
     @media screen and (min-width: 1024px) {
       margin: 0 28px 0 0;
-      height: 6vh;
-      width: 6vh;
+      height: 48px;
+      width: 48px
     }
   }
 
   .styled-round-inner-circle {
-    height: 1vh;
-    width: 1vh;
+    height: 7px;
+    width: 7px;
 
     @media screen and (min-width: 1024px) {
-      height: 1.5vh;
-      width: 1.5vh;
+      height: 12px;
+      width: 12px;
     }
   }
 `;

@@ -43,14 +43,13 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h2 {
-    font-size: 2.7vh;
-    margin-top: 1vh;
-    margin-right: 2.5vh;
+    font-size: 2.4vh;
+    margin-right: 5px;
 
     @media screen and (min-width: 1024px) {
-      font-size: 3.8vh;
+      font-size: 3.7vh;
       margin: 0;
-      padding-bottom: 1vh;
+      padding-bottom: 9px;
     }
   }
 

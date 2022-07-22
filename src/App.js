@@ -22,7 +22,9 @@ import Score from './game-info/Score';
 import GameButtons from './game-info/GameButtons';
 
 // TODO: fix overlay (when display flex is removed from app overlay doesn't work anymore, when put back it messes up the layout of mobile & desktop)
-// TODO: possibly change some vh to px for desktop styling as well as mobile
+// TODO: mobile styling for overlay
+// TODO: tablet styling
+// TODO: remove tooltips for mobile?
 
 const App = () => {
   const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
@@ -197,7 +199,7 @@ const App = () => {
 const StyledGameContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 2vh;
+  margin-top: 18px;
 `;
 
 const StyledFeedbackContentContainer = styled.div`
@@ -206,15 +208,15 @@ const StyledFeedbackContentContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
-  margin-bottom: 3vh;
+  margin-bottom: 25px;
 
    img {
-    margin-bottom: 2vh;
+    margin-bottom: 16px;
   }
 
   button {
-    margin-top: 4vh;
-    padding: 1vh 2vh;
+    margin-top: 30px;
+    padding: 9px 14px;
   }
 `;
 

@@ -77,7 +77,7 @@ const StyledOverlayContent = styled(motion.div)`
 
   .close-icon {
     align-self: flex-end;
-    margin: 2vh 3vh 0 0;
+    margin: 16px 23px 0 0;
     cursor: pointer;
     &:hover {
       transform: scale(1.2);

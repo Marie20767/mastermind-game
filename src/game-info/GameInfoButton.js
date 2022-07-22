@@ -15,12 +15,12 @@ const GameInfoButton = ({ icon, toolTipText, onClick }) => {
 
 const Button = styled.button`
   display: flex;
-  margin-right: 2vh;
+  margin-right: 15px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 6.5vh;
-  height: 6.5vh;
+  width: 45px;
+  height: 45px;
 
   @media screen and (min-width: 1024px) {
     width: 63px;

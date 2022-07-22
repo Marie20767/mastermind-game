@@ -87,12 +87,12 @@ const StyledPegsContainer = styled.div`
   .styled-pegpicker {
     cursor: pointer;   
     margin: 0 0 20px 0; 
-    width: 5vh;
-    height: 5vh;
+    width: 34px;
+    height: 34px;
 
     @media screen and (min-width: 1024px) {
-      width: 7vh;
-      height: 7vh;
+      width: 52px;
+      height: 52px;
       margin: 0 0 30px 0; 
     }
   }
@@ -103,9 +103,9 @@ const StyledButtonContainer = styled.div`
   flex-direction: column;
   
   button {
-    height: 5vh;
-    padding: 0 1vh;
-    margin-bottom: 1.5vh;
+    height: 30px;
+    padding: 0 7px;
+    margin-bottom: 12px;
 
     &.disabled {
       background-color: #d3d3d3d6;
@@ -115,8 +115,8 @@ const StyledButtonContainer = styled.div`
 
     @media screen and (min-width: 1024px) {
       height: 50px;
-      padding: 0 1.7vh;
-      margin-bottom: 3vh;
+      padding: 0 18px;
+      margin-bottom: 25px;
     }
   }
 `;

@@ -91,14 +91,14 @@ const StyledRulesContainer = styled(motion.div)`
   flex: 1;
 
   img {
-    margin-bottom: 3vh;
+    margin-bottom: 14px;
     height: 64px;
     width: 64px;
   }
 
   h2 {
-    margin-top: 4vh;
-    margin-bottom: 3vh;
+    margin-top: 33px;
+    margin-bottom: 23px;
     color: white;
     font-size: 4vh;
     letter-spacing: 1.5px;
@@ -108,11 +108,11 @@ const StyledRulesContainer = styled(motion.div)`
     color: white;
     font-size: 3.8vh;
     text-decoration: underline;
-    margin-bottom: 2vh;
+    margin-bottom: 28px;
   }
 
   .icon {
-    margin-bottom: 3vh;
+    margin-bottom: 35px;
     cursor: pointer;
     &:hover {
       transform: scale(1.2);
@@ -122,7 +122,7 @@ const StyledRulesContainer = styled(motion.div)`
   p {
     color: white;
     font-size: 3.3vh;
-    margin: 1.8vh 4vh;
+    margin: 10px 35px;
   }
 
   span {
