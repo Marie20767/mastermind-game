@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { ArrayIndex } from './@types';
 import GameBoard from './game-board/GameBoard';
 import GlobalStyle from './GlobalStyle';
 import Pegpicker from './Pegpicker';
@@ -21,7 +22,6 @@ import useLocalStorageState from './hooks/useLocalStorageState';
 import Score from './game-info/Score';
 import GameButtons from './game-info/GameButtons';
 
-// TODO: fix big desktop screen styling
 // TODO: test app on different mobile screens
 
 const App = () => {
@@ -60,7 +60,7 @@ const App = () => {
     });
 
     // Override the allUserAnswers element at the currentRound index to be updatedRoundAnswers
-    const allUpdatedUserAnswers = allUserAnswers.map((roundAnswers, index) => {
+    const allUpdatedUserAnswers = allUserAnswers.map((roundAnswers, index: ArrayIndex) => {
       if (index === currentRound) {
         return updatedRoundAnswers;
       }
@@ -156,8 +156,6 @@ const App = () => {
           <GameInfo
             gamesWon={gamesWon}
             gamesLost={gamesLost}
-            showLosingMessage={showLosingMessage}
-            showWinningMessage={showWinningMessage}
             onClickStartNewGame={onClickStartNewGame}
             onClickShowRules={onClickShowRules} />
         </StyledGameContainer>
