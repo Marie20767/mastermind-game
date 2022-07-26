@@ -14,23 +14,17 @@ const GlobalStyle = createGlobalStyle`
   }
 
   html, body, #root, .App {
-  height: 100%;
-  width: 100%;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  /* Make sure no text can be selected */
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; 
-  }
-
-  .App {
-    background-color: #eceadb;
-    display: flex;
-    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    /* Make sure no text can be selected */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
   }
 
   h1 {
@@ -49,11 +43,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   h2 {
-    font-size: 2.4vh;
+    font-size: 18px;
     margin-right: 5px;
 
     @media screen and (min-width: 768px) {
-      font-size: 3.7vh;
+      font-size: 38px;
       margin: 0;
       padding-bottom: 9px;
     }
@@ -71,7 +65,7 @@ const GlobalStyle = createGlobalStyle`
     }
 
     @media screen and (min-width: 768px) {
-      font-size: 3vh;
+      font-size: 30px;
       border-radius: 8px;
     }
   }

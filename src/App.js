@@ -131,39 +131,42 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <GlobalStyle />
-      <Score
-        className="mobile-score"
-        gamesWon={gamesWon}
-        gamesLost={gamesLost} />
-      <StyledGameContainer>
-        <Pegpicker
-          showSolution={showSolution}
-          currentRound={currentRound}
-          allUserAnswers={allUserAnswers}
-          setAllUserAnswers={setAllUserAnswers}
-          isRoundFull={isRoundFull}
-          onClickPickUserAnswer={onClickPickUserAnswer}
-          onClickGiveFeedback={onClickGiveFeedback} />
-        <GameBoard
-          allUserAnswers={allUserAnswers}
-          currentRound={currentRound}
-          solution={solution}
-          showSolution={showSolution}
-          allPegFeedback={allPegFeedback} />
-        <GameInfo
+    <StyledAppContainer>
+      <div className="App">
+        <GlobalStyle />
+        <Score
+          className="mobile-score"
           gamesWon={gamesWon}
-          gamesLost={gamesLost}
-          showLosingMessage={showLosingMessage}
-          showWinningMessage={showWinningMessage}
+          gamesLost={gamesLost} />
+        <StyledGameContainer>
+          <Pegpicker
+            showSolution={showSolution}
+            currentRound={currentRound}
+            allUserAnswers={allUserAnswers}
+            setAllUserAnswers={setAllUserAnswers}
+            isRoundFull={isRoundFull}
+            onClickPickUserAnswer={onClickPickUserAnswer}
+            onClickGiveFeedback={onClickGiveFeedback} />
+          <GameBoard
+            allUserAnswers={allUserAnswers}
+            currentRound={currentRound}
+            solution={solution}
+            showSolution={showSolution}
+            allPegFeedback={allPegFeedback} />
+          <GameInfo
+            gamesWon={gamesWon}
+            gamesLost={gamesLost}
+            showLosingMessage={showLosingMessage}
+            showWinningMessage={showWinningMessage}
+            onClickStartNewGame={onClickStartNewGame}
+            onClickShowRules={onClickShowRules} />
+        </StyledGameContainer>
+        <GameButtons
+          className="mobile-game-buttons"
           onClickStartNewGame={onClickStartNewGame}
           onClickShowRules={onClickShowRules} />
-      </StyledGameContainer>
-      <GameButtons
-        className="mobile-game-buttons"
-        onClickStartNewGame={onClickStartNewGame}
-        onClickShowRules={onClickShowRules} />
+      </div>
+
       <Overlay
         isVisible={showWinningMessage}
         delay={1}
@@ -187,17 +190,39 @@ const App = () => {
           <button type="button" onClick={onClickStartNewGame}>New Game</button>
         </StyledFeedbackContentContainer>
       </Overlay>
+
       <RulesOverlay
         setShowRules={setShowRules}
         isVisible={showRules} />
-    </div>
+    </StyledAppContainer>
   );
 };
+
+const StyledAppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #eceadb;
+  height: 100%;
+  width: 100%;
+
+  .App {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1800px;
+  }
+`;
 
 const StyledGameContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 18px;
+
+  @media screen and (min-width: 1024px) {
+    margin-top: 0;
+  }
 `;
 
 const StyledFeedbackContentContainer = styled.div`

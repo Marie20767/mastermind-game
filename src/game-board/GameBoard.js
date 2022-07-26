@@ -59,7 +59,7 @@ const StyledGameTitleContainer = styled.div`
   @media screen and (min-width: 768px) {
     display: block;
     position: absolute;
-    left: 17px;
+    left: 16px;
     bottom: 60px;
     border-radius: 0 15px 15px 0;
     background-color: #64a4b8;
@@ -78,7 +78,7 @@ const StyledGameTitle = styled.div`
   @media screen and (min-width: 768px) {
     font-family: 'Ubuntu', sans-serif;
     margin-top: 130px;
-    font-size: 8vh;
+    font-size: 92px;
     transform: rotate(-90deg) translateX(-440px);
     -webkit-text-fill-color:  #eceadb;
     -webkit-text-stroke-width: 2px;
@@ -86,7 +86,7 @@ const StyledGameTitle = styled.div`
   }
 
   @media screen and (min-width: 1024px) {
-    font-size: 10vh;
+    font-size: 76px;
     margin-top: 0;
   }
 `;

@@ -28,8 +28,8 @@ const Button = styled.button`
   }
 
   @media screen and (min-width: 1024px) {
-    width: 63px;
-    height: 63px;
+    width: 76px;
+    height: 76px;
   }
 
 
