@@ -40,6 +40,11 @@ const StyledGameBoard = styled.div`
    border: 1.5px solid black;
    margin-left: 15px;
 
+   @media screen and (min-width: 768px) {
+    width: 620px;
+    height: 900px;
+   }
+
    @media screen and (min-width: 1024px) {
     align-items: center;
     height: 730px;
@@ -50,27 +55,39 @@ const StyledGameBoard = styled.div`
 
 const StyledGameTitleContainer = styled.div`
   display: none;
-  @media screen and (min-width: 1024px) {
+
+  @media screen and (min-width: 768px) {
     display: block;
     position: absolute;
-    left: 1.5px;
+    left: 17px;
     bottom: 60px;
     border-radius: 0 15px 15px 0;
     background-color: #64a4b8;
-    height: 600px;
+    height: 770px;
     width: 130px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    left: 1px;
+    height: 600px;
   }
   
 `;
 
 const StyledGameTitle = styled.div`
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     font-family: 'Ubuntu', sans-serif;
+    margin-top: 130px;
+    font-size: 8vh;
     transform: rotate(-90deg) translateX(-440px);
-    font-size: 10vh;
     -webkit-text-fill-color:  #eceadb;
     -webkit-text-stroke-width: 2px;
     -webkit-text-stroke-color: black; 
+  }
+
+  @media screen and (min-width: 1024px) {
+    font-size: 10vh;
+    margin-top: 0;
   }
 `;
 

@@ -40,7 +40,7 @@ const StyledRoundContainer = styled.div`
   justify-content: center;
   margin-bottom: 13px;
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     margin-bottom: 18px;
   }
 
@@ -48,6 +48,12 @@ const StyledRoundContainer = styled.div`
     margin: 0 8px 0 0;
     height: 34px;
     width: 34px;
+
+    @media screen and (min-width: 768px) {
+      margin: 0 18px 0 0;
+      height: 60px;
+      width: 60px
+    }
 
     @media screen and (min-width: 1024px) {
       margin: 0 28px 0 0;
@@ -60,7 +66,7 @@ const StyledRoundContainer = styled.div`
     height: 7px;
     width: 7px;
 
-    @media screen and (min-width: 1024px) {
+    @media screen and (min-width: 768px) {
       height: 12px;
       width: 12px;
     }

@@ -70,8 +70,13 @@ const StyledFeedbackPegsSubContainer = styled.div`
     width: 9px;
     margin: 0 3px 3px 0;
 
-    @media screen and (min-width: 1024px) {
+    @media screen and (min-width: 768px) {
       margin: 0 5px 5px 0;
+      height: 14px;
+      width: 14px;
+    }
+
+    @media screen and (min-width: 1024px) {
       height: 12px;
       width: 12px;
     }

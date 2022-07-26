@@ -37,6 +37,10 @@ const StyledSolutionContainer = styled.div`
   justify-content: flex-end;
   margin-right: 24px;
 
+  @media screen and (min-width: 768px) {
+    margin-right: 59px
+  }
+
   @media screen and (min-width: 1024px) {
     margin-left: 176px;
     margin-right: 0;
@@ -47,6 +51,12 @@ const StyledSolutionContainer = styled.div`
     height: 34px;
     width: 34px;
 
+    @media screen and (min-width: 768px) {
+      margin: 0 18px 0 0;
+      height: 60px;
+      width: 60px;
+    }
+
     @media screen and (min-width: 1024px) {
       margin: 0 28px 0 0;
       height: 48px;
@@ -56,6 +66,10 @@ const StyledSolutionContainer = styled.div`
 
   .question-mark-icon {
     font-size: 18px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 30px
+    }
 
     @media screen and (min-width: 1024px) {
       font-size: 25px

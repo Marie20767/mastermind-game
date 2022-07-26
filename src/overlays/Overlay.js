@@ -69,18 +69,38 @@ const StyledOverlay = styled.div`
 const StyledOverlayContent = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  width: 50%;
-  height: 50%;
+  height: 48%;
+  width: 100%;
   border-radius: 15px;
   background-color: black;
   z-index: 1;
 
+  @media screen and (min-width: 768px) {
+    height: 50%;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+  }
+
   .close-icon {
     align-self: flex-end;
     margin: 16px 23px 0 0;
-    cursor: pointer;
-    &:hover {
+    font-size: 23px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 50px;
+      margin: 25px 30px 0 0;
+    }
+
+    @media screen and (min-width: 1024px) {
+      cursor: pointer;
+      font-size: 35px;
+      margin: 16px 23px 0 0;
+
+      &:hover {
       transform: scale(1.2);
+      }
     }
   }
 `;

@@ -28,6 +28,10 @@ const StyledNewGameAndRulesContainer = styled.div`
     justify-content: center;
     margin: 15px 0 15px 80px;
 
+    @media screen and (min-width: 768px) {
+      margin: 30px 0 15px 130px;
+    }
+
     @media screen and (min-width: 1024px) {
       display: none;
     }

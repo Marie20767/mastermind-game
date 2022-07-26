@@ -27,6 +27,10 @@ const StyledScoreContainer = styled.div`
     display: flex;
     margin-left: 75px;
 
+    @media screen and (min-width: 768px) {
+      margin-left: 130px;
+    }
+
     @media screen and (min-width: 1024px) {
       display: none;
     }

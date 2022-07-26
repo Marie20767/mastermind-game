@@ -22,14 +22,25 @@ const Button = styled.button`
   width: 45px;
   height: 45px;
 
+  @media screen and (min-width: 768px) {
+    width: 85px;
+    height: 85px;
+  }
+
   @media screen and (min-width: 1024px) {
     width: 63px;
     height: 63px;
   }
 
+
   .__react_component_tooltip {
-    font-size: 2vh;
-    padding: 8px 13px;
+    display: none;
+
+    @media screen and (min-width: 1024px) {
+      display: block;
+      font-size: 2vh;
+      padding: 8px 13px;
+    }
   }
 `;
 

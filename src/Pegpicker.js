@@ -90,10 +90,15 @@ const StyledPegsContainer = styled.div`
     width: 34px;
     height: 34px;
 
+    @media screen and (min-width: 768px) {
+      width: 60px;
+      height: 60px;
+      margin: 0 0 30px 0; 
+    }
+
     @media screen and (min-width: 1024px) {
       width: 52px;
       height: 52px;
-      margin: 0 0 30px 0; 
     }
   }
 `;
@@ -113,10 +118,14 @@ const StyledButtonContainer = styled.div`
       cursor: initial;
     }
 
-    @media screen and (min-width: 1024px) {
-      height: 50px;
+    @media screen and (min-width: 768px) {
+      height: 60px;
       padding: 0 18px;
       margin-bottom: 25px;
+    }
+
+    @media screen and (min-width: 1024px) {
+      height: 50px;
     }
   }
 `;

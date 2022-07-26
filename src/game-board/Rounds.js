@@ -43,13 +43,20 @@ const StyledRoundsContainer = styled.div`
     margin-left: 4px;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 768px) {
     margin-left: 140px;
     margin-top: 35px;
 
     .left-arrow-round {
-      font-size: 33px;
+      font-size: 40px;
       margin-left: 0;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    
+    .left-arrow-round {
+      font-size: 33px;
     }
   }
 

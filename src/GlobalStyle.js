@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   height: 100%;
   width: 100%;
   overflow-y: hidden;
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   /* Make sure no text can be selected */
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -29,13 +29,19 @@ const GlobalStyle = createGlobalStyle`
 
   .App {
     background-color: #eceadb;
+    display: flex;
+    flex-direction: column;
   }
 
   h1 {
     color: white;
-    font-size: 4.2vh;
+    font-size: 3.5vh;
     letter-spacing: 1.5px;
     font-family: 'GeoLight', Helvetica, sans-serif;
+
+    @media screen and (min-width: 768px) {
+      font-size: 4.2vh;
+    }
   }
 
   button, h2, h3, p {
@@ -46,7 +52,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 2.4vh;
     margin-right: 5px;
 
-    @media screen and (min-width: 1024px) {
+    @media screen and (min-width: 768px) {
       font-size: 3.7vh;
       margin: 0;
       padding-bottom: 9px;
@@ -64,7 +70,7 @@ const GlobalStyle = createGlobalStyle`
       background-color: #185f75;
     }
 
-    @media screen and (min-width: 1024px) {
+    @media screen and (min-width: 768px) {
       font-size: 3vh;
       border-radius: 8px;
     }

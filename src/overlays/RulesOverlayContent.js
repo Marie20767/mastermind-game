@@ -20,7 +20,7 @@ const RulesOverlayContent = ({ children, rulesPageIndex, setRulesPageIndex }) =>
           ? (
             <FontAwesomeIcon
               icon={faAnglesLeft}
-              className="icon next"
+              className="icon previous"
               onClick={() => setRulesPageIndex(rulesPageIndex - 1)}
               {...iconProps} />
           )
@@ -31,7 +31,7 @@ const RulesOverlayContent = ({ children, rulesPageIndex, setRulesPageIndex }) =>
           ? (
             <FontAwesomeIcon
               icon={faAnglesRight}
-              className="icon previous"
+              className="icon next"
               onClick={() => setRulesPageIndex(rulesPageIndex + 1)}
               {...iconProps} />
           )
@@ -54,7 +54,7 @@ const StyledIconContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  .previous {
+  .next {
     margin-left: 15px;
   }
 `;

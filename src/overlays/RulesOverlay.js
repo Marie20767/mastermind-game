@@ -92,37 +92,83 @@ const StyledRulesContainer = styled(motion.div)`
 
   img {
     margin-bottom: 14px;
-    height: 64px;
-    width: 64px;
+    height: 50px;
+    width: 50px;
+
+    @media screen and (min-width: 768px) {
+      height: 90px;
+      width: 90px;
+      margin-bottom: 25px;
+    }
+
+    @media screen and (min-width: 1024px) {
+      margin-bottom: 10px;
+      height: 80px;
+      width: 80px; 
+    }
   }
 
   h2 {
-    margin-top: 33px;
+    margin-top: 10px;
     margin-bottom: 23px;
+    font-size: 3.2vh;
     color: white;
-    font-size: 4vh;
     letter-spacing: 1.5px;
+
+    @media screen and (min-width: 768px) {
+      margin-top: 0px;
+      font-size: 4vh; 
+    }
+
+    @media screen and (min-width: 1024px) {
+      margin-top: 33px;
+      margin-bottom: 15px;
+    }
   }
 
   h3 {
     color: white;
-    font-size: 3.8vh;
+    font-size: 3vh;
     text-decoration: underline;
     margin-bottom: 28px;
+    
+    @media screen and (min-width: 768px) {
+      font-size: 3.8vh;
+    }
   }
 
   .icon {
     margin-bottom: 35px;
-    cursor: pointer;
-    &:hover {
+    font-size: 22px;
+
+    @media screen and (min-width: 768px) {
+      font-size: 45px;
+    }
+
+    @media screen and (min-width: 1024px) {
+      cursor: pointer;
+      font-size: 35px;
+
+      &:hover {
       transform: scale(1.2);
+      }
     }
   }
 
   p {
     color: white;
-    font-size: 3.3vh;
-    margin: 10px 35px;
+    font-size: 2.7vh;
+    margin: 8px 20px;
+
+    @media screen and (min-width: 768px) {
+      margin: 10px 30px;
+      font-size: 3vh; 
+    }
+
+    @media screen and (min-width: 1024px) {
+      font-size: 3.3vh;  
+      margin: 10px 35px;
+    }
   }
 
   span {

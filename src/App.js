@@ -21,10 +21,8 @@ import useLocalStorageState from './hooks/useLocalStorageState';
 import Score from './game-info/Score';
 import GameButtons from './game-info/GameButtons';
 
-// TODO: fix overlay (when display flex is removed from app overlay doesn't work anymore, when put back it messes up the layout of mobile & desktop)
-// TODO: mobile styling for overlay
-// TODO: tablet styling
-// TODO: remove tooltips for mobile?
+// TODO: fix big desktop screen styling
+// TODO: test app on different mobile screens
 
 const App = () => {
   const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
@@ -212,11 +210,23 @@ const StyledFeedbackContentContainer = styled.div`
 
    img {
     margin-bottom: 16px;
+    height: 48px;
+    width: 48px;
+
+    @media screen and (min-width: 768px) {
+      height: 68px;
+      width: 68px;
+    }
   }
 
   button {
     margin-top: 30px;
     padding: 9px 14px;
+    font-size: 2.2vh;
+
+    @media screen and (min-width: 768px) {
+      font-size: 3vh;
+    }
   }
 `;
 
