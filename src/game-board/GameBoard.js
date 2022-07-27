@@ -34,13 +34,14 @@ const StyledGameBoardContainer = styled.div`
 const StyledGameBoard = styled.div`
    display: flex;
    flex-direction: column;
-   padding: 30px 8px 15px 8px;
+   padding: 10px 8px 5px 8px;
    background-color: #c4cacc;
    border-radius: 5%;
    border: 1.5px solid black;
    margin-left: 15px;
 
    @media screen and (min-width: 768px) {
+    padding: 30px 8px 15px 8px;
     width: 620px;
     height: 900px;
    }

@@ -22,7 +22,8 @@ import useLocalStorageState from './hooks/useLocalStorageState';
 import Score from './game-info/Score';
 import GameButtons from './game-info/GameButtons';
 
-// TODO: test app on different mobile screens
+// TODO: 
+// check on mobile, after solution showed I was still able to delete pegs???
 
 const App = () => {
   const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
@@ -51,7 +52,7 @@ const App = () => {
   const onClickPickUserAnswer = (color) => {
     const updatedRoundAnswers = allUserAnswers[currentRound].map((element, index) => {
       // Find the first null element in allUserAnswers
-      if (index === findFirstNullIndex(allUserAnswers[currentRound])) {
+      if (index === findFirstNullIndex(allUserAnswers[currentRound]) && !showSolution) {
         // Replace that null element with the colour of the peg you clicked on
         return color;
       }
@@ -245,7 +246,7 @@ const StyledFeedbackContentContainer = styled.div`
   button {
     margin-top: 30px;
     padding: 9px 14px;
-    font-size: 2.2vh;
+    font-size: 18px;
 
     @media screen and (min-width: 768px) {
       font-size: 3vh;

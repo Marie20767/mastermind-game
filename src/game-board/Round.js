@@ -46,8 +46,8 @@ const StyledRoundContainer = styled.div`
 
   .styled-round-outer-circle {
     margin: 0 8px 0 0;
-    height: 34px;
-    width: 34px;
+    height: 30px;
+    width: 30px;
 
     @media screen and (min-width: 768px) {
       margin: 0 18px 0 0;

@@ -60,7 +60,7 @@ rules:
   import/no-absolute-path: 0
   react/no-string-refs: 0
   react/prop-types: 0
-  react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }]
+  react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
   react/prefer-stateless-function: 0
   react/destructuring-assignment: 0
   react/jsx-fragments: 0

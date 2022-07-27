@@ -19,8 +19,8 @@ const Button = styled.button`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
 
   @media screen and (min-width: 768px) {
     width: 85px;

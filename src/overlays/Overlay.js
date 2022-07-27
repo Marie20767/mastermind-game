@@ -69,8 +69,8 @@ const StyledOverlay = styled.div`
 const StyledOverlayContent = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  height: 48%;
-  width: 100%;
+  height: 62%;
+  width: 88%;
   border-radius: 15px;
   background-color: black;
   z-index: 1;
@@ -86,7 +86,7 @@ const StyledOverlayContent = styled(motion.div)`
   .close-icon {
     align-self: flex-end;
     margin: 16px 23px 0 0;
-    font-size: 23px;
+    font-size: 28px;
 
     @media screen and (min-width: 768px) {
       font-size: 50px;

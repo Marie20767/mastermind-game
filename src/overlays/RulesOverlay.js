@@ -109,9 +109,8 @@ const StyledRulesContainer = styled(motion.div)`
   }
 
   h2 {
-    margin-top: 10px;
-    margin-bottom: 23px;
-    font-size: 3.2vh;
+    margin: 9px 10px 23px 9px;
+    font-size: 25px;
     color: white;
     letter-spacing: 1.5px;
 
@@ -128,7 +127,7 @@ const StyledRulesContainer = styled(motion.div)`
 
   h3 {
     color: white;
-    font-size: 3vh;
+    font-size: 20px;
     text-decoration: underline;
     margin-bottom: 28px;
     
@@ -139,7 +138,7 @@ const StyledRulesContainer = styled(motion.div)`
 
   .icon {
     margin-bottom: 35px;
-    font-size: 22px;
+    font-size: 26px;
 
     @media screen and (min-width: 768px) {
       font-size: 45px;
@@ -157,7 +156,7 @@ const StyledRulesContainer = styled(motion.div)`
 
   p {
     color: white;
-    font-size: 2.7vh;
+    font-size: 18px;
     margin: 8px 20px;
 
     @media screen and (min-width: 768px) {

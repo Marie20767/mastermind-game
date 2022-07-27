@@ -47,9 +47,9 @@ const StyledSolutionContainer = styled.div`
   }
 
   .styled-solution-pegs {
-    margin: 0 8px 20px 0;
-    height: 34px;
-    width: 34px;
+    margin: 0 8px 13px 0;
+    height: 30px;
+    width: 30px;
 
     @media screen and (min-width: 768px) {
       margin: 0 18px 0 0;

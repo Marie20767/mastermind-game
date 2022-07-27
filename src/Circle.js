@@ -19,6 +19,7 @@ const Circle = ({
 };
 
 const StyledCircle = styled.div`
+  -webkit-tap-highlight-color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;

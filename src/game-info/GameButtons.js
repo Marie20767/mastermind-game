@@ -26,7 +26,7 @@ const StyledNewGameAndRulesContainer = styled.div`
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    margin: 15px 0 15px 80px;
+    margin: 10px 0 25px 100px;
 
     @media screen and (min-width: 768px) {
       margin: 30px 0 15px 130px;

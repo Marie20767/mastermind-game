@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
 
   h1 {
     color: white;
-    font-size: 3.5vh;
+    font-size: 26px;
     letter-spacing: 1.5px;
     font-family: 'GeoLight', Helvetica, sans-serif;
 
@@ -54,11 +54,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
+    -webkit-tap-highlight-color: transparent;
     background-color: #64a4b8;
     color: white;
     border: none;
     border-radius: 4px;
-    font-size: 2vh;
+    font-size: 17px;
     cursor: pointer;
     &:hover {
       background-color: #185f75;

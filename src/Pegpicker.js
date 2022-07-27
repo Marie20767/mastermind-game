@@ -14,7 +14,7 @@ const Pegpicker = ({
 }) => {
   const onClickDeletePegs = () => {
     const updatedRoundAnswers = allUserAnswers.map((roundAnswers, index) => {
-      if (index === currentRound) {
+      if (index === currentRound && !showSolution) {
         return [null, null, null, null];
       }
 
@@ -57,7 +57,7 @@ const Pegpicker = ({
         <button
           type="button"
           className={!isRoundFull || showSolution ? 'disabled' : ''}
-          onClick={isRoundFull ? onClickGiveFeedback : null}>
+          onClick={isRoundFull && !showSolution ? onClickGiveFeedback : null}>
           Check
         </button>
       </StyledButtonContainer>
@@ -86,7 +86,7 @@ const StyledPegsContainer = styled.div`
 
   .styled-pegpicker {
     cursor: pointer;   
-    margin: 0 0 20px 0; 
+    margin: 0 0 15px 0; 
     width: 34px;
     height: 34px;
 
@@ -108,9 +108,10 @@ const StyledButtonContainer = styled.div`
   flex-direction: column;
   
   button {
-    height: 30px;
-    padding: 0 7px;
-    margin-bottom: 12px;
+    height: 33px;
+    padding: 0 11px;
+    margin-bottom: 7px;
+    margin-top: 6px;
 
     &.disabled {
       background-color: #d3d3d3d6;
