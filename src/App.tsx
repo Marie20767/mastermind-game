@@ -22,9 +22,6 @@ import useLocalStorageState from './hooks/useLocalStorageState';
 import Score from './game-info/Score';
 import GameButtons from './game-info/GameButtons';
 
-// TODO: 
-// check on mobile, after solution showed I was still able to delete pegs???
-
 const App = () => {
   const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
   const [allUserAnswers, setAllUserAnswers] = useLocalStorageState('user-answers', generateInitialUserAnswersState());

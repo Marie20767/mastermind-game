@@ -1,4 +1,6 @@
-const PegColors = {
+import { PegColorsType } from '../@types';
+
+const PegColors : PegColorsType = {
   Red: '#ac274d',
   Yellow: '#f7d840',
   Blue: '#2b9de5',

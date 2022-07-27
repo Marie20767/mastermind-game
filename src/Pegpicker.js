@@ -10,11 +10,10 @@ const Pegpicker = ({
   isRoundFull,
   onClickPickUserAnswer,
   onClickGiveFeedback,
-
 }) => {
   const onClickDeletePegs = () => {
     const updatedRoundAnswers = allUserAnswers.map((roundAnswers, index) => {
-      if (index === currentRound && !showSolution) {
+      if (index === currentRound) {
         return [null, null, null, null];
       }
 
@@ -43,7 +42,7 @@ const Pegpicker = ({
               key={color}
               color={color}
               className="styled-pegpicker"
-              onClick={() => onClickPickUserAnswer(color)} />
+              onClick={!showSolution ? () => onClickPickUserAnswer(color) : null} />
           );
         })}
       </StyledPegsContainer>
@@ -51,7 +50,7 @@ const Pegpicker = ({
         <button
           type="button"
           className={getClassNameForDeleteButton()}
-          onClick={onClickDeletePegs}>
+          onClick={!showSolution ? onClickDeletePegs : null}>
           Delete
         </button>
         <button
@@ -94,11 +93,6 @@ const StyledPegsContainer = styled.div`
       width: 60px;
       height: 60px;
       margin: 0 0 30px 0; 
-    }
-
-    @media screen and (min-width: 1024px) {
-      width: 52px;
-      height: 52px;
     }
   }
 `;

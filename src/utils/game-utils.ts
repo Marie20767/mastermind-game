@@ -1,10 +1,11 @@
 import { FeedbackNumbers, NumberOfPegColors, NumberOfRounds, PegHexCodes, SolutionLength } from './constants';
+import { CurrentUserAnswer, PegColor, Solution } from '../@types';
 
-const generateRandomSolution = () => {
+const generateRandomSolution = (): string[] => {
   const randomSolution = [];
 
   for (let i = 0; i < SolutionLength; i++) {
-    const randomIndex = Math.floor(Math.random() * NumberOfPegColors);
+    const randomIndex: number = Math.floor(Math.random() * NumberOfPegColors);
 
     randomSolution.push(PegHexCodes[randomIndex]);
   }
@@ -12,7 +13,7 @@ const generateRandomSolution = () => {
   return randomSolution;
 };
 
-const generateInitialUserAnswersState = () => {
+const generateInitialUserAnswersState = (): null[][] => {
   const initialUserAnswersState = [];
 
   for (let i = 0; i < NumberOfRounds; i++) {
@@ -22,7 +23,7 @@ const generateInitialUserAnswersState = () => {
   return initialUserAnswersState;
 };
 
-const generateInitialPegFeedbackState = () => {
+const generateInitialPegFeedbackState = (): number[][] => {
   const initialPegFeedbackState = [];
 
   for (let i = 0; i < NumberOfRounds; i++) {
@@ -32,7 +33,7 @@ const generateInitialPegFeedbackState = () => {
   return initialPegFeedbackState;
 };
 
-const getNumberOfCorrectPositionPegs = (currentUserAnswer, solution) => {
+const getNumberOfCorrectPositionPegs = (currentUserAnswer: CurrentUserAnswer, solution: Solution): number => {
   let numberOfCorrectPositionPegs = 0;
 
   for (let i = 0; i < SolutionLength; i++) {
@@ -45,7 +46,7 @@ const getNumberOfCorrectPositionPegs = (currentUserAnswer, solution) => {
   return numberOfCorrectPositionPegs;
 };
 
-const getNumberOfPegColorInSolution = (pegColor, solution) => {
+const getNumberOfPegColorInSolution = (pegColor: PegColor, solution: Solution): number => {
   let numberOfPegColorInSolution = 0;
 
   for (let i = 0; i < SolutionLength; i++) {
@@ -57,7 +58,7 @@ const getNumberOfPegColorInSolution = (pegColor, solution) => {
   return numberOfPegColorInSolution;
 };
 
-const getNumberOfCorrectPositionPegsForColor = (pegColor, currentUserAnswer, solution) => {
+const getNumberOfCorrectPositionPegsForColor = (pegColor: PegColor, currentUserAnswer: CurrentUserAnswer, solution: Solution): number => {
   let numberOfCorrectPositionPegsForColor = 0;
 
   for (let i = 0; i < SolutionLength; i++) {
@@ -70,7 +71,7 @@ const getNumberOfCorrectPositionPegsForColor = (pegColor, currentUserAnswer, sol
   return numberOfCorrectPositionPegsForColor;
 };
 
-const getNumberOfIncorrectPositionPegsForColor = (pegColor, currentUserAnswer, solution) => {
+const getNumberOfIncorrectPositionPegsForColor = (pegColor: PegColor, currentUserAnswer: CurrentUserAnswer, solution: Solution): number => {
   let numberOfIncorrectPositionPegsForColor = 0;
 
   for (let i = 0; i < SolutionLength; i++) {
@@ -82,7 +83,7 @@ const getNumberOfIncorrectPositionPegsForColor = (pegColor, currentUserAnswer, s
   return numberOfIncorrectPositionPegsForColor;
 };
 
-const getNumberOfIncorrectPositionPegs = (currentUserAnswer, solution) => {
+const getNumberOfIncorrectPositionPegs = (currentUserAnswer: CurrentUserAnswer, solution: Solution) => {
   let numberOfIncorrectPositionPegs = 0;
 
   for (let i = 0; i < PegHexCodes.length; i++) {
@@ -110,7 +111,7 @@ const getNumberOfIncorrectPositionPegs = (currentUserAnswer, solution) => {
   return numberOfIncorrectPositionPegs;
 };
 
-const getUpdatedRoundFeedback = (numberOfIncorrectPositionPegs, numberOfCorrectPositionPegs) => {
+const getUpdatedRoundFeedback = (numberOfIncorrectPositionPegs: number, numberOfCorrectPositionPegs: number): number[] => {
   const updatedRoundFeedback = [];
 
   for (let index = 0; index < numberOfCorrectPositionPegs; index++) {
