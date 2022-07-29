@@ -2,9 +2,16 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesRight, faAnglesLeft } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 import { NumberOfRulesPages } from '../utils/constants';
+import { SetNumberFunction } from '../@types';
 
-const RulesOverlayContent = ({ children, rulesPageIndex, setRulesPageIndex }) => {
+interface Props {
+  rulesPageIndex: number,
+  setRulesPageIndex: SetNumberFunction
+}
+
+const RulesOverlayContent: React.FC<Props> = ({ children, rulesPageIndex, setRulesPageIndex }) => {
   const iconProps = {
     color: 'white',
     fontSize: '30px',

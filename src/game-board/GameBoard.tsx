@@ -1,8 +1,18 @@
+import React from 'react';
 import styled from 'styled-components';
+import { AllPegFeedback, AllUserAnswers, ShowSolution, SolutionArray } from '../@types';
 import Rounds from './Rounds';
 import Solution from './Solution';
 
-const GameBoard = ({ allUserAnswers, currentRound, solution, showSolution, allPegFeedback }) => {
+interface Props {
+  allUserAnswers: AllUserAnswers,
+  currentRound: number,
+  solution: SolutionArray,
+  showSolution: ShowSolution,
+  allPegFeedback: AllPegFeedback
+}
+
+const GameBoard: React.FC<Props> = ({ allUserAnswers, currentRound, solution, showSolution, allPegFeedback }) => {
   return (
     <StyledGameBoardContainer>
       <StyledGameBoard>

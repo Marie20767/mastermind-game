@@ -1,8 +1,17 @@
+import React from 'react';
 import styled from 'styled-components';
 import Score from './Score';
 import GameButtons from './GameButtons';
+import { OnClickButton } from '../@types';
 
-const GameInfo = ({ gamesWon, gamesLost, onClickStartNewGame, onClickShowRules }) => {
+interface Props {
+  gamesWon: number,
+  gamesLost: number,
+  onClickStartNewGame: OnClickButton,
+  onClickShowRules: OnClickButton
+}
+
+const GameInfo: React.FC<Props> = ({ gamesWon, gamesLost, onClickStartNewGame, onClickShowRules }) => {
   return (
     <StyledGameInfoContainer>
       <GameButtons

@@ -1,13 +1,19 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import welcomingChickImage from '../images/chick.png';
 import Overlay from './Overlay';
 import RulesOverlayContent from './RulesOverlayContent';
 import { OverlayAnimation } from '../animation';
 import { NumberOfRulesPages } from '../utils/constants';
+import { IsVisible, SetBooleanFunction } from '../@types';
 
-const RulesOverlay = ({ isVisible, setShowRules }) => {
+interface Props {
+  isVisible: IsVisible,
+  setShowRules: SetBooleanFunction,
+}
+
+const RulesOverlay: React.FC<Props> = ({ isVisible, setShowRules }) => {
   const [rulesPageIndex, setRulesPageIndex] = useState(0);
 
   const onClickCloseRulesOverlay = () => {

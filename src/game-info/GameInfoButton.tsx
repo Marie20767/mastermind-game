@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTooltip from 'react-tooltip';
+import React from 'react';
+import { IconType, OnClickButton } from '../@types';
 
-const GameInfoButton = ({ icon, toolTipText, onClick }) => {
+interface Props {
+  toolTipText: string,
+  onClick: OnClickButton,
+  icon: IconType
+}
+
+const GameInfoButton: React.FC<Props> = ({ icon, toolTipText, onClick }) => {
   return (
     <Button data-tip data-for={toolTipText} onClick={onClick} type="button">
       <ReactTooltip id={toolTipText} place="top" effect="solid">

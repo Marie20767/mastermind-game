@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { InitialValue } from '../@types';
 
-const useLocalStorageState = (key, initialValue) => {
+const useLocalStorageState = (key: string, initialValue: InitialValue) => {
   const [value, setValue] = useState(() => {
     const storedValue = localStorage.getItem(key);
 

@@ -1,11 +1,20 @@
 /* eslint-disable react/no-array-index-key */
+import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import Round from './Round';
 import { EmptyPegColors } from '../utils/constants';
+import { AllPegFeedback, AllUserAnswers, RoundAnswers, ShowSolution } from '../@types';
 
-const Rounds = ({
+interface Props {
+  allUserAnswers: AllUserAnswers,
+  allPegFeedback: AllPegFeedback,
+  currentRound: number,
+  showSolution: ShowSolution,
+}
+
+const Rounds: React.FC<Props> = ({
   allUserAnswers,
   allPegFeedback,
   currentRound,
@@ -13,8 +22,8 @@ const Rounds = ({
 }) => {
   return (
     <StyledRoundsContainer>
-      {allUserAnswers.map((roundAnswers, index) => {
-        const shouldShowArrow = index === currentRound && !showSolution;
+      {allUserAnswers.map((roundAnswers: RoundAnswers, index: number): React.ReactNode => {
+        const shouldShowArrow: boolean = index === currentRound && !showSolution;
 
         return (
           <Round

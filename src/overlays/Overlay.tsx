@@ -1,10 +1,18 @@
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Transition } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 import { OverlayAnimation } from '../animation';
+import { IsVisible, OnClickIcon } from '../@types';
 
-const Overlay = ({
+interface Props {
+  delay?: number,
+  isVisible: IsVisible,
+  onClickCloseOverlay: OnClickIcon
+}
+
+const Overlay: React.FC<Props> = ({
   children,
   delay = 0,
   isVisible = false,
@@ -15,7 +23,7 @@ const Overlay = ({
       {isVisible
         ? (
           <StyledOverlayContainer
-            transition={{ delay }}
+            transition={{ delay } as Transition}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{

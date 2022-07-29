@@ -1,13 +1,20 @@
 /* eslint-disable react/no-array-index-key */
+import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { SolutionArray, ShowSolution, PegColor } from '../@types';
 import Circle from '../Circle';
 
-const Solution = ({ solution, showSolution }) => {
+interface Props {
+  solution: SolutionArray,
+  showSolution: ShowSolution,
+}
+
+const Solution: React.FC<Props> = ({ solution, showSolution }) => {
   return (
     <StyledSolutionContainer>
-      {solution.map((color, index) => {
+      {solution.map((color: PegColor, index: number): React.ReactNode => {
         if (showSolution) {
           return (
             <Circle

@@ -1,6 +1,6 @@
-import { PegColorsType } from '../@types';
+import { EmptyPegColorsType, PegColorsType } from '../@types';
 
-const PegColors : PegColorsType = {
+const PegColors: PegColorsType = {
   Red: '#ac274d',
   Yellow: '#f7d840',
   Blue: '#2b9de5',
@@ -12,7 +12,7 @@ const PegColors : PegColorsType = {
 
 const PegHexCodes = Object.values(PegColors);
 
-const EmptyPegColors = {
+const EmptyPegColors: EmptyPegColorsType = {
   InnerCircle: '#4e4e4c',
   OuterCircle: 'transparent',
 };
@@ -23,13 +23,13 @@ const FeedbackNumbers = {
   empty: 3,
 };
 
-const NumberOfRounds = 9;
+const NumberOfRounds: number = 9;
 
-const NumberOfPegColors = 7;
+const NumberOfPegColors: number = 7;
 
-const SolutionLength = 4;
+const SolutionLength: number = 4;
 
-const NumberOfRulesPages = 4;
+const NumberOfRulesPages: number = 4;
 
 export {
   PegColors,

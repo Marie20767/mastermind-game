@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { ArrayIndex } from './@types';
 import GameBoard from './game-board/GameBoard';
 import GlobalStyle from './GlobalStyle';
 import Pegpicker from './Pegpicker';
@@ -21,6 +20,7 @@ import RulesOverlay from './overlays/RulesOverlay';
 import useLocalStorageState from './hooks/useLocalStorageState';
 import Score from './game-info/Score';
 import GameButtons from './game-info/GameButtons';
+import { IsRoundFull, OnClickButton, OnClickPickUserAnswer, PegColor, RoundAnswers, RoundPegFeedback } from './@types';
 
 const App = () => {
   const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
@@ -34,9 +34,9 @@ const App = () => {
   const [showWinningMessage, setShowWinningMessage] = useState(false);
   const [showRules, setShowRules] = useState(false);
 
-  const isRoundFull = allUserAnswers[currentRound].every((element) => element !== null);
+  const isRoundFull: IsRoundFull = allUserAnswers[currentRound].every((element: string[]) => element !== null);
 
-  const findFirstNullIndex = (state) => {
+  const findFirstNullIndex = (state: string[]): number => {
     return state.findIndex((element) => {
       if (element === null) {
         return true;
@@ -46,8 +46,8 @@ const App = () => {
     });
   };
 
-  const onClickPickUserAnswer = (color) => {
-    const updatedRoundAnswers = allUserAnswers[currentRound].map((element, index) => {
+  const onClickPickUserAnswer: OnClickPickUserAnswer = (color: PegColor) => {
+    const updatedRoundAnswers = allUserAnswers[currentRound].map((element: string[], index: number) => {
       // Find the first null element in allUserAnswers
       if (index === findFirstNullIndex(allUserAnswers[currentRound]) && !showSolution) {
         // Replace that null element with the colour of the peg you clicked on
@@ -58,7 +58,7 @@ const App = () => {
     });
 
     // Override the allUserAnswers element at the currentRound index to be updatedRoundAnswers
-    const allUpdatedUserAnswers = allUserAnswers.map((roundAnswers, index: ArrayIndex) => {
+    const allUpdatedUserAnswers = allUserAnswers.map((roundAnswers: RoundAnswers, index: number) => {
       if (index === currentRound) {
         return updatedRoundAnswers;
       }
@@ -70,15 +70,15 @@ const App = () => {
     setAllUserAnswers(allUpdatedUserAnswers);
   };
 
-  const onClickGiveFeedback = () => {
+  const onClickGiveFeedback: OnClickButton = () => {
     // Get the number of correct color in correct position pegs, correct color in incorrect position pegs and completely incorrect pegs for the currentRound
-    const numberOfCorrectPositionPegs = getNumberOfCorrectPositionPegs(allUserAnswers[currentRound], solution);
-    const numberOfIncorrectPositionPegs = getNumberOfIncorrectPositionPegs(allUserAnswers[currentRound], solution);
+    const numberOfCorrectPositionPegs: number = getNumberOfCorrectPositionPegs(allUserAnswers[currentRound], solution);
+    const numberOfIncorrectPositionPegs: number = getNumberOfIncorrectPositionPegs(allUserAnswers[currentRound], solution);
 
     const updatedRoundFeedback = getUpdatedRoundFeedback(numberOfIncorrectPositionPegs, numberOfCorrectPositionPegs);
 
     // Update all the pegFeedback
-    const updatedAllPegFeedback = allPegFeedback.map((roundPegFeedback, index) => {
+    const updatedAllPegFeedback = allPegFeedback.map((roundPegFeedback: RoundPegFeedback, index: number) => {
       if (index === currentRound) {
         return updatedRoundFeedback;
       }
@@ -95,7 +95,7 @@ const App = () => {
       setCurrentRound(newCurrentRound);
     }
 
-    const areRoundAnswersAllCorrect = updatedAllPegFeedback[currentRound].every((number) => number === FeedbackNumbers.correct);
+    const areRoundAnswersAllCorrect: boolean = updatedAllPegFeedback[currentRound].every((number: number) => number === FeedbackNumbers.correct);
 
     if (isRoundFull && currentRound === NumberOfRounds - 1 && !areRoundAnswersAllCorrect) {
       setShowSolution(true);
@@ -114,7 +114,7 @@ const App = () => {
     }
   };
 
-  const onClickStartNewGame = () => {
+  const onClickStartNewGame : OnClickButton = () => {
     setCurrentRound(0);
     setShowSolution(false);
     setSolution(generateRandomSolution());
@@ -124,7 +124,7 @@ const App = () => {
     setShowWinningMessage(false);
   };
 
-  const onClickShowRules = () => {
+  const onClickShowRules: OnClickButton = () => {
     setShowRules(true);
   };
 

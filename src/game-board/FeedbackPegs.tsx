@@ -1,15 +1,20 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-undef */
 import styled from 'styled-components';
+import { RoundPegFeedback } from '../@types';
 import Circle from '../Circle';
 import { EmptyPegColors, FeedbackNumbers, PegColors } from '../utils/constants';
 
-const FeedbackPegs = ({ roundPegFeedback }) => {
+interface Props {
+  roundPegFeedback: RoundPegFeedback
+}
+
+const FeedbackPegs: React.FC<Props> = ({ roundPegFeedback }) => {
   const [firstPeg, secondPeg, ...lastTwoFeedbackPegs] = roundPegFeedback;
   const firstTwoFeedbackPegs = [firstPeg, secondPeg];
 
-  const renderFeedbackPegs = (feedbackPegs) => {
-    return feedbackPegs.map((number, index) => {
+  const renderFeedbackPegs = (feedbackPegs: RoundPegFeedback) => {
+    return feedbackPegs.map((number: number, index: number): React.ReactNode => {
       if (number === FeedbackNumbers.empty) {
         return (
           <Circle

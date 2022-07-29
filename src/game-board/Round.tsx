@@ -1,14 +1,22 @@
 /* eslint-disable react/no-array-index-key */
+import React from 'react';
 import styled from 'styled-components';
+import { RoundPegFeedback, RoundAnswers, UserAnswer } from '../@types';
 import Circle from '../Circle';
 import { EmptyPegColors } from '../utils/constants';
 import FeedbackPegs from './FeedbackPegs';
 
-const Round = ({ Icon, roundAnswers, roundPegFeedback }) => {
+interface Props {
+  Icon: React.ReactNode,
+  roundAnswers: RoundAnswers,
+  roundPegFeedback: RoundPegFeedback
+}
+
+const Round: React.FC<Props> = ({ Icon, roundAnswers, roundPegFeedback }) => {
   return (
     <StyledRoundContainer>
       <FeedbackPegs roundPegFeedback={roundPegFeedback} />
-      {roundAnswers.map((color, index) => {
+      {roundAnswers.map((color: UserAnswer, index: number): React.ReactNode => {
         if (color !== null) {
           return (
             <Circle

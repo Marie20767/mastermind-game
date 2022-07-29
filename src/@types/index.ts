@@ -1,4 +1,8 @@
-export type PegColorsType = {
+/* eslint-disable no-unused-vars */
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import React from 'react';
+
+export interface PegColorsType {
   Red: '#ac274d',
   Yellow: '#f7d840',
   Blue: '#2b9de5',
@@ -8,9 +12,49 @@ export type PegColorsType = {
   Purple: '#a99cc7',
 }
 
-export type PegColor = '#ac274d' | '#f7d840' | '#2b9de5' | '#f49633' | '#06ba7e' | '#fff' | '#a99cc7' | null;
+export interface EmptyPegColorsType {
+  InnerCircle: CircleColor,
+  OuterCircle: CircleColor,
+}
 
-export type CurrentUserAnswer = PegColor[]
+export type PegColor = '#ac274d' | '#f7d840' | '#2b9de5' | '#f49633' | '#06ba7e' | '#fff' | '#a99cc7';
 
-export type Solution = PegColor[]
+export type CircleColor = PegColor | '#4e4e4c' | 'transparent';
 
+export type UserAnswer = PegColor | null;
+
+export type CurrentUserAnswer = UserAnswer[]
+
+export type SolutionArray = PegColor[]
+
+export type OnClickDiv = React.MouseEventHandler<HTMLDivElement> | undefined
+
+export type OnClickButton = React.MouseEventHandler<HTMLButtonElement> | undefined
+
+export type OnClickIcon = React.MouseEventHandler<SVGSVGElement> | undefined
+
+export type OnClickPickUserAnswer = (color: PegColor) => void
+
+export type RoundAnswers = UserAnswer[]
+
+export type AllUserAnswers = RoundAnswers[]
+
+export type SetAllUserAnswers = (allUserAnswers: AllUserAnswers) => void
+
+export type IsRoundFull = boolean
+
+export type ShowSolution = boolean
+
+export type RoundPegFeedback = number[]
+
+export type AllPegFeedback = RoundPegFeedback[]
+
+export type InitialValue = string[] | null[][] | number[][] | number | boolean
+
+export type IsVisible = boolean
+
+export type SetBooleanFunction = (parameter: boolean) => void
+
+export type SetNumberFunction = (parameter: number) => void
+
+export type IconType = IconProp

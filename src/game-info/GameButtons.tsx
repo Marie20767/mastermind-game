@@ -1,8 +1,16 @@
 import { faArrowRotateLeft, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 import styled from 'styled-components';
+import { OnClickButton } from '../@types';
 import GameInfoButton from './GameInfoButton';
 
-const GameButtons = ({ className, onClickStartNewGame, onClickShowRules }) => {
+interface Props {
+  className: string,
+  onClickStartNewGame: OnClickButton,
+  onClickShowRules: OnClickButton,
+}
+
+const GameButtons: React.FC<Props> = ({ className, onClickStartNewGame, onClickShowRules }) => {
   return (
     <StyledNewGameAndRulesContainer className={className}>
       <GameInfoButton onClick={onClickStartNewGame} icon={faArrowRotateLeft} toolTipText="Start new game" />

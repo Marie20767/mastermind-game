@@ -1,8 +1,15 @@
 import styled from 'styled-components';
+import React from 'react';
+import { CircleColor, OnClickDiv } from './@types';
 
-const Circle = ({
+interface Props {
+  color: CircleColor,
+  className: string,
+  onClick?: OnClickDiv
+}
+
+const Circle: React.FC<Props> = ({
   color,
-  clickable,
   className,
   onClick,
   children,
@@ -11,7 +18,6 @@ const Circle = ({
     <StyledCircle
       color={color}
       className={className}
-      clickable={clickable}
       onClick={onClick}>
       {children}
     </StyledCircle>
