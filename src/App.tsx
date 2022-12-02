@@ -22,7 +22,7 @@ import Score from './game-info/Score';
 import GameButtons from './game-info/GameButtons';
 import { IsRoundFull, OnClickButton, OnClickPickUserAnswer, PegColor, RoundAnswers, RoundPegFeedback } from './@types';
 
-const App = () => {
+const App: React.FC = () => {
   const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
   const [allUserAnswers, setAllUserAnswers] = useLocalStorageState('user-answers', generateInitialUserAnswersState());
   const [currentRound, setCurrentRound] = useLocalStorageState('current-round', 0);

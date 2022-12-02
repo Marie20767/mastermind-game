@@ -103,8 +103,8 @@ const StyledPegsContainer = styled.div`
     height: 34px;
 
     @media screen and (min-width: 768px) {
-      width: 60px;
-      height: 60px;
+      width: 55px;
+      height: 55px;
       margin: 0 0 30px 0; 
     }
   }

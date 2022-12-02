@@ -136,6 +136,9 @@ export {
   generateInitialUserAnswersState,
   generateInitialPegFeedbackState,
   getNumberOfCorrectPositionPegs,
+  getNumberOfPegColorInSolution,
+  getNumberOfCorrectPositionPegsForColor,
+  getNumberOfIncorrectPositionPegsForColor,
   getNumberOfIncorrectPositionPegs,
   getUpdatedRoundFeedback,
 };

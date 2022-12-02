@@ -3,7 +3,7 @@ import { InitialValue } from '../@types';
 
 const useLocalStorageState = (key: string, initialValue: InitialValue) => {
   const [value, setValue] = useState(() => {
-    const storedValue = localStorage.getItem(key);
+    const storedValue: string | null = localStorage.getItem(key);
 
     return storedValue !== null ? JSON.parse(storedValue) : initialValue;
   });
