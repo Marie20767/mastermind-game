@@ -46,7 +46,7 @@ const Button = styled.button`
 
     @media screen and (min-width: 1024px) {
       display: block;
-      font-size: 2vh;
+      font-size: 20px;
       padding: 8px 13px;
     }
   }

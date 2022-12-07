@@ -122,7 +122,7 @@ const StyledRulesContainer = styled(motion.div)`
 
     @media screen and (min-width: 768px) {
       margin-top: 0px;
-      font-size: 4vh; 
+      font-size: 34px; 
     }
 
     @media screen and (min-width: 1024px) {
@@ -138,7 +138,7 @@ const StyledRulesContainer = styled(motion.div)`
     margin-bottom: 28px;
     
     @media screen and (min-width: 768px) {
-      font-size: 3.8vh;
+      font-size: 32px;
     }
   }
 
@@ -167,11 +167,11 @@ const StyledRulesContainer = styled(motion.div)`
 
     @media screen and (min-width: 768px) {
       margin: 10px 30px;
-      font-size: 3vh; 
+      font-size: 25px; 
     }
 
     @media screen and (min-width: 1024px) {
-      font-size: 3.3vh;  
+      font-size: 25px;  
       margin: 10px 35px;
     }
   }

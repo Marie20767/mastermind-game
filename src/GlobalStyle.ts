@@ -34,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'GeoLight', Helvetica, sans-serif;
 
     @media screen and (min-width: 768px) {
-      font-size: 4.2vh;
+      font-size: 38px;
     }
   }
 

@@ -53,6 +53,7 @@ const Pegpicker: React.FC<Props> = ({
           return (
             <Circle
               key={`${color}-${index}`}
+              testId={`pegpicker-${color}`}
               color={color}
               className="styled-pegpicker"
               onClick={!showSolution ? () => onClickPickUserAnswer(color) : undefined} />

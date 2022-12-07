@@ -28,6 +28,7 @@ const Rounds: React.FC<Props> = ({
         return (
           <Round
             key={`${roundAnswers.join('-')}-${index}`}
+            roundTestId={`round-${index}`}
             Icon={(
               <FontAwesomeIcon
                 icon={faArrowLeftLong}

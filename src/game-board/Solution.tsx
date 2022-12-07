@@ -19,6 +19,7 @@ const Solution: React.FC<Props> = ({ solution, showSolution }) => {
           return (
             <Circle
               key={`${color}-${index}`}
+              testId={`solution-${index}-${color}`}
               className="styled-solution-pegs"
               color={color} />
           );
@@ -26,7 +27,8 @@ const Solution: React.FC<Props> = ({ solution, showSolution }) => {
 
         return (
           <Circle
-            key={`${color}-${index}`}
+            key={`transparent-${index}`}
+            testId={`solution-${index}-transparent`}
             className="styled-solution-pegs"
             color="transparent">
             <FontAwesomeIcon

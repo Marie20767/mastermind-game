@@ -9,18 +9,20 @@ import FeedbackPegs from './FeedbackPegs';
 interface Props {
   Icon: React.ReactNode,
   roundAnswers: RoundAnswers,
-  roundPegFeedback: RoundPegFeedback
+  roundPegFeedback: RoundPegFeedback,
+  roundTestId: string,
 }
 
-const Round: React.FC<Props> = ({ Icon, roundAnswers, roundPegFeedback }) => {
+const Round: React.FC<Props> = ({ Icon, roundAnswers, roundPegFeedback, roundTestId }) => {
   return (
-    <StyledRoundContainer>
+    <StyledRoundContainer data-testid={roundTestId}>
       <FeedbackPegs roundPegFeedback={roundPegFeedback} />
       {roundAnswers.map((color: UserAnswer, index: number): React.ReactNode => {
         if (color !== null) {
           return (
             <Circle
               key={`${color}-${index}`}
+              testId={`roundanswer-${index}-${color}`}
               className="styled-round-outer-circle"
               color={color} />
           );
@@ -28,7 +30,8 @@ const Round: React.FC<Props> = ({ Icon, roundAnswers, roundPegFeedback }) => {
 
         return (
           <Circle
-            key={`${color}-${index}`}
+            key={`transparent-${index}`}
+            testId={`roundanswer-${index}-transparent`}
             className="styled-round-outer-circle"
             color={EmptyPegColors.OuterCircle}>
             <Circle

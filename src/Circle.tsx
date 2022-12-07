@@ -5,12 +5,14 @@ import { CircleColor, OnClickDiv } from './@types';
 interface Props {
   color: CircleColor,
   className: string,
+  testId?: string,
   onClick?: OnClickDiv
 }
 
 const Circle: React.FC<Props> = ({
   color,
   className,
+  testId,
   onClick,
   children,
 }) => {
@@ -18,6 +20,7 @@ const Circle: React.FC<Props> = ({
     <StyledCircle
       color={color}
       className={className}
+      data-testid={testId}
       onClick={onClick}>
       {children}
     </StyledCircle>

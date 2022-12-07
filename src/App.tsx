@@ -95,9 +95,9 @@ const App: React.FC = () => {
       setCurrentRound(newCurrentRound);
     }
 
-    const areRoundAnswersAllCorrect: boolean = updatedAllPegFeedback[currentRound].every((number: number) => number === FeedbackNumbers.correct);
+    const areCurrentRoundAnswersCorrect: boolean = updatedAllPegFeedback[currentRound].every((number: number) => number === FeedbackNumbers.correct);
 
-    if (isRoundFull && currentRound === NumberOfRounds - 1 && !areRoundAnswersAllCorrect) {
+    if (isRoundFull && currentRound === NumberOfRounds - 1 && !areCurrentRoundAnswersCorrect) {
       setShowSolution(true);
       const newGamesLostScore = gamesLost + 1;
 
@@ -105,7 +105,7 @@ const App: React.FC = () => {
       setShowLosingMessage(true);
     }
 
-    if (areRoundAnswersAllCorrect) {
+    if (areCurrentRoundAnswersCorrect) {
       setShowSolution(true);
       const newGamesWonScore = gamesWon + 1;
 
@@ -246,7 +246,7 @@ const StyledFeedbackContentContainer = styled.div`
     font-size: 18px;
 
     @media screen and (min-width: 768px) {
-      font-size: 3vh;
+      font-size: 23px;
     }
   }
 `;

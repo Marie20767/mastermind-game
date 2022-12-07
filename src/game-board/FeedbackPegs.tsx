@@ -13,12 +13,15 @@ const FeedbackPegs: React.FC<Props> = ({ roundPegFeedback }) => {
   const [firstPeg, secondPeg, ...lastTwoFeedbackPegs] = roundPegFeedback;
   const firstTwoFeedbackPegs = [firstPeg, secondPeg];
 
-  const renderFeedbackPegs = (feedbackPegs: RoundPegFeedback) => {
+  const renderFeedbackPegs = (feedbackPegs: RoundPegFeedback, indexOffset: number = 0) => {
     return feedbackPegs.map((number: number, index: number): React.ReactNode => {
+      const finalIndex = index + indexOffset;
+
       if (number === FeedbackNumbers.empty) {
         return (
           <Circle
-            key={`${FeedbackNumbers.empty}-${index}`}
+            key={`${FeedbackNumbers.empty}-${finalIndex}`}
+            testId={`pegfeedback-${finalIndex}-${EmptyPegColors.InnerCircle}`}
             className="styled-feedback-pegs"
             color={EmptyPegColors.InnerCircle} />
         );
@@ -27,7 +30,8 @@ const FeedbackPegs: React.FC<Props> = ({ roundPegFeedback }) => {
       if (number === FeedbackNumbers.correct) {
         return (
           <Circle
-            key={`${FeedbackNumbers.correct}-${index}`}
+            key={`${FeedbackNumbers.correct}-${finalIndex}`}
+            testId={`pegfeedback-${finalIndex}-${PegColors.Red}`}
             className="styled-feedback-pegs"
             color={PegColors.Red} />
         );
@@ -35,7 +39,8 @@ const FeedbackPegs: React.FC<Props> = ({ roundPegFeedback }) => {
 
       return (
         <Circle
-          key={`${FeedbackNumbers.incorrect}-${index}`}
+          key={`${FeedbackNumbers.incorrect}-${finalIndex}`}
+          testId={`pegfeedback-${finalIndex}-#fff`}
           className="styled-feedback-pegs"
           color="#fff" />
       );
@@ -48,7 +53,7 @@ const FeedbackPegs: React.FC<Props> = ({ roundPegFeedback }) => {
         {renderFeedbackPegs(firstTwoFeedbackPegs)}
       </StyledFeedbackPegsSubContainer>
       <StyledFeedbackPegsSubContainer>
-        {renderFeedbackPegs(lastTwoFeedbackPegs)}
+        {renderFeedbackPegs(lastTwoFeedbackPegs, 2)}
       </StyledFeedbackPegsSubContainer>
     </StyledFeedbackContainer>
   );
