@@ -13,8 +13,15 @@ interface Props {
 const GameButtons: React.FC<Props> = ({ className, onClickStartNewGame, onClickShowRules }) => {
   return (
     <StyledNewGameAndRulesContainer className={className}>
-      <GameInfoButton onClick={onClickStartNewGame} icon={faArrowRotateLeft} toolTipText="Start new game" data-testid="restart" />
-      <GameInfoButton onClick={onClickShowRules} icon={faQuestion} toolTipText="Check game rules" />
+      <GameInfoButton
+        onClick={onClickStartNewGame}
+        icon={faArrowRotateLeft}
+        toolTipText="Start new game"
+        testId="restart" />
+      <GameInfoButton
+        onClick={onClickShowRules}
+        icon={faQuestion}
+        toolTipText="Check game rules" />
     </StyledNewGameAndRulesContainer>
   );
 };

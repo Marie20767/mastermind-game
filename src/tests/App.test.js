@@ -1,7 +1,13 @@
 import { beforeEach, describe, test, expect } from '@jest/globals';
 import { render } from '@testing-library/react';
 import App from '../App';
-import { CorrectFeedbackColor, WrongFeedbackColor, WrongPositionFeedbackColor } from './test-constants';
+import {
+  allFeedbackPegsAreWrongOrEmpty,
+  allRoundPegsAreEmpty,
+  CorrectFeedbackColor,
+  WrongFeedbackColor,
+  WrongPositionFeedbackColor,
+} from './test-constants';
 import {
   pickUserAnswersForAllRoundsLoosingCase,
   pickUserAnswersForAllRoundsWinningCase,
@@ -10,6 +16,9 @@ import {
   play1RoundAndVerifyFeedback,
   pickPegsAndCheckIfDeleted,
   setSolutionToLocalStorage,
+  checkFeedbackPegDisplay,
+  pressRestartGameButton,
+  verifyPegColorForRounds,
 } from './test-utils';
 
 describe(App, () => {
@@ -17,28 +26,43 @@ describe(App, () => {
     window.localStorage.clear();
   });
 
-  test('selects correct peg colors and gives correct feedback when 2 pegs are correct and 2 pegs are wrong', () => {
+  test('selects correct peg colors and shows 2 red and 2 empty feedback pegs', () => {
     const solution = ['#fff', '#f7d840', '#fff', '#2b9de5'];
+
+    // Manually setting a fake solution in local storage
+    setSolutionToLocalStorage(solution);
+
+    const { getByTestId, getByRole } = render(<App />);
     const pickedPegColors = ['#fff', '#f7d840', '#06ba7e', '#06ba7e'];
     const feedbackColors = [CorrectFeedbackColor, CorrectFeedbackColor, WrongFeedbackColor, WrongFeedbackColor];
 
-    play1RoundAndVerifyFeedback(solution, pickedPegColors, feedbackColors);
+    play1RoundAndVerifyFeedback(pickedPegColors, getByTestId, getByRole, feedbackColors);
   });
 
-  test('selects correct peg colors and gives correct feedback when all pegs are wrong', () => {
+  test('selects correct peg colors and shows 4 empty feedback pegs', () => {
     const solution = ['#a99cc7', '#a99cc7', '#2b9de5', '#fff'];
-    const pickedPegColors = ['#f7d840', '#f7d840', '#f7d840', '#f7d840'];
-    const feedbackColors = [WrongFeedbackColor, WrongFeedbackColor, WrongFeedbackColor, WrongFeedbackColor];
 
-    play1RoundAndVerifyFeedback(solution, pickedPegColors, feedbackColors);
+    // Manually setting a fake solution in local storage
+    setSolutionToLocalStorage(solution);
+
+    const { getByTestId, getByRole } = render(<App />);
+    const pickedPegColors = ['#f7d840', '#f7d840', '#f7d840', '#f7d840'];
+    const feedbackColors = allFeedbackPegsAreWrongOrEmpty;
+
+    play1RoundAndVerifyFeedback(pickedPegColors, getByTestId, getByRole, feedbackColors);
   });
 
-  test('selects correct peg colors and gives correct feedback when 1 peg is correct, 2 pegs are in incorrect position and 1 is wrong', () => {
+  test('selects correct peg colors and show 1 red, 2 white and 1 empty feedback pegs', () => {
     const solution = ['#f7d840', '#2b9de5', '#a99cc7', '#fff'];
+
+    // Manually setting a fake solution in local storage
+    setSolutionToLocalStorage(solution);
+
+    const { getByTestId, getByRole } = render(<App />);
     const pickedPegColors = ['#f7d840', '#a99cc7', '#2b9de5', '#f7d840'];
     const feedbackColors = [CorrectFeedbackColor, WrongPositionFeedbackColor, WrongPositionFeedbackColor, WrongFeedbackColor];
 
-    play1RoundAndVerifyFeedback(solution, pickedPegColors, feedbackColors);
+    play1RoundAndVerifyFeedback(pickedPegColors, getByTestId, getByRole, feedbackColors);
   });
 
   test('shows solution when user lost after 9 rounds', () => {
@@ -80,7 +104,7 @@ describe(App, () => {
     pickPegsAndCheckIfDeleted(pickedColors);
   });
 
-  test('keeps all round colors after pressing delete when the check button has already been clicked', () => {
+  test('keeps all round colors after pressing delete and check', () => {
     const pickedColors = ['#f7d840', '#06ba7e', '#06ba7e', '#06ba7e'];
 
     pickPegsAndCheckIfDeleted(pickedColors);
@@ -113,5 +137,24 @@ describe(App, () => {
     const loosingTitle = getByText('You lost...');
 
     expect(loosingTitle).toBeTruthy();
+  });
+
+  test('resets the game when restart button is clicked', () => {
+    const solution = ['#2b9de5', '#f7d840', '#f7d840', '#2b9de5'];
+
+    // Manually setting a fake solution in local storage
+    setSolutionToLocalStorage(solution);
+
+    const { container, getByTestId, getByRole } = render(<App />);
+
+    const pickedPegColors = ['#fff', '#f7d840', '#fff', '#06ba7e'];
+    const feedbackColors = [CorrectFeedbackColor, WrongFeedbackColor, WrongFeedbackColor, WrongFeedbackColor];
+
+    play1RoundAndVerifyFeedback(pickedPegColors, getByTestId, getByRole, feedbackColors);
+
+    pressRestartGameButton(container);
+
+    checkFeedbackPegDisplay(allFeedbackPegsAreWrongOrEmpty, getByTestId('round-0'));
+    verifyPegColorForRounds(allRoundPegsAreEmpty, getByTestId('round-0'));
   });
 });

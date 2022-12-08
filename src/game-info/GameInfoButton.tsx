@@ -7,12 +7,13 @@ import { IconType, OnClickButton } from '../@types';
 interface Props {
   toolTipText: string,
   onClick: OnClickButton,
-  icon: IconType
+  icon: IconType,
+  testId?: string,
 }
 
-const GameInfoButton: React.FC<Props> = ({ icon, toolTipText, onClick }) => {
+const GameInfoButton: React.FC<Props> = ({ icon, toolTipText, testId, onClick }) => {
   return (
-    <Button data-tip data-for={toolTipText} onClick={onClick} type="button">
+    <Button data-tip data-for={toolTipText} onClick={onClick} type="button" data-testid={testId}>
       <ReactTooltip id={toolTipText} place="top" effect="solid">
         <span>{toolTipText}</span>
       </ReactTooltip>

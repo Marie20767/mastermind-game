@@ -7,18 +7,21 @@ export const setSolutionToLocalStorage = (colorArray) => {
   window.localStorage.setItem('solution', JSON.stringify(colorArray));
 };
 
-export const play1RoundAndVerifyFeedback = (solution, pickedPegColors, feedbackColors) => {
-  // Manually setting a fake solution in local storage
-  setSolutionToLocalStorage(solution);
-
-  const { getByTestId, getByRole } = render(<App />);
-
+export const play1RoundAndVerifyFeedback = (pickedPegColors, getByTestId, getByRole, feedbackColors) => {
   pickPegsAndVerifySelection(pickedPegColors, getByTestId);
   pressCheckButton(getByRole);
 
   const round1 = getByTestId('round-0');
 
   checkFeedbackPegDisplay(feedbackColors, round1);
+};
+
+export const verifyPegColorForRounds = (pickedPegColors, round) => {
+  for (let i = 0; i < pickedPegColors.length; i++) {
+    const pegFromRoundAnswer = within(round).getByTestId(`roundanswer-${i}-${pickedPegColors[i]}`);
+
+    expect(pegFromRoundAnswer).toBeTruthy();
+  }
 };
 
 export const pickPegsAndVerifySelection = (pickedPegColors, getByTestId) => {
@@ -39,6 +42,13 @@ export const pickPegs = (pickedPegColors, getByTestId) => {
 
     fireEvent.click(pegColourFromPegPicker);
   }
+};
+
+export const pressRestartGameButton = (container) => {
+  const desktopGameButtonsContainer = container.getElementsByClassName('desktop-game-buttons');
+  const restartButton = within(desktopGameButtonsContainer[0]).getByTestId('restart');
+
+  fireEvent.click(restartButton);
 };
 
 export const pressCheckButton = (getByRole) => {
@@ -120,14 +130,6 @@ export const pickUserAnswersFor3RoundsWithoutCheckingLastSelection = (pickedPegC
   }
 
   pickPegs(pickedPegColors, getByTestId);
-};
-
-const verifyPegColorForRounds = (pickedPegColors, round) => {
-  for (let i = 0; i < pickedPegColors.length; i++) {
-    const pegFromRoundAnswer = within(round).getByTestId(`roundanswer-${i}-${pickedPegColors[i]}`);
-
-    expect(pegFromRoundAnswer).toBeTruthy();
-  }
 };
 
 export const verifyRoundsWereNotDeleted = (getByTestId, pickedPegColors) => {
