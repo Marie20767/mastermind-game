@@ -1,7 +1,6 @@
 import '@testing-library/cypress/add-commands';
 
-// If you have an app where you need to login first everytime you test the app you can add commands
-// Cypress.Commands.add('login', () => {
-//   cy.visit('/');
-//   cy.findByRole('button', { name: 'click here to login' }).click();
-// });
+Cypress.Commands.add('setSolution', () => {
+  cy.visit('/');
+  window.localStorage.setItem('solution', JSON.stringify(['#f7d840', '#06ba7e', '#2b9de5', '#2b9de5']));
+});
