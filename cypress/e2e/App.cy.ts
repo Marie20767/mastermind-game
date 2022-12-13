@@ -40,32 +40,32 @@ describe('renders the app', () => {
 // })
 
 // E2E Example:
-describe('todos', () => {
-  beforeEach(() => {
-    cy.visit('/');
-  });
+// describe('todos', () => {
+//   beforeEach(() => {
+//     cy.visit('/');
+//   });
 
-  it('user can add, check and delete todos', () => {
-    cy.findByRole('textbox', { name: /title/i })
-      .type('Todo1')
-      .type('{enter}');
+//   it('user can add, check and delete todos', () => {
+//     cy.findByRole('textbox', { name: /title/i })
+//       .type('Todo1')
+//       .type('{enter}');
 
-    cy.findByRole('textbox', { name: /title/i })
-      .type('Todo2')
-      .type('{enter}');
+//     cy.findByRole('textbox', { name: /title/i })
+//       .type('Todo2')
+//       .type('{enter}');
 
-    cy.findByText('Todo1').should('exist');
-    cy.findByText('Todo2').should('exist');
-    cy.findByText('total todos: 3').should('exist');
-  });
+//     cy.findByText('Todo1').should('exist');
+//     cy.findByText('Todo2').should('exist');
+//     cy.findByText('total todos: 3').should('exist');
+//   });
 
-  cy.findByRole('checkbox', { name: 'todo2' }).check();
-  cy.findByText('selected todos: 1').should('exist');
-  cy.get('[data-cy=todo-Todo1]').within(() => {
-    cy.findByRole('button', { name: 'remove' }).click();
-  });
+//   cy.findByRole('checkbox', { name: 'todo2' }).check();
+//   cy.findByText('selected todos: 1').should('exist');
+//   cy.get('[data-cy=todo-Todo1]').within(() => {
+//     cy.findByRole('button', { name: 'remove' }).click();
+//   });
 
-  cy.findByText('total todos: 1').should('exist');
-});
+//   cy.findByText('total todos: 1').should('exist');
+// });
 
 export {};

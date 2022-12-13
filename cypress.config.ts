@@ -5,6 +5,6 @@ export default defineConfig({
   viewportWidth: 1200,
   experimentalStudio: true,
   e2e: {
-    baseUrl: './src',
+    baseUrl: 'http://localhost:3000',
   },
 });
