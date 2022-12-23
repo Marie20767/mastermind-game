@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import App from '../App';
 import {
   allFeedbackPegsAreWrongOrEmpty,
-  allRoundPegsAreEmpty,
+  emptyRoundPegColors,
   CorrectFeedbackColor,
   WrongFeedbackColor,
   WrongPositionFeedbackColor,
@@ -155,6 +155,6 @@ describe(App, () => {
     pressRestartGameButton(container);
 
     checkFeedbackPegDisplay(allFeedbackPegsAreWrongOrEmpty, getByTestId('round-0'));
-    verifyPegColorForRounds(allRoundPegsAreEmpty, getByTestId('round-0'));
+    verifyPegColorForRounds(emptyRoundPegColors, getByTestId('round-0'));
   });
 });

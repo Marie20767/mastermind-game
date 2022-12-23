@@ -1,6 +1,6 @@
-import { allRoundPegsAreEmpty, CorrectFeedbackColor } from '../../src/tests/test-constants';
+import { emptyRoundPegColors, CorrectFeedbackColor } from '../../src/tests/test-constants';
 
-export const checkColorOfAllArrows = (roundIndex) => {
+export const checkArrowIndicatorIsAtCorrectRound = (roundIndex) => {
   for (let i = 0; i < 8; i++) {
     const expectedArrowColor = i === roundIndex ? '#4e4e4c' : 'transparent';
 
@@ -16,13 +16,23 @@ export const checkSolution = (solution) => {
   }
 };
 
-export const pickAndVerifyPegsFor1Round = (selectedColors) => {
+const pickPegsForRound = (selectedColors) => {
   for (let i = 0; i < selectedColors.length; i++) {
     cy.get(`[data-testid="pegpicker-${selectedColors[i]}"]`).click();
-    cy.get('[data-testid="round-0"]').within(() => {
+  }
+};
+
+const verifyPegsForRound = (selectedColors, roundIndex) => {
+  for (let i = 0; i < selectedColors.length; i++) {
+    cy.get(`[data-testid="round-${roundIndex}"]`).within(() => {
       cy.get(`[data-testid="roundanswer-${i}-${selectedColors[i]}"]`).should('exist');
     });
   }
+};
+
+const pickAndVerifyPegsForRound = (selectedColors, roundIndex) => {
+  pickPegsForRound(selectedColors);
+  verifyPegsForRound(selectedColors, roundIndex);
 };
 
 const checkTheGameBoardIsEmptyOfPegs = () => {
@@ -31,61 +41,51 @@ const checkTheGameBoardIsEmptyOfPegs = () => {
   cy.get('[class*="styled-feedback-pegs"][color="#4e4e4c"]').should('have.length', 36);
 };
 
+const verifyFeedbackForRound = (roundIndex, feedbackColors) => {
+  cy.get(`[data-testid="round-${roundIndex}"]`).within(() => {
+    for (let i = 0; i < feedbackColors.length; i++) {
+      cy.get(`[data-testid="pegfeedback-${i}-${feedbackColors[i]}"]`).should('exist');
+    }
+  });
+};
+
 export const selectPegsDelete1RoundAndGetFeedback = (selectedColorsNotMatchingSolution, selectedColorsMatchingSolution) => {
   // Pick pegs and check if they appear in round 1
-  pickAndVerifyPegsFor1Round(selectedColorsNotMatchingSolution);
+  pickAndVerifyPegsForRound(selectedColorsNotMatchingSolution, 0);
   // Delete 1 round
   cy.findByRole('button', { name: 'Delete' }).click();
   // Check pegs from first round are empty after deleting
-  for (let i = 0; i < allRoundPegsAreEmpty.length; i++) {
-    cy.get('[data-testid="round-0"]').within(() => {
-      cy.get(`[data-testid="roundanswer-${i}-${allRoundPegsAreEmpty[i]}"]`).should('exist');
-    });
-  }
+  verifyPegsForRound(emptyRoundPegColors, 0);
+
   // Pick pegs matching solution to win after 1 round
-  pickAndVerifyPegsFor1Round(selectedColorsMatchingSolution);
+  pickAndVerifyPegsForRound(selectedColorsMatchingSolution, 0);
   // Press check button
   cy.findByRole('button', { name: 'Check' }).click();
   // Get peg feedback
   const pegFeedback = [CorrectFeedbackColor, CorrectFeedbackColor, CorrectFeedbackColor, CorrectFeedbackColor];
 
-  cy.get('[data-testid="round-0"]').within(() => {
-    for (let i = 0; i < pegFeedback.length; i++) {
-      cy.get(`[data-testid="pegfeedback-${i}-${pegFeedback[i]}"]`).should('exist');
-    }
-  });
+  verifyFeedbackForRound(0, pegFeedback);
 };
 
 export const playRoundsAndGetFeedback = (rounds, selectedColors1, feedbackColors1, selectedColors2, feedbackColors2) => {
   for (let i = 0; i < rounds; i++) {
-    checkColorOfAllArrows(i);
-    for (let j = 0; j < selectedColors1.length; j++) {
-      cy.get(`[data-testid="pegpicker-${selectedColors1[j]}"]`).click();
-    }
+    checkArrowIndicatorIsAtCorrectRound(i);
+    pickPegsForRound(selectedColors1);
 
     cy.findByRole('button', { name: 'Check' }).click();
-    cy.get(`[data-testid="round-${i}"]`).within(() => {
-      for (let k = 0; k < feedbackColors1.length; k++) {
-        cy.get(`[data-testid="pegfeedback-${k}-${feedbackColors1[k]}"]`).should('exist');
-      }
-    });
+    verifyFeedbackForRound(i, feedbackColors1);
   }
 
-  for (let i = 0; i < selectedColors2.length; i++) {
-    cy.get(`[data-testid="pegpicker-${selectedColors2[i]}"]`).click();
-  }
-
+  pickPegsForRound(selectedColors2);
   cy.findByRole('button', { name: 'Check' }).click();
-  for (let i = 0; i < feedbackColors2.length; i++) {
-    cy.get(`[data-testid="pegfeedback-${i}-${feedbackColors2[i]}"]`).should('exist');
-  }
+  verifyFeedbackForRound(rounds, feedbackColors2);
 };
 
 const checkGameIsSetupForNewGame = () => {
   // Check solution is hidden
-  checkSolution(allRoundPegsAreEmpty);
+  checkSolution(emptyRoundPegColors);
   // Check arrow is showing at the bottom
-  checkColorOfAllArrows(0);
+  checkArrowIndicatorIsAtCorrectRound(0);
   // Check that the round pegs are all empty and no feedback is showing
   checkTheGameBoardIsEmptyOfPegs();
 };

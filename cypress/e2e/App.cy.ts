@@ -1,5 +1,5 @@
-import { allRoundPegsAreEmpty, CorrectFeedbackColor, WrongPositionFeedbackColor, WrongFeedbackColor } from '../../src/tests/test-constants';
-import { checkColorOfAllArrows, checkSolution, selectPegsDelete1RoundAndGetFeedback, checkOverlayAndStartNewGame, playRoundsAndGetFeedback } from './test-utils';
+import { emptyRoundPegColors, CorrectFeedbackColor, WrongPositionFeedbackColor, WrongFeedbackColor } from '../../src/tests/test-constants';
+import { checkArrowIndicatorIsAtCorrectRound, checkSolution, selectPegsDelete1RoundAndGetFeedback, checkOverlayAndStartNewGame, playRoundsAndGetFeedback } from './test-utils';
 
 const solution = ['#f7d840', '#06ba7e', '#2b9de5', '#2b9de5'];
 
@@ -10,8 +10,8 @@ describe('play 1 full game', () => {
 
   it('wins on the first round', () => {
     // check the setup before playing (arrow showing correctly, solution hidden)
-    checkColorOfAllArrows(0);
-    checkSolution(allRoundPegsAreEmpty);
+    checkArrowIndicatorIsAtCorrectRound(0);
+    checkSolution(emptyRoundPegColors);
     selectPegsDelete1RoundAndGetFeedback(['#fff', '#ac274d', '#fff', '#ac274d'], solution);
     checkSolution(solution);
     checkOverlayAndStartNewGame('Congratulations!', 'Games won: 1', 'Games lost: 0');
@@ -28,7 +28,7 @@ describe('play 1 full game', () => {
     checkOverlayAndStartNewGame('Congratulations!', 'Games won: 1', 'Games lost: 0');
   });
 
-  it.only('looses the game', () => {
+  it('looses the game', () => {
     const selectedColorsNotMatchinSolution1 = ['#fff', '#fff', '#06ba7e', '#ac274d'];
     const feedbackColors1 = [WrongPositionFeedbackColor, WrongFeedbackColor, WrongFeedbackColor, WrongFeedbackColor];
     const selectedColorsNotmatchingSolution2 = ['#06ba7e', '#f7d840', '#f7d840', '#f7d840'];
