@@ -5,25 +5,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import Round from './Round';
 import { EmptyPegColors } from '../utils/constants';
-import { AllPegFeedback, AllUserAnswers, RoundAnswers, ShowSolution } from '../@types';
+import { AllPegFeedback, AllUserAnswers, RoundAnswers } from '../@types';
+import { useAppSelector } from '../redux/hooks';
 
 interface Props {
   allUserAnswers: AllUserAnswers,
   allPegFeedback: AllPegFeedback,
   currentRound: number,
-  showSolution: ShowSolution,
 }
 
 const Rounds: React.FC<Props> = ({
   allUserAnswers,
   allPegFeedback,
   currentRound,
-  showSolution,
 }) => {
+  const { solutionShown } = useAppSelector((state) => state.game);
+
   return (
     <StyledRoundsContainer>
       {allUserAnswers.map((roundAnswers: RoundAnswers, index: number): React.ReactNode => {
-        const shouldShowArrow: boolean = index === currentRound && !showSolution;
+        const shouldShowArrow: boolean = index === currentRound && !solutionShown;
 
         return (
           <Round

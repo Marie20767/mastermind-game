@@ -51,8 +51,6 @@ export type AllPegFeedback = RoundPegFeedback[]
 
 export type InitialValue = string[] | null[][] | number[][] | number | boolean
 
-export type IsVisible = boolean
-
 export type SetBooleanFunction = (parameter: boolean) => void
 
 export type SetNumberFunction = (parameter: number) => void

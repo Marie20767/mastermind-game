@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import useLocalStorageState from './hooks/useLocalStorageState';
 
-import GameBoard from './game-board/GameBoard';
-import GlobalStyle from './GlobalStyle';
-import Pegpicker from './Pegpicker';
+import { calculateGamesLost, calculateGamesWon, setSolution, showGamesRules, showSolution } from './redux/reducers/game';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import useLocalStorageState from './hooks/useLocalStorageState';
 import {
   generateInitialPegFeedbackState,
   generateInitialUserAnswersState,
@@ -14,30 +13,38 @@ import {
   getUpdatedRoundFeedback,
 } from './utils/game-utils';
 import { FeedbackNumbers, NumberOfRounds } from './utils/constants';
-import GameInfo from './game-info/GameInfo';
-import Overlay from './overlays/Overlay';
+import {
+  IsRoundFull,
+  OnClickButton,
+  OnClickPickUserAnswer,
+  PegColor,
+  RoundAnswers,
+  RoundPegFeedback,
+} from './@types';
+
 import sadDogImage from './images/sad-dog.png';
 import happyBeeImage from './images/bee.png';
+
+import GameBoard from './game-board/GameBoard';
+import GlobalStyle from './GlobalStyle';
+import Pegpicker from './Pegpicker';
+import GameInfo from './game-info/GameInfo';
+import Overlay from './overlays/Overlay';
 import RulesOverlay from './overlays/RulesOverlay';
 import Score from './game-info/Score';
 import GameButtons from './game-info/GameButtons';
-import { IsRoundFull, OnClickButton, OnClickPickUserAnswer, PegColor, RoundAnswers, RoundPegFeedback } from './@types';
 
 const App: React.FC = () => {
-  const userHasPlayedGameBefore = !!localStorage.getItem('user-answers') || !!localStorage.getItem('won-games') || !!localStorage.getItem('lost-games');
-
-  const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
   const [allUserAnswers, setAllUserAnswers] = useLocalStorageState('user-answers', generateInitialUserAnswersState());
   const [currentRound, setCurrentRound] = useLocalStorageState('current-round', 0);
-  const [showSolution, setShowSolution] = useLocalStorageState('show-solution', false);
   const [allPegFeedback, setAllPegFeedback] = useLocalStorageState('peg-feedback', generateInitialPegFeedbackState());
-  const [gamesWon, setGamesWon] = useLocalStorageState('won-games', 0);
-  const [gamesLost, setGamesLost] = useLocalStorageState('lost-games', 0);
   const [showLosingMessage, setShowLosingMessage] = useState(false);
   const [showWinningMessage, setShowWinningMessage] = useState(false);
-  const [showRules, setShowRules] = useState(!userHasPlayedGameBefore);
 
   const isRoundFull: IsRoundFull = allUserAnswers[currentRound].every((element: string[]) => element !== null);
+
+  const { solutionValue, solutionShown, gamesWon, gamesLost, gameRulesShown } = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
 
   const findFirstNullIndex = (state: string[]): number => {
     return state.findIndex((element) => {
@@ -52,7 +59,7 @@ const App: React.FC = () => {
   const onClickPickUserAnswer: OnClickPickUserAnswer = (color: PegColor) => {
     const updatedRoundAnswers = allUserAnswers[currentRound].map((element: string[], index: number) => {
       // Find the first null element in allUserAnswers
-      if (index === findFirstNullIndex(allUserAnswers[currentRound]) && !showSolution) {
+      if (index === findFirstNullIndex(allUserAnswers[currentRound]) && !solutionShown) {
         // Replace that null element with the colour of the peg you clicked on
         return color;
       }
@@ -75,8 +82,8 @@ const App: React.FC = () => {
 
   const onClickGiveFeedback: OnClickButton = () => {
     // Get the number of correct color in correct position pegs, correct color in incorrect position pegs and completely incorrect pegs for the currentRound
-    const numberOfCorrectPositionPegs: number = getNumberOfCorrectPositionPegs(allUserAnswers[currentRound], solution);
-    const numberOfIncorrectPositionPegs: number = getNumberOfIncorrectPositionPegs(allUserAnswers[currentRound], solution);
+    const numberOfCorrectPositionPegs: number = getNumberOfCorrectPositionPegs(allUserAnswers[currentRound], solutionValue);
+    const numberOfIncorrectPositionPegs: number = getNumberOfIncorrectPositionPegs(allUserAnswers[currentRound], solutionValue);
 
     const updatedRoundFeedback = getUpdatedRoundFeedback(numberOfIncorrectPositionPegs, numberOfCorrectPositionPegs);
 
@@ -101,26 +108,26 @@ const App: React.FC = () => {
     const areCurrentRoundAnswersCorrect: boolean = updatedAllPegFeedback[currentRound].every((number: number) => number === FeedbackNumbers.correct);
 
     if (isRoundFull && currentRound === NumberOfRounds - 1 && !areCurrentRoundAnswersCorrect) {
-      setShowSolution(true);
+      dispatch(showSolution(true));
       const newGamesLostScore = gamesLost + 1;
 
-      setGamesLost(newGamesLostScore);
+      dispatch(calculateGamesLost(newGamesLostScore));
       setShowLosingMessage(true);
     }
 
     if (areCurrentRoundAnswersCorrect) {
-      setShowSolution(true);
+      dispatch(showSolution(true));
       const newGamesWonScore = gamesWon + 1;
 
-      setGamesWon(newGamesWonScore);
+      dispatch(calculateGamesWon(newGamesWonScore));
       setShowWinningMessage(true);
     }
   };
 
   const onClickStartNewGame : OnClickButton = () => {
     setCurrentRound(0);
-    setShowSolution(false);
-    setSolution(generateRandomSolution());
+    dispatch(showSolution(false));
+    dispatch(setSolution(generateRandomSolution()));
     setAllPegFeedback(generateInitialPegFeedbackState());
     setAllUserAnswers(generateInitialUserAnswersState());
     setShowLosingMessage(false);
@@ -128,20 +135,16 @@ const App: React.FC = () => {
   };
 
   const onClickShowRules: OnClickButton = () => {
-    setShowRules(true);
+    dispatch(showGamesRules(true));
   };
 
   return (
     <StyledAppContainer>
       <div className="App">
         <GlobalStyle />
-        <Score
-          className="mobile-score"
-          gamesWon={gamesWon}
-          gamesLost={gamesLost} />
+        <Score className="mobile-score" />
         <StyledGameContainer>
           <Pegpicker
-            showSolution={showSolution}
             currentRound={currentRound}
             allUserAnswers={allUserAnswers}
             setAllUserAnswers={setAllUserAnswers}
@@ -151,12 +154,8 @@ const App: React.FC = () => {
           <GameBoard
             allUserAnswers={allUserAnswers}
             currentRound={currentRound}
-            solution={solution}
-            showSolution={showSolution}
             allPegFeedback={allPegFeedback} />
           <GameInfo
-            gamesWon={gamesWon}
-            gamesLost={gamesLost}
             onClickStartNewGame={onClickStartNewGame}
             onClickShowRules={onClickShowRules} />
         </StyledGameContainer>
@@ -190,9 +189,7 @@ const App: React.FC = () => {
         </StyledFeedbackContentContainer>
       </Overlay>
 
-      <RulesOverlay
-        setShowRules={setShowRules}
-        isVisible={showRules} />
+      <RulesOverlay isVisible={gameRulesShown} />
     </StyledAppContainer>
   );
 };

@@ -1,17 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import Score from './Score';
 import GameButtons from './GameButtons';
 import { OnClickButton } from '../@types';
 
 interface Props {
-  gamesWon: number,
-  gamesLost: number,
   onClickStartNewGame: OnClickButton,
   onClickShowRules: OnClickButton
 }
 
-const GameInfo: React.FC<Props> = ({ gamesWon, gamesLost, onClickStartNewGame, onClickShowRules }) => {
+const GameInfo: React.FC<Props> = ({ onClickStartNewGame, onClickShowRules }) => {
   return (
     <StyledGameInfoContainer>
       <GameButtons
@@ -19,9 +18,7 @@ const GameInfo: React.FC<Props> = ({ gamesWon, gamesLost, onClickStartNewGame, o
         onClickStartNewGame={onClickStartNewGame}
         onClickShowRules={onClickShowRules} />
       <Score
-        className="desktop-score"
-        gamesWon={gamesWon}
-        gamesLost={gamesLost} />
+        className="desktop-score" />
     </StyledGameInfoContainer>
   );
 };

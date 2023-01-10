@@ -1,23 +1,28 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
+
 import { motion } from 'framer-motion';
+import { OverlayAnimation } from '../animation';
 import welcomingChickImage from '../images/chick.png';
+
+import { useAppDispatch } from '../redux/hooks';
+import { showGamesRules } from '../redux/reducers/game';
+import { NumberOfRulesPages } from '../utils/constants';
+
 import Overlay from './Overlay';
 import RulesOverlayContent from './RulesOverlayContent';
-import { OverlayAnimation } from '../animation';
-import { NumberOfRulesPages } from '../utils/constants';
-import { IsVisible, SetBooleanFunction } from '../@types';
 
 interface Props {
-  isVisible: IsVisible,
-  setShowRules: SetBooleanFunction,
+  isVisible: boolean,
 }
 
-const RulesOverlay: React.FC<Props> = ({ isVisible, setShowRules }) => {
+const RulesOverlay: React.FC<Props> = ({ isVisible }) => {
   const [rulesPageIndex, setRulesPageIndex] = useState(0);
 
+  const dispatch = useAppDispatch();
+
   const onClickCloseRulesOverlay = () => {
-    setShowRules(false);
+    dispatch(showGamesRules(false));
     setRulesPageIndex(0);
   };
 

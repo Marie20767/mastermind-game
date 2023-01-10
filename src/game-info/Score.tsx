@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useAppSelector } from '../redux/hooks';
+
 interface Props {
-  gamesWon: number,
-  gamesLost: number,
   className: string
 }
 
-const Score: React.FC<Props> = ({ gamesWon, gamesLost, className }) => {
+const Score: React.FC<Props> = ({ className }) => {
+  const { gamesWon, gamesLost } = useAppSelector((state) => state.game);
+
   return (
     <StyledScoreContainer className={className}>
       <h2>Games won: {gamesWon}</h2>

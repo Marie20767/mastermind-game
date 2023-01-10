@@ -1,18 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { AllPegFeedback, AllUserAnswers, ShowSolution, SolutionArray } from '../@types';
+
+import { AllPegFeedback, AllUserAnswers } from '../@types';
 import Rounds from './Rounds';
 import Solution from './Solution';
 
 interface Props {
   allUserAnswers: AllUserAnswers,
   currentRound: number,
-  solution: SolutionArray,
-  showSolution: ShowSolution,
   allPegFeedback: AllPegFeedback
 }
 
-const GameBoard: React.FC<Props> = ({ allUserAnswers, currentRound, solution, showSolution, allPegFeedback }) => {
+const GameBoard: React.FC<Props> = ({ allUserAnswers, currentRound, allPegFeedback }) => {
   return (
     <StyledGameBoardContainer>
       <StyledGameBoard>
@@ -21,14 +20,11 @@ const GameBoard: React.FC<Props> = ({ allUserAnswers, currentRound, solution, sh
             MASTERMIND
           </StyledGameTitle>
         </StyledGameTitleContainer>
-        <Solution
-          solution={solution}
-          showSolution={showSolution} />
+        <Solution />
         <Rounds
           allUserAnswers={allUserAnswers}
           currentRound={currentRound}
-          allPegFeedback={allPegFeedback}
-          showSolution={showSolution} />
+          allPegFeedback={allPegFeedback} />
       </StyledGameBoard>
     </StyledGameBoardContainer>
   );
