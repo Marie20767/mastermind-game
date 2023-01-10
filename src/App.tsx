@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import useLocalStorageState from './hooks/useLocalStorageState';
+
 import GameBoard from './game-board/GameBoard';
 import GlobalStyle from './GlobalStyle';
 import Pegpicker from './Pegpicker';
@@ -17,12 +19,13 @@ import Overlay from './overlays/Overlay';
 import sadDogImage from './images/sad-dog.png';
 import happyBeeImage from './images/bee.png';
 import RulesOverlay from './overlays/RulesOverlay';
-import useLocalStorageState from './hooks/useLocalStorageState';
 import Score from './game-info/Score';
 import GameButtons from './game-info/GameButtons';
 import { IsRoundFull, OnClickButton, OnClickPickUserAnswer, PegColor, RoundAnswers, RoundPegFeedback } from './@types';
 
 const App: React.FC = () => {
+  const userHasPlayedGameBefore = !!localStorage.getItem('user-answers') || !!localStorage.getItem('won-games') || !!localStorage.getItem('lost-games');
+
   const [solution, setSolution] = useLocalStorageState('solution', generateRandomSolution());
   const [allUserAnswers, setAllUserAnswers] = useLocalStorageState('user-answers', generateInitialUserAnswersState());
   const [currentRound, setCurrentRound] = useLocalStorageState('current-round', 0);
@@ -32,7 +35,7 @@ const App: React.FC = () => {
   const [gamesLost, setGamesLost] = useLocalStorageState('lost-games', 0);
   const [showLosingMessage, setShowLosingMessage] = useState(false);
   const [showWinningMessage, setShowWinningMessage] = useState(false);
-  const [showRules, setShowRules] = useState(false);
+  const [showRules, setShowRules] = useState(!userHasPlayedGameBefore);
 
   const isRoundFull: IsRoundFull = allUserAnswers[currentRound].every((element: string[]) => element !== null);
 
