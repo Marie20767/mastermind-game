@@ -1,7 +1,8 @@
+/* eslint-disable quote-props */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { AllPegFeedback, AllUserAnswers, PegColor } from '../../@types';
-import { getLocalStorageValue } from '../../utils/storage';
+import { getLocalStorageValue, localStorageSetItems } from '../../utils/storage';
 import { generateInitialPegFeedbackState, generateInitialUserAnswersState, generateRandomSolution } from '../../utils/game-utils';
 
 interface gameState {
@@ -23,7 +24,7 @@ const initialState : gameState = {
   solutionValue: getLocalStorageValue('solution', generateRandomSolution()),
   solutionShown: getLocalStorageValue('show-solution', false),
   gamesWon: getLocalStorageValue('won-games', 0),
-  gamesLost: getLocalStorageValue('won-games', 0),
+  gamesLost: getLocalStorageValue('lost-games', 0),
   gameRulesShown: !userHasPlayedGameBefore,
   losingMessageIsShown: false,
   winningMessageIsShown: false,
@@ -36,10 +37,6 @@ const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    setSolution: (state, action) => {
-      state.solutionValue = action.payload;
-    },
-
     showGamesRules: (state, action) => {
       state.gameRulesShown = action.payload;
     },
@@ -54,16 +51,42 @@ const gameSlice = createSlice({
 
     setAllPegFeedback: (state, action) => {
       state.allPegFeedback = action.payload;
+      localStorage.setItem('peg-feedback', JSON.stringify(action.payload));
     },
 
     setAllUserAnswers: (state, action) => {
       state.allUserAnswers = action.payload;
+      localStorage.setItem('user-answers', JSON.stringify(action.payload));
     },
 
     setCurrentRound: (state) => {
       const newCurrentRound = state.currentRound + 1;
 
       state.currentRound = newCurrentRound;
+      localStorage.setItem('current-round', JSON.stringify(newCurrentRound));
+    },
+
+    onGameLost: (state) => {
+      state.solutionShown = true;
+      state.losingMessageIsShown = true;
+
+      const newGamesLostScore = state.gamesLost + 1;
+
+      state.gamesLost = newGamesLostScore;
+      localStorage.setItem('lost-games', JSON.stringify(newGamesLostScore));
+      localStorage.setItem('show-solution', JSON.stringify(true));
+    },
+
+    onGameWon: (state) => {
+      state.solutionShown = true;
+      localStorage.setItem('show-solution', JSON.stringify(true));
+      state.winningMessageIsShown = true;
+
+      const newGamesWonScore = state.gamesWon + 1;
+
+      state.gamesWon = newGamesWonScore;
+      localStorage.setItem('won-games', JSON.stringify(newGamesWonScore));
+      localStorage.setItem('show-solution', JSON.stringify(true));
     },
 
     resetStatesForNewGame: (state) => {
@@ -74,30 +97,19 @@ const gameSlice = createSlice({
       state.allUserAnswers = generateInitialUserAnswersState();
       state.winningMessageIsShown = false;
       state.losingMessageIsShown = false;
-    },
 
-    onGameLost: (state) => {
-      state.solutionShown = true;
-      state.losingMessageIsShown = true;
-
-      const newGamesLostScore = state.gamesLost + 1;
-
-      state.gamesLost = newGamesLostScore;
-    },
-
-    onGameWon: (state) => {
-      state.solutionShown = true;
-      state.winningMessageIsShown = true;
-
-      const newGamesWonScore = state.gamesWon + 1;
-
-      state.gamesWon = newGamesWonScore;
+      localStorageSetItems({
+        'current-round': 0,
+        'show-solution': false,
+        'solution': state.solutionValue,
+        'peg-feedback': state.allPegFeedback,
+        'user-answers': state.allUserAnswers,
+      });
     },
   },
 });
 
 export const {
-  setSolution,
   showGamesRules,
   showLosingMessage,
   showWinningMessage,

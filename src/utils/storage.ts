@@ -1,8 +1,24 @@
 
 import { InitialValue } from '../@types';
 
-export const getLocalStorageValue = (key: string, initialValue: InitialValue) => {
+interface LocalStorageItems {
+  [key: string]: any;
+}
+
+export const getLocalStorageValue = (key: string, initialValue: InitialValue, saveInitialValue = false) => {
   const storedValue: string | null = localStorage.getItem(key);
 
-  return storedValue !== null ? JSON.parse(storedValue) : initialValue;
+  if (storedValue !== null) {
+    return JSON.parse(storedValue);
+  }
+
+  if (saveInitialValue) {
+    localStorage.setItem(key, JSON.stringify(initialValue));
+  }
+
+  return initialValue;
+};
+
+export const localStorageSetItems = (items: LocalStorageItems) => {
+  Object.keys(items).forEach((key) => localStorage.setItem(key, JSON.stringify(items[key])));
 };
