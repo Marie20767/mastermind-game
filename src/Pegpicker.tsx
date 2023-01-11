@@ -2,29 +2,27 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { useAppSelector } from './redux/hooks';
-import { AllUserAnswers, IsRoundFull, OnClickButton, OnClickPickUserAnswer, PegColor, RoundAnswers, SetAllUserAnswers } from './@types';
-import Circle from './Circle';
+import { setAllUserAnswers } from './redux/reducers/game';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { OnClickButton, OnClickPickUserAnswer, PegColor, RoundAnswers } from './@types';
 import { PegHexCodes } from './utils/constants';
 
+import Circle from './Circle';
+
 interface Props {
-  currentRound: number,
-  allUserAnswers: AllUserAnswers,
-  setAllUserAnswers: SetAllUserAnswers,
-  isRoundFull: IsRoundFull,
   onClickPickUserAnswer: OnClickPickUserAnswer,
   onClickGiveFeedback: OnClickButton,
+  isRoundFull: boolean,
 }
 
 const Pegpicker: React.FC<Props> = ({
-  currentRound,
-  allUserAnswers,
-  setAllUserAnswers,
   isRoundFull,
   onClickPickUserAnswer,
   onClickGiveFeedback,
 }) => {
-  const { solutionShown } = useAppSelector((state) => state.game);
+  const { solutionShown, allUserAnswers, currentRound } = useAppSelector((state) => state.game);
+
+  const dispatch = useAppDispatch();
 
   const onClickDeletePegs: OnClickButton = () => {
     const updatedRoundAnswers = allUserAnswers.map((roundAnswers: RoundAnswers, index: number) => {
@@ -35,7 +33,7 @@ const Pegpicker: React.FC<Props> = ({
       return roundAnswers;
     });
 
-    setAllUserAnswers(updatedRoundAnswers);
+    dispatch(setAllUserAnswers(updatedRoundAnswers));
   };
 
   const getClassNameForDeleteButton = (): string => {

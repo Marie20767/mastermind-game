@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
 import styled from 'styled-components';
+import React from 'react';
 
-import { calculateGamesLost, calculateGamesWon, setSolution, showGamesRules, showSolution } from './redux/reducers/game';
-import { useAppDispatch, useAppSelector } from './redux/hooks';
-import useLocalStorageState from './hooks/useLocalStorageState';
 import {
-  generateInitialPegFeedbackState,
-  generateInitialUserAnswersState,
-  generateRandomSolution,
+  onGameLost,
+  onGameWon,
+  resetStatesForNewGame,
+  setAllPegFeedback,
+  setAllUserAnswers,
+  setCurrentRound,
+  showLosingMessage,
+  showWinningMessage } from './redux/reducers/game';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import {
   getNumberOfCorrectPositionPegs,
   getNumberOfIncorrectPositionPegs,
   getUpdatedRoundFeedback,
 } from './utils/game-utils';
 import { FeedbackNumbers, NumberOfRounds } from './utils/constants';
 import {
-  IsRoundFull,
   OnClickButton,
   OnClickPickUserAnswer,
   PegColor,
   RoundAnswers,
   RoundPegFeedback,
+  UserAnswer,
 } from './@types';
 
 import sadDogImage from './images/sad-dog.png';
@@ -35,18 +39,21 @@ import Score from './game-info/Score';
 import GameButtons from './game-info/GameButtons';
 
 const App: React.FC = () => {
-  const [allUserAnswers, setAllUserAnswers] = useLocalStorageState('user-answers', generateInitialUserAnswersState());
-  const [currentRound, setCurrentRound] = useLocalStorageState('current-round', 0);
-  const [allPegFeedback, setAllPegFeedback] = useLocalStorageState('peg-feedback', generateInitialPegFeedbackState());
-  const [showLosingMessage, setShowLosingMessage] = useState(false);
-  const [showWinningMessage, setShowWinningMessage] = useState(false);
-
-  const isRoundFull: IsRoundFull = allUserAnswers[currentRound].every((element: string[]) => element !== null);
-
-  const { solutionValue, solutionShown, gamesWon, gamesLost, gameRulesShown } = useAppSelector((state) => state.game);
+  const {
+    solutionValue,
+    solutionShown,
+    gameRulesShown,
+    losingMessageIsShown,
+    winningMessageIsShown,
+    allPegFeedback,
+    allUserAnswers,
+    currentRound,
+  } = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
 
-  const findFirstNullIndex = (state: string[]): number => {
+  const isRoundFull = allUserAnswers[currentRound].every((element: UserAnswer) => element !== null);
+
+  const findFirstNullIndex = (state: any[]): number => {
     return state.findIndex((element) => {
       if (element === null) {
         return true;
@@ -57,7 +64,7 @@ const App: React.FC = () => {
   };
 
   const onClickPickUserAnswer: OnClickPickUserAnswer = (color: PegColor) => {
-    const updatedRoundAnswers = allUserAnswers[currentRound].map((element: string[], index: number) => {
+    const updatedRoundAnswers = allUserAnswers[currentRound].map((element: UserAnswer, index: number) => {
       // Find the first null element in allUserAnswers
       if (index === findFirstNullIndex(allUserAnswers[currentRound]) && !solutionShown) {
         // Replace that null element with the colour of the peg you clicked on
@@ -77,7 +84,7 @@ const App: React.FC = () => {
     });
 
     // Update the state
-    setAllUserAnswers(allUpdatedUserAnswers);
+    dispatch(setAllUserAnswers(allUpdatedUserAnswers));
   };
 
   const onClickGiveFeedback: OnClickButton = () => {
@@ -96,46 +103,22 @@ const App: React.FC = () => {
       return roundPegFeedback;
     });
 
-    setAllPegFeedback(updatedAllPegFeedback);
+    dispatch(setAllPegFeedback(updatedAllPegFeedback));
 
     // If the allUserAnswers array is full of colours, go to the next round
     if (isRoundFull && currentRound !== NumberOfRounds - 1) {
-      const newCurrentRound = currentRound + 1;
-
-      setCurrentRound(newCurrentRound);
+      dispatch(setCurrentRound());
     }
 
     const areCurrentRoundAnswersCorrect: boolean = updatedAllPegFeedback[currentRound].every((number: number) => number === FeedbackNumbers.correct);
 
     if (isRoundFull && currentRound === NumberOfRounds - 1 && !areCurrentRoundAnswersCorrect) {
-      dispatch(showSolution(true));
-      const newGamesLostScore = gamesLost + 1;
-
-      dispatch(calculateGamesLost(newGamesLostScore));
-      setShowLosingMessage(true);
+      dispatch(onGameLost());
     }
 
     if (areCurrentRoundAnswersCorrect) {
-      dispatch(showSolution(true));
-      const newGamesWonScore = gamesWon + 1;
-
-      dispatch(calculateGamesWon(newGamesWonScore));
-      setShowWinningMessage(true);
+      dispatch(onGameWon());
     }
-  };
-
-  const onClickStartNewGame : OnClickButton = () => {
-    setCurrentRound(0);
-    dispatch(showSolution(false));
-    dispatch(setSolution(generateRandomSolution()));
-    setAllPegFeedback(generateInitialPegFeedbackState());
-    setAllUserAnswers(generateInitialUserAnswersState());
-    setShowLosingMessage(false);
-    setShowWinningMessage(false);
-  };
-
-  const onClickShowRules: OnClickButton = () => {
-    dispatch(showGamesRules(true));
   };
 
   return (
@@ -145,47 +128,36 @@ const App: React.FC = () => {
         <Score className="mobile-score" />
         <StyledGameContainer>
           <Pegpicker
-            currentRound={currentRound}
-            allUserAnswers={allUserAnswers}
-            setAllUserAnswers={setAllUserAnswers}
             isRoundFull={isRoundFull}
             onClickPickUserAnswer={onClickPickUserAnswer}
             onClickGiveFeedback={onClickGiveFeedback} />
-          <GameBoard
-            allUserAnswers={allUserAnswers}
-            currentRound={currentRound}
-            allPegFeedback={allPegFeedback} />
-          <GameInfo
-            onClickStartNewGame={onClickStartNewGame}
-            onClickShowRules={onClickShowRules} />
+          <GameBoard />
+          <GameInfo />
         </StyledGameContainer>
-        <GameButtons
-          className="mobile-game-buttons"
-          onClickStartNewGame={onClickStartNewGame}
-          onClickShowRules={onClickShowRules} />
+        <GameButtons className="mobile-game-buttons" />
       </div>
 
       <Overlay
-        isVisible={showWinningMessage}
+        isVisible={winningMessageIsShown}
         delay={1}
-        onClickCloseOverlay={() => setShowWinningMessage(false)}>
+        onClickCloseOverlay={() => dispatch(showWinningMessage(false))}>
         <StyledFeedbackContentContainer>
           <img src={happyBeeImage} alt="Happy bee" />
           <h1>Congratulations!</h1>
           <h1>You won, Mastermind.</h1>
-          <button type="button" onClick={onClickStartNewGame}>New Game</button>
+          <button type="button" onClick={() => dispatch(resetStatesForNewGame())}>New Game</button>
         </StyledFeedbackContentContainer>
       </Overlay>
 
       <Overlay
-        isVisible={showLosingMessage}
+        isVisible={losingMessageIsShown}
         delay={1}
-        onClickCloseOverlay={() => setShowLosingMessage(false)}>
+        onClickCloseOverlay={() => dispatch(showLosingMessage(false))}>
         <StyledFeedbackContentContainer>
           <img src={sadDogImage} alt="Sad dog" />
           <h1>You lost...</h1>
           <h1>Better luck next time!</h1>
-          <button type="button" onClick={onClickStartNewGame}>New Game</button>
+          <button type="button" onClick={() => dispatch(resetStatesForNewGame())}>New Game</button>
         </StyledFeedbackContentContainer>
       </Overlay>
 

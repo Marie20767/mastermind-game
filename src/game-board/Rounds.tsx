@@ -5,21 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 import Round from './Round';
 import { EmptyPegColors } from '../utils/constants';
-import { AllPegFeedback, AllUserAnswers, RoundAnswers } from '../@types';
+import { RoundAnswers } from '../@types';
 import { useAppSelector } from '../redux/hooks';
 
-interface Props {
-  allUserAnswers: AllUserAnswers,
-  allPegFeedback: AllPegFeedback,
-  currentRound: number,
-}
-
-const Rounds: React.FC<Props> = ({
-  allUserAnswers,
-  allPegFeedback,
-  currentRound,
-}) => {
-  const { solutionShown } = useAppSelector((state) => state.game);
+const Rounds: React.FC = () => {
+  const { solutionShown, allPegFeedback, allUserAnswers, currentRound } = useAppSelector((state) => state.game);
 
   return (
     <StyledRoundsContainer>
