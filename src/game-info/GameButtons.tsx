@@ -1,25 +1,29 @@
-import { faArrowRotateLeft, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import React from 'react';
 import styled from 'styled-components';
-import { OnClickButton } from '../@types';
+
+import { faArrowRotateLeft, faQuestion } from '@fortawesome/free-solid-svg-icons';
+
+import { useAppDispatch } from '../redux/hooks';
+import { resetStatesForNewGame, showGamesRules } from '../redux/reducers/game';
+
 import GameInfoButton from './GameInfoButton';
 
 interface Props {
   className: string,
-  onClickStartNewGame: OnClickButton,
-  onClickShowRules: OnClickButton,
 }
 
-const GameButtons: React.FC<Props> = ({ className, onClickStartNewGame, onClickShowRules }) => {
+const GameButtons: React.FC<Props> = ({ className }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <StyledNewGameAndRulesContainer className={className}>
       <GameInfoButton
-        onClick={onClickStartNewGame}
+        onClick={() => dispatch(resetStatesForNewGame())}
         icon={faArrowRotateLeft}
         toolTipText="Start new game"
         testId="restart" />
       <GameInfoButton
-        onClick={onClickShowRules}
+        onClick={() => dispatch(showGamesRules(true))}
         icon={faQuestion}
         toolTipText="Check game rules" />
     </StyledNewGameAndRulesContainer>

@@ -1,5 +1,9 @@
 import { emptyRoundPegColors, CorrectFeedbackColor } from '../../src/tests/test-constants';
 
+export const closeRulesOverlay = () => {
+  cy.get('[class*="close-icon"]').click();
+};
+
 export const checkArrowIndicatorIsAtCorrectRound = (roundIndex) => {
   for (let i = 0; i < 8; i++) {
     const expectedArrowColor = i === roundIndex ? '#4e4e4c' : 'transparent';

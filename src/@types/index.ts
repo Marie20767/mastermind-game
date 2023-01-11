@@ -23,8 +23,6 @@ export type CircleColor = PegColor | '#4e4e4c' | 'transparent';
 
 export type UserAnswer = PegColor | null;
 
-export type CurrentUserAnswer = UserAnswer[]
-
 export type SolutionArray = PegColor[]
 
 export type OnClickDiv = React.MouseEventHandler<HTMLDivElement> | undefined
@@ -41,17 +39,11 @@ export type AllUserAnswers = RoundAnswers[]
 
 export type SetAllUserAnswers = (allUserAnswers: AllUserAnswers) => void
 
-export type IsRoundFull = boolean
-
-export type ShowSolution = boolean
-
 export type RoundPegFeedback = number[]
 
 export type AllPegFeedback = RoundPegFeedback[]
 
 export type InitialValue = string[] | null[][] | number[][] | number | boolean
-
-export type IsVisible = boolean
 
 export type SetBooleanFunction = (parameter: boolean) => void
 

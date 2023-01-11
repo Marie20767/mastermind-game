@@ -3,19 +3,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
-import { SolutionArray, ShowSolution, PegColor } from '../@types';
+import { useAppSelector } from '../redux/hooks';
+import { PegColor } from '../@types';
 import Circle from '../Circle';
 
-interface Props {
-  solution: SolutionArray,
-  showSolution: ShowSolution,
-}
+const Solution: React.FC = () => {
+  const { solutionValue, solutionShown } = useAppSelector((state) => state.game);
 
-const Solution: React.FC<Props> = ({ solution, showSolution }) => {
   return (
     <StyledSolutionContainer>
-      {solution.map((color: PegColor, index: number): React.ReactNode => {
-        if (showSolution) {
+      {solutionValue.map((color: PegColor, index: number): React.ReactNode => {
+        if (solutionShown) {
           return (
             <Circle
               key={`${color}-${index}`}

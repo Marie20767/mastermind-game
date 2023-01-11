@@ -1,29 +1,29 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
 import styled from 'styled-components';
-import { AllUserAnswers, IsRoundFull, OnClickButton, OnClickPickUserAnswer, PegColor, RoundAnswers, SetAllUserAnswers, ShowSolution } from './@types';
-import Circle from './Circle';
+
+import { setAllUserAnswers } from './redux/reducers/game';
+import { useAppDispatch, useAppSelector } from './redux/hooks';
+import { OnClickButton, OnClickPickUserAnswer, PegColor, RoundAnswers } from './@types';
 import { PegHexCodes } from './utils/constants';
 
+import Circle from './Circle';
+
 interface Props {
-  currentRound: number,
-  allUserAnswers: AllUserAnswers,
-  setAllUserAnswers: SetAllUserAnswers,
-  showSolution: ShowSolution,
-  isRoundFull: IsRoundFull,
   onClickPickUserAnswer: OnClickPickUserAnswer,
   onClickGiveFeedback: OnClickButton,
+  isRoundFull: boolean,
 }
 
 const Pegpicker: React.FC<Props> = ({
-  currentRound,
-  allUserAnswers,
-  setAllUserAnswers,
-  showSolution,
   isRoundFull,
   onClickPickUserAnswer,
   onClickGiveFeedback,
 }) => {
+  const { solutionShown, allUserAnswers, currentRound } = useAppSelector((state) => state.game);
+
+  const dispatch = useAppDispatch();
+
   const onClickDeletePegs: OnClickButton = () => {
     const updatedRoundAnswers = allUserAnswers.map((roundAnswers: RoundAnswers, index: number) => {
       if (index === currentRound) {
@@ -33,13 +33,13 @@ const Pegpicker: React.FC<Props> = ({
       return roundAnswers;
     });
 
-    setAllUserAnswers(updatedRoundAnswers);
+    dispatch(setAllUserAnswers(updatedRoundAnswers));
   };
 
   const getClassNameForDeleteButton = (): string => {
     const areAllPegsEmpty = allUserAnswers[currentRound].every((roundAnswer) => roundAnswer === null);
 
-    if (areAllPegsEmpty || showSolution) {
+    if (areAllPegsEmpty || solutionShown) {
       return 'disabled';
     }
 
@@ -56,7 +56,7 @@ const Pegpicker: React.FC<Props> = ({
               testId={`pegpicker-${color}`}
               color={color}
               className="styled-pegpicker"
-              onClick={!showSolution ? () => onClickPickUserAnswer(color) : undefined} />
+              onClick={!solutionShown ? () => onClickPickUserAnswer(color) : undefined} />
           );
         })}
       </StyledPegsContainer>
@@ -64,13 +64,13 @@ const Pegpicker: React.FC<Props> = ({
         <button
           type="button"
           className={getClassNameForDeleteButton()}
-          onClick={!showSolution ? onClickDeletePegs : undefined}>
+          onClick={!solutionShown ? onClickDeletePegs : undefined}>
           Delete
         </button>
         <button
           type="button"
-          className={!isRoundFull || showSolution ? 'disabled' : ''}
-          onClick={isRoundFull && !showSolution ? onClickGiveFeedback : undefined}>
+          className={!isRoundFull || solutionShown ? 'disabled' : ''}
+          onClick={isRoundFull && !solutionShown ? onClickGiveFeedback : undefined}>
           Check
         </button>
       </StyledButtonContainer>
