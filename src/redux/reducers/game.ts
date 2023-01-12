@@ -90,14 +90,6 @@ const gameSlice = createSlice({
     },
 
     resetStatesForNewGame: (state) => {
-      state.currentRound = 0;
-      state.solutionShown = false;
-      state.solutionValue = generateRandomSolution();
-      state.allPegFeedback = generateInitialPegFeedbackState();
-      state.allUserAnswers = generateInitialUserAnswersState();
-      state.winningMessageIsShown = false;
-      state.losingMessageIsShown = false;
-
       localStorageSetItems({
         'current-round': 0,
         'show-solution': false,
@@ -105,6 +97,17 @@ const gameSlice = createSlice({
         'peg-feedback': state.allPegFeedback,
         'user-answers': state.allUserAnswers,
       });
+
+      return {
+        ...state,
+        currentRound: 0,
+        solutionShown: false,
+        solutionValue: generateRandomSolution(),
+        allPegFeedback: generateInitialPegFeedbackState(),
+        allUserAnswers: generateInitialUserAnswersState(),
+        winningMessageIsShown: false,
+        losingMessageIsShown: false,
+      };
     },
   },
 });
