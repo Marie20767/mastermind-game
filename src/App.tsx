@@ -178,8 +178,15 @@ const StyledAppContainer = styled.div`
   .App {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     max-width: 1800px;
+
+    @media screen and (min-height: 640px) and (max-width: 768px) {
+      padding-top: 16%;
+    }
+
+    @media screen and (min-width: 768px) {
+      justify-content: center;
+    }
   }
 `;
 

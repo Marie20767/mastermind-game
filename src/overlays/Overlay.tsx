@@ -62,9 +62,21 @@ const StyledOverlayContainer = styled(motion.div)`
   position: fixed;
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100%;
   width: 100%;
+
+  // Use padding top to centre overlay for mobile to fix bug on Android devices
+  // where content appears off screen until interaction (possibly a framer motion bug)
+  padding-top: 20%;
+
+  @media screen and (min-height: 680px) and (max-width: 768px) {
+    padding-top: 32%;
+  }
+
+  @media screen and (min-width: 768px) {
+    align-items: center;
+    padding-top: 0;
+  }
 `;
 
 const StyledOverlay = styled.div`
@@ -79,11 +91,15 @@ const StyledOverlay = styled.div`
 const StyledOverlayContent = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  height: 62%;
+  height: 380px;
   width: 88%;
   border-radius: 15px;
   background-color: black;
   z-index: 1;
+
+  @media screen and (min-height: 640px) and (max-width: 768px) {
+    height: 460px;
+  }
 
   @media screen and (min-width: 768px) {
     height: 50%;

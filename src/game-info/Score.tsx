@@ -34,7 +34,8 @@ const StyledScoreContainer = styled.div`
 
   &.mobile-score {
     display: flex;
-    margin-left: 75px;
+    margin-left: 78px;
+    margin-top: 6px;
 
     @media screen and (min-width: 768px) {
       margin-left: 130px;
