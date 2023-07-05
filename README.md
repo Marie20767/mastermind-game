@@ -1,6 +1,6 @@
 # React Mastermind Game by Marie Impens
 
-View my Mastermind Game here: https://marie-mastermind.pages.dev/
+Strategic game where the goal is to guess a secret colour sequence. View my Mastermind Game here: https://marie-mastermind.pages.dev/ and have fun! :)
 
 ## Available Scripts
 
